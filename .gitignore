@@ -22,3 +22,7 @@ sysinfo.txt
 
 # GJAPI Settings
 [Aa]ssets/Plugins/GameJolt/Resources/GJAPISettings.asset
+
+# GJAPI Test Scenes
+[Aa]ssets/[Tt]ests/
+[Aa]ssets/[Tt]ests.meta
