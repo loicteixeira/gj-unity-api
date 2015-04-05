@@ -47,8 +47,11 @@ namespace GJAPI
 				{
 					user = null;
 				}
-				
-				callback(user);
+
+				if (callback != null)
+				{
+					callback(user);
+				}
 			}, false);
 		}
 
@@ -74,7 +77,10 @@ namespace GJAPI
 					users = null;
 				}
 				
-				callback(users);
+				if (callback != null)
+				{
+					callback(users);
+				}
 			}, false);
 		}
 		#endregion Get

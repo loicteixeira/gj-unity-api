@@ -63,7 +63,10 @@ namespace GJAPI
 					value = null;
 				}
 
-				callback(value);
+				if (callback != null)
+				{
+					callback(value);
+				}
 			}, !global, Core.ResponseFormat.Dump);
 		}
 
@@ -99,7 +102,10 @@ namespace GJAPI
 					keys = null;
 				}
 
-				callback(keys);
+				if (callback != null)
+				{
+					callback(keys);
+				}
 			}, !global);
 		}
 	}

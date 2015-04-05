@@ -12,7 +12,10 @@ namespace GJAPI
 			parameters.Add("trophy_id", id.ToString());
 
 			Core.Request.Get(Constants.API_TROPHIES_ADD, parameters, (Core.Response response) => {
-				callback(response.success);
+				if (callback != null)
+				{
+					callback(response.success);
+				}
 			});
 		}
 		#endregion Unlock
@@ -34,7 +37,10 @@ namespace GJAPI
 					trophy = null;
 				}
 
-				callback(trophy);
+				if (callback != null)
+				{
+					callback(trophy);
+				}
 			});
 		}
 
@@ -80,7 +86,10 @@ namespace GJAPI
 					trophies = null;
 				}
 				
-				callback(trophies);
+				if (callback != null)
+				{
+					callback(trophies);
+				}
 			});
 		}
 		#endregion Get
