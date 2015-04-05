@@ -21,11 +21,6 @@ namespace GJAPI
 					{
 						Debug.LogError("An instance of " + typeof(Manager) + " is needed in the scene, but there is none.");
 					}
-					else
-					{
-						DontDestroyOnLoad(instance.gameObject);
-						instance.Configure();
-					}
 				}
 				
 				return instance;
@@ -42,8 +37,32 @@ namespace GJAPI
 		public Objects.User CurrentUser { get; set; }
 		#endregion Fields & Properties
 
-		#region Config
-		protected void Configure()
+		#region Init
+		void Awake()
+		{
+			if (Persist())
+			{
+				Configure();
+			}
+		}
+
+		bool Persist()
+		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+			else if (instance != this)
+			{
+				Destroy(this.gameObject);
+				return false;
+			}
+
+			DontDestroyOnLoad(this.gameObject);
+			return true;
+		}
+
+		void Configure()
 		{
 			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;
 			GameID = settings.gameId;
@@ -58,10 +77,10 @@ namespace GJAPI
 			{
 				Debug.LogWarning("Missing Private Key.");
 			}
-
 		}
-		#endregion Config
+		#endregion Init
 
+		#region Requests
 		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback)
 		{
 			float timeout = Time.time + Timeout;
@@ -133,5 +152,6 @@ namespace GJAPI
 			}
 			callback(response);
 		}
+		#endregion Requests
 	}
 }
