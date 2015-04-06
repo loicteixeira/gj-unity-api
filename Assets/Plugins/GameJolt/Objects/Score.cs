@@ -1,4 +1,5 @@
-﻿using SimpleJSON;
+﻿using System;
+using SimpleJSON;
 
 namespace GJAPI.Objects
 {
@@ -23,6 +24,14 @@ namespace GJAPI.Objects
 		#endregion Fields & Properties
 		
 		#region Constructors
+		public Score(int value, string text, string guestName = "", string extra = "")
+		{
+			this.Value = value;
+			this.Text = text;
+			this.GuestName = guestName;
+			this.Extra = extra;
+		}
+
 		public Score(JSONClass data)
 		{
 			this.PopulateFromJSON(data);
@@ -42,6 +51,13 @@ namespace GJAPI.Objects
 			this.GuestName = data["guest"].Value;
 		}
 		#endregion Update Attributes
+
+		#region Interface
+		public void Add(int table = 0, Action<bool> callback = null)
+		{
+			Scores.Add(this, table, callback);
+		}
+		#endregion Interface
 		
 		public override string ToString()
 		{

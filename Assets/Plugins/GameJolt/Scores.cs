@@ -7,6 +7,11 @@ namespace GJAPI
 	public static class Scores
 	{
 		#region Add
+		public static void Add(Objects.Score score, int table = 0, Action<bool> callback = null)
+		{
+			Add(score.Value, score.Text, score.GuestName, table, score.Extra, callback);
+		}
+
 		public static void Add(int value, string text, int table = 0, string extra = "", Action<bool> callback = null)
 		{
 			Add(value, text, "", table, extra, callback);
