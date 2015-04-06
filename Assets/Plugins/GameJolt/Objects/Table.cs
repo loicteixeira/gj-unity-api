@@ -5,7 +5,7 @@ namespace GJAPI.Objects
 	public class Table : Base
 	{
 		#region Fields & Properties
-		public int Id { get; set; }
+		public int ID { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public bool Primary { get; private set; }
@@ -14,7 +14,7 @@ namespace GJAPI.Objects
 		#region Constructors
 		public Table(int id, string name, string description = "")
 		{
-			this.Id = id;
+			this.ID = id;
 			this.Name = name;
 			this.Description = description;
 			this.Primary = false;
@@ -29,7 +29,7 @@ namespace GJAPI.Objects
 		#region Update Attributes
 		protected override void PopulateFromJSON(JSONClass data)
 		{
-			this.Id = data["id"].AsInt;
+			this.ID = data["id"].AsInt;
 			this.Name = data["name"].Value;
 			this.Description = data["description"].Value;
 			this.Primary = data["primary"].AsBool;
@@ -38,7 +38,7 @@ namespace GJAPI.Objects
 
 		public override string ToString()
 		{
-			return string.Format("GJAPI.Objects.Table: {0} - {1}", Name, Id);
+			return string.Format("GJAPI.Objects.Table: {0} - {1}", Name, ID);
 		}
 	}
 }
