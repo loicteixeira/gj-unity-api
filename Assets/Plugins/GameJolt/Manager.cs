@@ -35,6 +35,11 @@ namespace GJAPI
 		public float Timeout { get; set; }
 
 		public Objects.User CurrentUser { get; set; }
+
+#if UNITY_EDITOR
+		string DebugUser { get; set; }
+		string DebugToken { get; set; }
+#endif
 		#endregion Fields & Properties
 
 		#region Init
@@ -43,6 +48,7 @@ namespace GJAPI
 			if (Persist())
 			{
 				Configure();
+				AutoConnectWebPlayer();
 			}
 		}
 
@@ -77,6 +83,11 @@ namespace GJAPI
 			{
 				Debug.LogWarning("Missing Private Key.");
 			}
+
+#if UNITY_EDITOR
+			DebugUser = settings.user;
+			DebugToken = settings.token;
+#endif
 		}
 		#endregion Init
 
@@ -153,5 +164,57 @@ namespace GJAPI
 			callback(response);
 		}
 		#endregion Requests
+
+		#region Actions
+		public string message = "No message yet";
+
+		void AutoConnectWebPlayer()
+		{
+#if UNITY_WEBPLAYER || UNITY_WEBGL
+	#if UNITY_EDITOR
+			if (DebugUser != string.Empty && DebugToken != string.Empty)
+			{
+				Users.Authenticate(DebugUser, DebugToken, (bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
+			}
+			else
+			{
+				Debug.LogWarning("Cannot simulate WebPlayer AutoConnect. Missing user and/or token in debug settings.");
+			}
+	#else
+			var uri = new System.Uri(Application.absoluteURL);
+			if (uri.Host.EndsWith("gamejolt.net") || uri.Host.EndsWith("gamejolt.com"))
+			{
+				Application.ExternalCall("GJAPI_AuthUser", this.gameObject.name, "OnAutoConnectWebPlayer");
+			}
+			else
+			{
+				Debug.Log("Cannot AutoConnect, the game is not hosted on GameJolt.");
+			}
+	#endif
+#endif
+		}
+
+		public void OnAutoConnectWebPlayer(string response)
+		{
+			if (response != string.Empty)
+			{
+				var credentials = response.Split(':');
+				if (credentials.Length == 2)
+				{
+					Users.Authenticate(credentials[0], credentials[1]);
+					// TODO: Prompt "Welcome Back <username>!"
+				}
+				else
+				{
+					Debug.Log("Cannot AutoConnect.");
+				}
+			}
+			else
+			{
+				// This is a Guest.
+				// TODO: Prompt "Hello Guest!" and encourage to signup/signin?
+			}
+		}
+		#endregion Actions
 	}
 }
