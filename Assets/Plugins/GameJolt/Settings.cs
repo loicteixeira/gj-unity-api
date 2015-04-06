@@ -12,6 +12,7 @@ namespace GJAPI
 		public float timeout = 10f;
 
 		[Header("Debug")]
+		public bool autoConnect = false;
 		public string user;
 		public string token;
 	}

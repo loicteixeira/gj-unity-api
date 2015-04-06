@@ -37,6 +37,7 @@ namespace GJAPI
 		public Objects.User CurrentUser { get; set; }
 
 #if UNITY_EDITOR
+		bool DebugAutoConnect { get; set; }
 		string DebugUser { get; set; }
 		string DebugToken { get; set; }
 #endif
@@ -85,6 +86,7 @@ namespace GJAPI
 			}
 
 #if UNITY_EDITOR
+			DebugAutoConnect = settings.autoConnect;
 			DebugUser = settings.user;
 			DebugToken = settings.token;
 #endif
@@ -172,13 +174,16 @@ namespace GJAPI
 		{
 #if UNITY_WEBPLAYER || UNITY_WEBGL
 	#if UNITY_EDITOR
-			if (DebugUser != string.Empty && DebugToken != string.Empty)
+			if (DebugAutoConnect)
 			{
-				Users.Authenticate(DebugUser, DebugToken, (bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
-			}
-			else
-			{
-				Debug.LogWarning("Cannot simulate WebPlayer AutoConnect. Missing user and/or token in debug settings.");
+				if (DebugUser != string.Empty && DebugToken != string.Empty)
+				{
+					Users.Authenticate(DebugUser, DebugToken, (bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
+				}
+				else
+				{
+					Debug.LogWarning("Cannot simulate WebPlayer AutoConnect. Missing user and/or token in debug settings.");
+				}
 			}
 	#else
 			var uri = new System.Uri(Application.absoluteURL);
