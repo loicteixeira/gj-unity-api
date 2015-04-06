@@ -6,6 +6,11 @@ namespace GJAPI
 	public static class Trophies
 	{
 		#region Unlock
+		public static void Unlock(Objects.Trophy trophy, Action<bool> callback = null)
+		{
+			Unlock(trophy.ID, callback);
+		}
+
 		public static void Unlock(int id, Action<bool> callback = null)
 		{
 			var parameters = new Dictionary<string, string>();

@@ -17,6 +17,15 @@ namespace GJAPI.Objects
 		#endregion Fields & Properties
 		
 		#region Constructors
+		public Trophy(int id, string title, string description, TrophyDifficulty difficulty, bool unlocked)
+		{
+			this.ID = id;
+			this.Title = title;
+			this.Description = description;
+			this.Difficulty = difficulty;
+			this.Unlocked = unlocked;
+		}
+
 		public Trophy(JSONClass data)
 		{
 			this.PopulateFromJSON(data);
@@ -42,6 +51,20 @@ namespace GJAPI.Objects
 			}
 		}
 		#endregion Update Attributes
+
+		#region Interface
+		public void Unlock(Action<bool> callback = null)
+		{
+			Trophies.Unlock(this, (bool success) => {
+				Unlocked = success;
+
+				if (callback != null)
+				{
+					callback(success);
+				}
+			});
+		}
+		#endregion Interface
 		
 		public override string ToString()
 		{
