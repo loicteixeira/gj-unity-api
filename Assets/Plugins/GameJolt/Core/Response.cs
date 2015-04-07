@@ -49,6 +49,7 @@ namespace GJAPI.Core
 
 				break;
 			
+			case ResponseFormat.KeyPair:
 			default:
 				this.success = response.StartsWith("success:\"true\"");
 
