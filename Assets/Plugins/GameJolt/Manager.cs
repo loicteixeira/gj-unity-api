@@ -168,8 +168,6 @@ namespace GJAPI
 		#endregion Requests
 
 		#region Actions
-		public string message = "No message yet";
-
 		void AutoConnectWebPlayer()
 		{
 #if UNITY_WEBPLAYER || UNITY_WEBGL
