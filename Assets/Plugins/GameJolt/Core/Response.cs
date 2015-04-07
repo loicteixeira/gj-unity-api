@@ -55,7 +55,10 @@ namespace GJAPI.Core
 
 				if (this.success)
 				{
-					// Note: 
+					// Note: For KeyPair mode, it would be nice to have the response as a key/value pair.
+					// However, some calls will return duplicated key names which is pretty annoying to deal with.
+					// Because the KeyPair mode is only used for internal error messages (proper API calls use Json of Dump)
+					// this level of implementation is sufficient. 
 					this.raw = response;
 				}
 				else
