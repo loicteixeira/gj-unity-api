@@ -1,4 +1,4 @@
-﻿using SimpleJSON;
+﻿using GJAPI.External.SimpleJSON;
 
 namespace GJAPI.Objects
 {

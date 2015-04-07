@@ -3,52 +3,13 @@
 #define USE_FileIO
 #endif
 
-/* * * * *
- * A simple JSON Parser / builder
- * ------------------------------
- * 
- * It mainly has been written as a simple JSON parser. It can build a JSON string
- * from the node-tree, or generate a node tree from any valid JSON string.
- * 
- * If you want to use compression when saving to file / stream / B64 you have to include
- * SharpZipLib ( http://www.icsharpcode.net/opensource/sharpziplib/ ) in your project and
- * define "USE_SharpZipLib" at the top of the file
- * 
- * Written by Bunny83 
- * 2012-06-09
- * 
- * Features / attributes:
- * - provides strongly typed node classes and lists / dictionaries
- * - provides easy access to class members / array items / data values
- * - the parser ignores data types. Each value is a string.
- * - only double quotes (") are used for quoting strings.
- * - values and names are not restricted to quoted strings. They simply add up and are trimmed.
- * - There are only 3 types: arrays(JSONArray), objects(JSONClass) and values(JSONData)
- * - provides "casting" properties to easily convert to / from those types:
- *   int / float / double / bool
- * - provides a common interface for each node so no explicit casting is required.
- * - the parser try to avoid errors, but if malformed JSON is parsed the result is undefined
- * 
- * 
- * 2012-12-17 Update:
- * - Added internal JSONLazyCreator class which simplifies the construction of a JSON tree
- *   Now you can simple reference any item that doesn't exist yet and it will return a JSONLazyCreator
- *   The class determines the required type by it's further use, creates the type and removes itself.
- * - Added binary serialization / deserialization.
- * - Added support for BZip2 zipped binary format. Requires the SharpZipLib ( http://www.icsharpcode.net/opensource/sharpziplib/ )
- *   The usage of the SharpZipLib library can be disabled by removing or commenting out the USE_SharpZipLib define at the top
- * - The serializer uses different types when it comes to store the values. Since my data values
- *   are all of type string, the serializer will "try" which format fits best. The order is: int, float, double, bool, string.
- *   It's not the most efficient way but for a moderate amount of data it should work on all platforms.
- * 
- * * * * */
+/* Trimmed down version of SimpleJSON from Bunny83 tailored for the API use */
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
- 
- 
-namespace SimpleJSON
+
+namespace GJAPI.External.SimpleJSON
 {
     public enum JSONBinaryTag
     {
@@ -383,201 +344,6 @@ namespace SimpleJSON
             }
             return ctx;
         }
- 
-        public virtual void Serialize(System.IO.BinaryWriter aWriter) {}
- 
-        public void SaveToStream(System.IO.Stream aData)
-        {
-            var W = new System.IO.BinaryWriter(aData);
-            Serialize(W);
-        }
- 
-        #if USE_SharpZipLib
-        public void SaveToCompressedStream(System.IO.Stream aData)
-        {
-            using (var gzipOut = new ICSharpCode.SharpZipLib.BZip2.BZip2OutputStream(aData))
-            {
-                gzipOut.IsStreamOwner = false;
-                SaveToStream(gzipOut);
-                gzipOut.Close();
-            }
-        }
- 
-        public void SaveToCompressedFile(string aFileName)
-        {
-            #if USE_FileIO
-            System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
-            using(var F = System.IO.File.OpenWrite(aFileName))
-            {
-                SaveToCompressedStream(F);
-            }
-            #else
-            throw new Exception("Can't use File IO stuff in webplayer");
-            #endif
-        }
-        public string SaveToCompressedBase64()
-        {
-            using (var stream = new System.IO.MemoryStream())
-            {
-                SaveToCompressedStream(stream);
-                stream.Position = 0;
-                return System.Convert.ToBase64String(stream.ToArray());
-            }
-        }
- 
-        #else
-        public void SaveToCompressedStream(System.IO.Stream aData)
-        {
-            throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
-        }
-        public void SaveToCompressedFile(string aFileName)
-        {
-            throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
-        }
-        public string SaveToCompressedBase64()
-        {
-            throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
-        }
-        #endif
-        
-        public void SaveToFile(string aFileName)
-        {
-            #if USE_FileIO
-            System.IO.Directory.CreateDirectory((new System.IO.FileInfo(aFileName)).Directory.FullName);
-            using(var F = System.IO.File.OpenWrite(aFileName))
-            {
-                SaveToStream(F);
-            }
-            #else
-            throw new Exception("Can't use File IO stuff in webplayer");
-            #endif
-        }
-        public string SaveToBase64()
-        {
-            using (var stream = new System.IO.MemoryStream())
-            {
-                SaveToStream(stream);
-                stream.Position = 0;
-                return System.Convert.ToBase64String(stream.ToArray());
-            }
-        }
-        public static JSONNode Deserialize(System.IO.BinaryReader aReader)
-        {
-            JSONBinaryTag type = (JSONBinaryTag)aReader.ReadByte();
-            switch(type)
-            {
-            case JSONBinaryTag.Array:
-            {
-                int count = aReader.ReadInt32();
-                JSONArray tmp = new JSONArray();
-                for(int i = 0; i < count; i++)
-                    tmp.Add(Deserialize(aReader));
-                return tmp;
-            }
-            case JSONBinaryTag.Class:
-            {
-                int count = aReader.ReadInt32();                
-                JSONClass tmp = new JSONClass();
-                for(int i = 0; i < count; i++)
-                {
-                    string key = aReader.ReadString();
-                    var val = Deserialize(aReader);
-                    tmp.Add(key, val);
-                }
-                return tmp;
-            }
-            case JSONBinaryTag.Value:
-            {
-                return new JSONData(aReader.ReadString());
-            }
-            case JSONBinaryTag.IntValue:
-            {
-                return new JSONData(aReader.ReadInt32());
-            }
-            case JSONBinaryTag.DoubleValue:
-            {
-                return new JSONData(aReader.ReadDouble());
-            }
-            case JSONBinaryTag.BoolValue:
-            {
-                return new JSONData(aReader.ReadBoolean());
-            }
-            case JSONBinaryTag.FloatValue:
-            {
-                return new JSONData(aReader.ReadSingle());
-            }
- 
-            default:
-            {
-                throw new Exception("Error deserializing JSON. Unknown tag: " + type);
-            }
-            }
-        }
- 
-        #if USE_SharpZipLib
-        public static JSONNode LoadFromCompressedStream(System.IO.Stream aData)
-        {
-            var zin = new ICSharpCode.SharpZipLib.BZip2.BZip2InputStream(aData);
-            return LoadFromStream(zin);
-        }
-        public static JSONNode LoadFromCompressedFile(string aFileName)
-        {
-            #if USE_FileIO
-            using(var F = System.IO.File.OpenRead(aFileName))
-            {
-                return LoadFromCompressedStream(F);
-            }
-            #else
-            throw new Exception("Can't use File IO stuff in webplayer");
-            #endif
-        }
-        public static JSONNode LoadFromCompressedBase64(string aBase64)
-        {
-            var tmp = System.Convert.FromBase64String(aBase64);
-            var stream = new System.IO.MemoryStream(tmp);
-            stream.Position = 0;
-            return LoadFromCompressedStream(stream);
-        }
-        #else
-        public static JSONNode LoadFromCompressedFile(string aFileName)
-        {
-            throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
-        }
-        public static JSONNode LoadFromCompressedStream(System.IO.Stream aData)
-        {
-            throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
-        }
-        public static JSONNode LoadFromCompressedBase64(string aBase64)
-        {
-            throw new Exception("Can't use compressed functions. You need include the SharpZipLib and uncomment the define at the top of SimpleJSON");
-        }
-        #endif
- 
-        public static JSONNode LoadFromStream(System.IO.Stream aData)
-        {
-            using(var R = new System.IO.BinaryReader(aData))
-            {
-                return Deserialize(R);
-            }
-        }
-        public static JSONNode LoadFromFile(string aFileName)
-        {
-            #if USE_FileIO
-            using(var F = System.IO.File.OpenRead(aFileName))
-            {
-                return LoadFromStream(F);
-            }
-            #else
-            throw new Exception("Can't use File IO stuff in webplayer");
-            #endif
-        }
-        public static JSONNode LoadFromBase64(string aBase64)
-        {
-            var tmp = System.Convert.FromBase64String(aBase64);
-            var stream = new System.IO.MemoryStream(tmp);
-            stream.Position = 0;
-            return LoadFromStream(stream);
-        }
     } // End of JSONNode
  
     public class JSONArray : JSONNode, IEnumerable
@@ -662,15 +428,6 @@ namespace SimpleJSON
             }
             result += "\n" + aPrefix + "]";
             return result;
-        }
-        public override void Serialize (System.IO.BinaryWriter aWriter)
-        {
-            aWriter.Write((byte)JSONBinaryTag.Array);
-            aWriter.Write(m_List.Count);
-            for(int i = 0; i < m_List.Count; i++)
-            {
-                m_List[i].Serialize(aWriter);
-            }
         }
     } // End of JSONArray
  
@@ -798,16 +555,6 @@ namespace SimpleJSON
             result += "\n" + aPrefix + "}";
             return result;
         }
-        public override void Serialize (System.IO.BinaryWriter aWriter)
-        {
-            aWriter.Write((byte)JSONBinaryTag.Class);
-            aWriter.Write(m_Dict.Count);
-            foreach(string K in m_Dict.Keys)
-            {
-                aWriter.Write(K);
-                m_Dict[K].Serialize(aWriter);
-            }
-        }
     } // End of JSONClass
  
     public class JSONData : JSONNode
@@ -846,42 +593,6 @@ namespace SimpleJSON
         public override string ToString(string aPrefix)
         {
             return "\"" + Escape(m_Data) + "\"";
-        }
-        public override void Serialize (System.IO.BinaryWriter aWriter)
-        {
-            var tmp = new JSONData("");
- 
-            tmp.AsInt = AsInt;
-            if (tmp.m_Data == this.m_Data)
-            {
-                aWriter.Write((byte)JSONBinaryTag.IntValue);
-                aWriter.Write(AsInt);
-                return;
-            }
-            tmp.AsFloat = AsFloat;
-            if (tmp.m_Data == this.m_Data)
-            {
-                aWriter.Write((byte)JSONBinaryTag.FloatValue);
-                aWriter.Write(AsFloat);
-                return;
-            }
-            tmp.AsDouble = AsDouble;
-            if (tmp.m_Data == this.m_Data)
-            {
-                aWriter.Write((byte)JSONBinaryTag.DoubleValue);
-                aWriter.Write(AsDouble);
-                return;
-            }
- 
-            tmp.AsBool = AsBool;
-            if (tmp.m_Data == this.m_Data)
-            {
-                aWriter.Write((byte)JSONBinaryTag.BoolValue);
-                aWriter.Write(AsBool);
-                return;
-            }
-            aWriter.Write((byte)JSONBinaryTag.Value);
-            aWriter.Write(m_Data);
         }
     } // End of JSONData
  

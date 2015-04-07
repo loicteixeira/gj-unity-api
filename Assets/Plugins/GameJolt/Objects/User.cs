@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using SimpleJSON;
+using GJAPI.External.SimpleJSON;
 
 namespace GJAPI.Objects
 {
