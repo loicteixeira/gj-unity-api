@@ -28,17 +28,51 @@ namespace GJAPI.Core
 				{
 					this.dump = response.Substring(returnIndex + 1);
 				}
+
+				if (!this.success)
+				{
+					UnityEngine.Debug.LogWarning(this.dump);
+					this.dump = null;
+				}
+
 				break;
 				
 			case ResponseFormat.Json:
 				this.json = JSON.Parse(response)["response"];
 				this.success = this.json["success"].AsBool;
 
+				if (!this.success)
+				{
+					UnityEngine.Debug.LogWarning(this.json["message"]);
+					this.json = null;
+				}
+
 				break;
 			
 			default:
 				this.success = response.StartsWith("success:\"true\"");
-				this.raw = response;
+
+				if (this.success)
+				{
+					// Note: 
+					this.raw = response;
+				}
+				else
+				{
+					var lines = response.Split('\n');
+					foreach (var line in lines)
+					{
+						if (line != string.Empty)
+						{
+							var pair = line.Split(':');
+							if (pair.Length >= 1 && pair[0] == "message")
+							{
+								UnityEngine.Debug.LogWarning(pair[1]);
+								break;
+							}
+						}
+					}
+				}
 
 				break;
 			}
