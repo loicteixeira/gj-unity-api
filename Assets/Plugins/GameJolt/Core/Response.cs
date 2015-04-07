@@ -9,10 +9,10 @@ namespace GJAPI.Core
 	public class Response
 	{			
 		public readonly ResponseFormat format;
-		public readonly bool success;
-		public readonly string raw;
-		public readonly string dump;
-		public readonly JSONNode json;
+		public readonly bool success = false;
+		public readonly string raw = null;
+		public readonly string dump = null;
+		public readonly JSONNode json = null;
 		
 		public Response(string response, ResponseFormat format = ResponseFormat.Json)
 		{
