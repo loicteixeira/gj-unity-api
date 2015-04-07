@@ -5182,7 +5182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4afd56a8661bffe4d82b24c8f9941637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: No message yet
 --- !u!4 &1131976491
 Transform:
   m_ObjectHideFlags: 0
