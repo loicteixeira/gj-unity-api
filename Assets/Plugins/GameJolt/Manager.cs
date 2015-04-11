@@ -33,6 +33,7 @@ namespace GJAPI
 		public string PrivateKey { get; private set; }
 
 		public float Timeout { get; set; }
+		public bool AutoPing { get; private set; }
 
 		public Objects.User CurrentUser { get; set; }
 
@@ -75,6 +76,7 @@ namespace GJAPI
 			GameID = settings.gameId;
 			PrivateKey = settings.privateKey;
 			Timeout = settings.timeout;
+			AutoPing = settings.autoPing;
 
 			if (GameID == 0)
 			{
@@ -217,6 +219,43 @@ namespace GJAPI
 				// This is a Guest.
 				// TODO: Prompt "Hello Guest!" and encourage to signup/signin?
 			}
+		}
+
+		public void StartAutoPing()
+		{
+			if (!AutoPing)
+			{
+				return;
+			}
+
+			Sessions.Open((bool success) => {
+				// What should we do if it fails? Retry later?
+				// Without smart handling, it will probably just fail again...
+				if (success)
+				{
+					Invoke("Ping", 30f);
+				}
+			});
+		}
+
+		void Ping()
+		{
+			Sessions.Ping(SessionStatus.Active, (bool success) => {
+				// Sessions are automatically closed after 120 seconds
+				// which will happen if the application has been in the background for too long.
+				// It would be nice to Ping an Idle state when the app is in the background,
+				// but because Unity apps don't run in the background by default, this is doomed to failure.
+				// Let it error out and reconnect.
+				if (!success)
+				{
+					Invoke("StartAutoPing", 1f); // Try reconnecting.
+					return;
+				}
+				else
+				{
+					Invoke("Ping", 30f); // Ping again.
+				}
+			});
 		}
 		#endregion Actions
 	}

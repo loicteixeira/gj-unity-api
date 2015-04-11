@@ -108,6 +108,11 @@ namespace GJAPI.Objects
 
 			Core.Request.Get(Constants.API_USERS_AUTH, parameters, (Core.Response response) => {
 				IsAuthenticated = response.success;
+
+				if (response.success)
+				{
+					Manager.Instance.StartAutoPing();
+				}
 				
 				if (callback != null)
 				{
