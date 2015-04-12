@@ -39,7 +39,8 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Sign In. Click to see source.");
 
-		GJAPI.Users.Authenticate(userNameField.text, userTokenField.text, (bool success) => {
+		var user = new GJAPI.Objects.User(userNameField.text, userTokenField.text);
+		user.SignIn((bool success) => {
 			AddConsoleLine(string.Format("Sign In {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}

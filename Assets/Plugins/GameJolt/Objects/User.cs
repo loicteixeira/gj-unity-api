@@ -100,8 +100,16 @@ namespace GJAPI.Objects
 		#endregion Update Attributes
 
 		#region Interface
-		public void Authenticate(Action<bool> callback = null)
+		public void SignIn(Action<bool> callback = null)
 		{
+			if (Manager.Instance.CurrentUser != null)
+			{
+				UnityEngine.Debug.LogWarning("Another user is currently signed in. Sign it out first.");
+				return;
+			}
+
+			Manager.Instance.CurrentUser = this;
+
 			var parameters = new Dictionary<string, string>();
 			parameters.Add("username", Name);
 			parameters.Add("user_token", Token);

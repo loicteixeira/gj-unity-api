@@ -5,14 +5,6 @@ namespace GJAPI
 {
 	public static class Users
 	{
-		#region Authenticate
-		public static void Authenticate(string name, string token, Action<bool> callback = null)
-		{
-			Manager.Instance.CurrentUser = new Objects.User(name, token);
-			Manager.Instance.CurrentUser.Authenticate(callback);
-		}
-		#endregion Authenticate
-
 		#region Get
 		public static void Get(string name, Action<Objects.User> callback)
 		{

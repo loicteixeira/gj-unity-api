@@ -178,7 +178,8 @@ namespace GJAPI
 			{
 				if (DebugUser != string.Empty && DebugToken != string.Empty)
 				{
-					Users.Authenticate(DebugUser, DebugToken, (bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
+					var user = new Objects.User(DebugUser, DebugToken);
+					user.SignIn((bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
 				}
 				else
 				{
@@ -206,7 +207,8 @@ namespace GJAPI
 				var credentials = response.Split(':');
 				if (credentials.Length == 2)
 				{
-					Users.Authenticate(credentials[0], credentials[1]);
+					var user = new Objects.User(credentials[0], credentials[1]);
+					user.SignIn();
 					// TODO: Prompt "Welcome Back <username>!"
 				}
 				else
