@@ -99,34 +99,19 @@ namespace GJAPI
 		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback)
 		{
 			float timeout = Time.time + Timeout;
-			string error = null;
 
 			var www = new WWW(url);
 			while (!www.isDone)
 			{
 				if (Time.time > timeout)
 				{
-					error = "success:\"false\"\nmessage:\"Timeout\"";
-					break;
+					callback(new Core.Response("Timeout"));
+					yield break;
 				}
 				yield return new WaitForEndOfFrame();
 			}
 
-			if (www.error != null)
-			{
-				error = "success:\"false\"\nmessage:\"" + www.error + "\"";
-			}
-
-			Core.Response response;
-			if (error != null)
-			{
-				response = new Core.Response(error, Core.ResponseFormat.KeyPair);
-			}
-			else
-			{
-				response = new Core.Response(www.text, format);
-			}
-			callback(response);
+			callback(new Core.Response(www, format));
 		}
 
 		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, Core.ResponseFormat format, Action<Core.Response> callback)
@@ -138,34 +123,19 @@ namespace GJAPI
 			}
 
 			float timeout = Time.time + Timeout;
-			string error = null;
 
 			var www = new WWW (url, form);
 			while (!www.isDone)
 			{
 				if (Time.time > timeout)
 				{
-					error = "success:\"false\"\nmessage:\"Timeout\"";
-					break;
+					callback(new Core.Response("Timeout"));
+					yield break;
 				}
 				yield return new WaitForEndOfFrame();
 			}
-			
-			if (www.error != null)
-			{
-				error = "success:\"false\"\nmessage:\"" + www.error + "\"";
-			}
-			
-			Core.Response response;
-			if (error != null)
-			{
-				response = new Core.Response(error, Core.ResponseFormat.KeyPair);
-			}
-			else
-			{
-				response = new Core.Response(www.text, format);
-			}
-			callback(response);
+
+			callback(new Core.Response(www, format));
 		}
 		#endregion Requests
 

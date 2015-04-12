@@ -16,8 +16,7 @@ namespace GJAPI.Core
 			var error = Prepare(ref parameters, requireVerified, format);
 			if (error != null)
 			{
-				UnityEngine.Debug.LogWarning(error);
-				callback(new Core.Response("success:\"false\"\nmessage:\"" + error + "\"", Core.ResponseFormat.KeyPair));
+				callback(new Core.Response(error));
 			}
 			else
 			{
@@ -37,8 +36,7 @@ namespace GJAPI.Core
 			var error = Prepare(ref parameters, requireVerified, format);
 			if (error != null)
 			{
-				UnityEngine.Debug.LogWarning(error);
-				callback(new Core.Response("success:\"false\"\nmessage:\"" + error + "\"", Core.ResponseFormat.KeyPair));
+				callback(new Core.Response(error));
 			}
 			else
 			{

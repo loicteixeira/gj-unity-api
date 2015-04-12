@@ -14,7 +14,7 @@ namespace GJAPI
 				{
 					callback(response.success);
 				}
-			}, true, Core.ResponseFormat.KeyPair);
+			}, true, Core.ResponseFormat.Json);
 		}
 
 		public static void Ping(SessionStatus status = SessionStatus.Active, Action<bool> callback = null)
@@ -27,7 +27,7 @@ namespace GJAPI
 				{
 					callback(response.success);
 				}
-			}, true, Core.ResponseFormat.KeyPair);
+			}, true, Core.ResponseFormat.Json);
 		}
 
 		public static void Close(Action<bool> callback = null)
@@ -37,7 +37,7 @@ namespace GJAPI
 				{
 					callback(response.success);
 				}
-			}, true, Core.ResponseFormat.KeyPair);
+			}, true, Core.ResponseFormat.Json);
 		}
 	}
 }

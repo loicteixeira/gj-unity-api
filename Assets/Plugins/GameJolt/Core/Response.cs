@@ -1,82 +1,76 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
 using GJAPI.External.SimpleJSON;
 
 namespace GJAPI.Core
 {
-	public enum ResponseFormat { KeyPair, Json, Dump }
+	public enum ResponseFormat { Dump, Json, Raw }
 
 	public class Response
 	{			
 		public readonly ResponseFormat format;
 		public readonly bool success = false;
-		public readonly string raw = null;
+		public readonly byte[] bytes = null;
 		public readonly string dump = null;
 		public readonly JSONNode json = null;
+
+		public Response(string errorMessage) {
+			this.success = false;
+			Debug.LogWarning(errorMessage);
+		}
 		
-		public Response(string response, ResponseFormat format = ResponseFormat.Json)
+		public Response(WWW www, ResponseFormat format = ResponseFormat.Json)
 		{
+			if (www.error != null)
+			{
+				this.success = false;
+				Debug.LogWarning(www.error);
+				return;
+			}
+
 			this.format = format;
-			
+
 			switch (format)
 			{
 			case ResponseFormat.Dump:
-				this.success = response.StartsWith("SUCCESS");
+				this.success = www.text.StartsWith("SUCCESS");
 
-				var returnIndex = response.IndexOf ('\n');
+				var returnIndex = www.text.IndexOf ('\n');
 				if (returnIndex != -1)
 				{
-					this.dump = response.Substring(returnIndex + 1);
+					this.dump = www.text.Substring(returnIndex + 1);
 				}
 
 				if (!this.success)
 				{
-					UnityEngine.Debug.LogWarning(this.dump);
+					Debug.LogWarning(this.dump);
 					this.dump = null;
 				}
 
 				break;
 				
 			case ResponseFormat.Json:
-				this.json = JSON.Parse(response)["response"];
+				this.json = JSON.Parse(www.text)["response"];
 				this.success = this.json["success"].AsBool;
 
 				if (!this.success)
 				{
-					UnityEngine.Debug.LogWarning(this.json["message"]);
+					Debug.LogWarning(this.json["message"]);
 					this.json = null;
 				}
 
 				break;
 			
-			case ResponseFormat.KeyPair:
-			default:
-				this.success = response.StartsWith("success:\"true\"");
+			case ResponseFormat.Raw:
+				this.success = true;
+				this.bytes = www.bytes;
 
-				if (this.success)
-				{
-					// For KeyPair mode, it would be nice to have the response as a key/value pair.
-					// However, some calls will return duplicated key names which is pretty annoying to deal with.
-					// Because the KeyPair mode is only used for internal error messages (proper API calls use Json of Dump)
-					// this level of implementation is sufficient. 
-					this.raw = response;
-				}
-				else
-				{
-					var lines = response.Split('\n');
-					foreach (var line in lines)
-					{
-						if (line != string.Empty)
-						{
-							var pair = line.Split(':');
-							if (pair.Length >= 1 && pair[0] == "message")
-							{
-								UnityEngine.Debug.LogWarning(pair[1]);
-								break;
-							}
-						}
-					}
-				}
+				break;
+
+			default:
+				this.success = false;
+				Debug.LogWarning("Unknown format. Cannot process response.");
 
 				break;
 			}
