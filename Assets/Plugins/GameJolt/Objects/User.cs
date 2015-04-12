@@ -121,6 +121,15 @@ namespace GJAPI.Objects
 			}, false);
 		}
 
+		public void SignOut()
+		{
+			if (Manager.Instance.CurrentUser == this)
+			{
+				Manager.Instance.CurrentUser = null;
+				Manager.Instance.StopAutoPing();
+			}
+		}
+
 		public void Get(Action<User> callback = null)
 		{
 			var me = this;

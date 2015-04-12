@@ -257,6 +257,15 @@ namespace GJAPI
 				}
 			});
 		}
+
+		public void StopAutoPing()
+		{
+			if (AutoPing)
+			{
+				CancelInvoke("StartAutoPing");
+				CancelInvoke("Ping");
+			}
+		}
 		#endregion Actions
 	}
 }

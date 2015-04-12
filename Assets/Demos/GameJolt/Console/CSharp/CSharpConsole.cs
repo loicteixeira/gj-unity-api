@@ -35,13 +35,26 @@ public class CSharpConsole : MonoBehaviour
 	#endregion Inspector Fields
 
 	#region Click Actions
-	public void Login()
+	public void SignIn()
 	{
-		Debug.Log("Login. Click to see source.");
+		Debug.Log("Sign In. Click to see source.");
 
 		GJAPI.Users.Authenticate(userNameField.text, userTokenField.text, (bool success) => {
-			AddConsoleLine(string.Format("Login {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Sign In {0}.", success ? "Succeesful" : "Failed"));
 		});
+	}
+
+	public void SignOut()
+	{
+		Debug.Log("Sign Out. Click to see source.");
+
+		var isSignedIn = GJAPI.Manager.Instance.CurrentUser != null;
+		if (isSignedIn)
+		{
+			GJAPI.Manager.Instance.CurrentUser.SignOut();
+		}
+
+		AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Succeesful" : "Failed"));
 	}
 
 	public void SessionOpen()
