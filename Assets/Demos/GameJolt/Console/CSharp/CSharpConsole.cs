@@ -270,7 +270,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Remove DataStore Key. Click to see source.");
 
-		GJAPI.DataStore.Remove(keyField.text, globalToggle.isOn, (bool success) => {
+		GJAPI.DataStore.Delete(keyField.text, globalToggle.isOn, (bool success) => {
 			AddConsoleLine(string.Format("Remove DataStore Key {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}

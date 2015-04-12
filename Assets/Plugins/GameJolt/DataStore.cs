@@ -70,7 +70,7 @@ namespace GJAPI
 			}, !global, Core.ResponseFormat.Dump);
 		}
 
-		public static void Remove(string key, bool global, Action<bool> callback = null)
+		public static void Delete(string key, bool global, Action<bool> callback = null)
 		{
 			var parameters = new Dictionary<string, string>();
 			parameters.Add("key", key);
