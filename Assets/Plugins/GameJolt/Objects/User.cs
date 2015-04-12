@@ -147,7 +147,7 @@ namespace GJAPI.Objects
 
 		public override string ToString()
 		{
-			return string.Format("GJAPI.Objects.User: {0} - {1} - Authenticated: {2} - Status: {4}", Name, ID, IsAuthenticated, Status);
+			return string.Format("GJAPI.Objects.User: {0} - {1} - Authenticated: {2} - Status: {3}", Name, ID, IsAuthenticated, Status);
 		}
 	}
 }
