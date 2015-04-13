@@ -36,5 +36,12 @@ namespace GJAPI
 		public const string API_DATASTORE_FETCH = "data-store/";
 		public const string API_DATASTORE_REMOVE = "data-store/remove/";
 		public const string API_DATASTORE_KEYS_FETCH = "data-store/get-keys/";
+
+		public const string IMAGE_RESOURCE_REL_PATH = "Images/";
+
+		public const string DEFAULT_AVATAR_ASSET_NAME = "DefaultAvatar";
+		public const string DEFAULT_AVATAR_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_AVATAR_ASSET_NAME;
+		public const string DEFAULT_TROPHY_ASSET_NAME = "DefaultTrophy";
+		public const string DEFAULT_TROPHY_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_TROPHY_ASSET_NAME;
 	}
 }
