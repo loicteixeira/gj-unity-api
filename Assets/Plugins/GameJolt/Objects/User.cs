@@ -1,3 +1,4 @@
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 using GJAPI.External.SimpleJSON;
@@ -47,6 +48,8 @@ namespace GJAPI.Objects
 		public UserStatus Status { get; private set; }
 
 		public string AvatarURL { get; set; }
+
+		public Sprite Avatar { get; set; }
 		#endregion Fields & Properties
 
 		#region Constructors
@@ -104,7 +107,7 @@ namespace GJAPI.Objects
 		{
 			if (Manager.Instance.CurrentUser != null)
 			{
-				UnityEngine.Debug.LogWarning("Another user is currently signed in. Sign it out first.");
+				Debug.LogWarning("Another user is currently signed in. Sign it out first.");
 				return;
 			}
 
@@ -142,6 +145,36 @@ namespace GJAPI.Objects
 		{
 			var me = this;
 			Users.Get(me, callback);
+		}
+
+		public void DownloadAvatar(Action<bool> callback = null)
+		{
+			if (!string.IsNullOrEmpty(AvatarURL))
+			{
+				Misc.DownloadImage(AvatarURL, (Sprite avatar) => {
+					if (avatar != null)
+					{
+						Avatar = avatar;
+					}
+					else
+					{
+						var tex = Resources.Load(GJAPI.Constants.DEFAULT_AVATAR_ASSET_PATH) as Texture2D;
+						Avatar = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
+					}
+
+					if (callback != null)
+					{
+						callback(avatar != null);
+					}
+				});
+			}
+			else
+			{
+				if (callback != null)
+				{
+					callback(false);
+				}
+			}
 		}
 		#endregion Interface
 
