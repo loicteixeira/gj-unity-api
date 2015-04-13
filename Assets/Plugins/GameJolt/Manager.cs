@@ -73,25 +73,32 @@ namespace GJAPI
 		void Configure()
 		{
 			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;
-			GameID = settings.gameId;
-			PrivateKey = settings.privateKey;
-			Timeout = settings.timeout;
-			AutoPing = settings.autoPing;
-
-			if (GameID == 0)
+			if (settings != null)
 			{
-				Debug.LogWarning("Missing Game ID.");
-			}
-			if (PrivateKey == string.Empty)
-			{
-				Debug.LogWarning("Missing Private Key.");
-			}
-
+				GameID = settings.gameId;
+				PrivateKey = settings.privateKey;
+				Timeout = settings.timeout;
+				AutoPing = settings.autoPing;
+				
+				if (GameID == 0)
+				{
+					Debug.LogWarning("Missing Game ID.");
+				}
+				if (PrivateKey == string.Empty)
+				{
+					Debug.LogWarning("Missing Private Key.");
+				}
+				
 #if UNITY_EDITOR
-			DebugAutoConnect = settings.autoConnect;
-			DebugUser = settings.user;
-			DebugToken = settings.token;
+				DebugAutoConnect = settings.autoConnect;
+				DebugUser = settings.user;
+				DebugToken = settings.token;
 #endif
+			}
+			else
+			{
+				Debug.LogWarning("Could not load settings.");
+			}
 		}
 		#endregion Init
 

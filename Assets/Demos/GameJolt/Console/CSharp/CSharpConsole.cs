@@ -313,8 +313,11 @@ public class CSharpConsole : MonoBehaviour
 	{
 		// Do not try this at home! Seriously, you shouldn't.
 		var settings = Resources.Load(GJAPI.Constants.SETTINGS_ASSET_NAME) as GJAPI.Settings;
-		userNameField.text = settings.user;
-		userTokenField.text = settings.token;
+		if (settings != null)
+		{
+			userNameField.text = settings.user;
+			userTokenField.text = settings.token;
+		}
 	}
 
 	void AddConsoleLine(string text)
