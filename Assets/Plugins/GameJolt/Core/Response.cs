@@ -5,7 +5,7 @@ using GJAPI.External.SimpleJSON;
 
 namespace GJAPI.Core
 {
-	public enum ResponseFormat { Dump, Json, Raw }
+	public enum ResponseFormat { Dump, Json, Raw, Texture }
 
 	public class Response
 	{			
@@ -14,6 +14,7 @@ namespace GJAPI.Core
 		public readonly byte[] bytes = null;
 		public readonly string dump = null;
 		public readonly JSONNode json = null;
+		public readonly Texture2D texture = null;
 
 		public Response(string errorMessage) {
 			this.success = false;
@@ -65,6 +66,12 @@ namespace GJAPI.Core
 			case ResponseFormat.Raw:
 				this.success = true;
 				this.bytes = www.bytes;
+
+				break;
+
+			case ResponseFormat.Texture:
+				this.success = true;
+				this.texture = www.texture;
 
 				break;
 
