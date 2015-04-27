@@ -164,10 +164,33 @@ namespace GJAPI
 				}
 			}
 	#else
-			var uri = new System.Uri(Application.absoluteURL);
+			var uri = new Uri(Application.absoluteURL);
 			if (uri.Host.EndsWith("gamejolt.net") || uri.Host.EndsWith("gamejolt.com"))
 			{
+				#if UNITY_WEBPLAYER
 				Application.ExternalCall("GJAPI_AuthUser", this.gameObject.name, "OnAutoConnectWebPlayer");
+				#elif UNITY_WEBGL
+				Application.ExternalEval(string.Format(@"
+var qs = location.search;
+var params = {{}};
+var tokens;
+var re = /[?&]?([^=]+)=([^&]*)/g;
+
+while (tokens = re.exec(qs)) {{
+	params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+}}
+
+var message;
+if ('gjapi_username' in params && params.gjapi_username !== '' && 'gjapi_token' in params && params.gjapi_token !== '') {{
+	message = params.gjapi_username + ':' + params.gjapi_token;	
+}}
+else {{
+	message = '';
+}}
+
+SendMessage('{0}', 'OnGetUserFromWeb', message);
+		", this.gameObject.name));
+				#endif
 			}
 			else
 			{
