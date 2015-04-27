@@ -22,3 +22,6 @@ sysinfo.txt
 
 # GJAPI Settings
 [Aa]ssets/Plugins/GameJolt/Resources/GJAPISettings.asset
+
+# OS
+.DS_Store
