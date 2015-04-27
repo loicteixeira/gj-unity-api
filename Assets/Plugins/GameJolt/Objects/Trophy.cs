@@ -13,7 +13,7 @@ namespace GJAPI.Objects
 		public string Description { get; set; }
 		public TrophyDifficulty Difficulty { get; set; }
 		public bool Unlocked { get; set; }
-		public string ImageUrl { get; set; }
+		public string ImageURL { get; set; }
 		#endregion Fields & Properties
 		
 		#region Constructors
@@ -38,7 +38,7 @@ namespace GJAPI.Objects
 			this.ID = data["id"].AsInt;
 			this.Title = data["title"].Value;
 			this.Description = data["description"].Value;
-			this.ImageUrl = data["image_url"].Value;
+			this.ImageURL = data["image_url"].Value;
 			this.Unlocked = data["achieved"].Value != "false";
 
 			try
