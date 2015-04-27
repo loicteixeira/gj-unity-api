@@ -204,7 +204,7 @@ SendMessage('{0}', 'OnGetUserFromWeb', message);
 		{
 			if (response != string.Empty)
 			{
-				var credentials = response.Split(':');
+				var credentials = response.Split(new char[] { ':' }, 2);
 				if (credentials.Length == 2)
 				{
 					var user = new Objects.User(credentials[0], credentials[1]);
