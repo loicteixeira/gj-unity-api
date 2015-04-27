@@ -1,4 +1,5 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using GJAPI.External.SimpleJSON;
 
 namespace GJAPI.Objects
@@ -14,6 +15,7 @@ namespace GJAPI.Objects
 		public TrophyDifficulty Difficulty { get; set; }
 		public bool Unlocked { get; set; }
 		public string ImageURL { get; set; }
+		public Sprite Image { get; set; }
 		#endregion Fields & Properties
 		
 		#region Constructors
@@ -63,6 +65,36 @@ namespace GJAPI.Objects
 					callback(success);
 				}
 			});
+		}
+
+		public void DownloadImage(Action<bool> callback = null)
+		{
+			if (!string.IsNullOrEmpty(ImageURL))
+			{
+				Misc.DownloadImage(ImageURL, (Sprite image) => {
+					if (image != null)
+					{
+						Image = image;
+					}
+					else
+					{
+						var tex = Resources.Load(GJAPI.Constants.DEFAULT_TROPHY_ASSET_PATH) as Texture2D;
+						Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
+					}
+					
+					if (callback != null)
+					{
+						callback(image != null);
+					}
+				});
+			}
+			else
+			{
+				if (callback != null)
+				{
+					callback(false);
+				}
+			}
 		}
 		#endregion Interface
 		
