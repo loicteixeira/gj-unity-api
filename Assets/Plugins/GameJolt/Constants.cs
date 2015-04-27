@@ -39,9 +39,9 @@ namespace GJAPI
 
 		public const string IMAGE_RESOURCE_REL_PATH = "Images/";
 
-		public const string DEFAULT_AVATAR_ASSET_NAME = "DefaultAvatar";
+		public const string DEFAULT_AVATAR_ASSET_NAME = "GJAPIDefaultAvatar";
 		public const string DEFAULT_AVATAR_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_AVATAR_ASSET_NAME;
-		public const string DEFAULT_TROPHY_ASSET_NAME = "DefaultTrophy";
+		public const string DEFAULT_TROPHY_ASSET_NAME = "GJAPIDefaultTrophy";
 		public const string DEFAULT_TROPHY_ASSET_PATH = IMAGE_RESOURCE_REL_PATH + DEFAULT_TROPHY_ASSET_NAME;
 	}
 }
