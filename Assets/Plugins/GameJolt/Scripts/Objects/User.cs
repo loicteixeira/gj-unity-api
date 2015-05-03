@@ -111,8 +111,6 @@ namespace GJAPI.Objects
 				return;
 			}
 
-			Manager.Instance.CurrentUser = this;
-
 			var parameters = new Dictionary<string, string>();
 			parameters.Add("username", Name);
 			parameters.Add("user_token", Token);
@@ -122,6 +120,7 @@ namespace GJAPI.Objects
 
 				if (response.success)
 				{
+					Manager.Instance.CurrentUser = this;
 					Manager.Instance.StartAutoPing();
 				}
 				
