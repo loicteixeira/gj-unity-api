@@ -203,7 +203,7 @@ SendMessage('{0}', 'OnGetUserFromWeb', message);
 			}
 		}
 
-		public void StartAutoPing()
+		void StartAutoPing()
 		{
 			if (!AutoPing)
 			{
@@ -240,7 +240,7 @@ SendMessage('{0}', 'OnGetUserFromWeb', message);
 			});
 		}
 
-		public void StopAutoPing()
+		void StopAutoPing()
 		{
 			if (AutoPing)
 			{
