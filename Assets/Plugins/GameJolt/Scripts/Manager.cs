@@ -49,6 +49,7 @@ namespace GJAPI
 		{
 			Configure();
 			AutoConnectWebPlayer();
+			CacheTables();
 		}
 
 		void Configure()
@@ -248,6 +249,14 @@ SendMessage('{0}', 'OnGetUserFromWeb', message);
 			{
 				CancelInvoke("StartAutoPing");
 				CancelInvoke("Ping");
+			}
+		}
+
+		void CacheTables()
+		{
+			if (UseCaching)
+			{
+				Scores.GetTables(null);
 			}
 		}
 		#endregion Actions

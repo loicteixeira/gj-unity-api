@@ -6,6 +6,8 @@ namespace GJAPI
 {
 	public static class Scores
 	{
+		static Objects.Table[] cachedTables = null;
+
 		#region Add
 		public static void Add(Objects.Score score, int table = 0, Action<bool> callback = null)
 		{
@@ -84,28 +86,43 @@ namespace GJAPI
 		#region GetTables
 		public static void GetTables(Action<Objects.Table[]> callback)
 		{
-			Core.Request.Get(Constants.API_SCORES_TABLES_FETCH, null, (Core.Response response) => {
-				Objects.Table[] tables;
-				if(response.success)
-				{
-					int count = response.json["tables"].AsArray.Count;
-					tables = new Objects.Table[count];
-
-					for (int i = 0; i < count; ++i)
-					{
-						tables[i] = new Objects.Table(response.json["tables"][i].AsObject);
-					}
-				}
-				else
-				{
-					tables = null;
-				}
-
+			if (cachedTables != null)
+			{
 				if (callback != null)
 				{
-					callback(tables);
+					callback(cachedTables);
 				}
-			}, false);
+			}
+			else
+			{
+				Core.Request.Get(Constants.API_SCORES_TABLES_FETCH, null, (Core.Response response) => {
+					Objects.Table[] tables;
+					if(response.success)
+					{
+						int count = response.json["tables"].AsArray.Count;
+						tables = new Objects.Table[count];
+						
+						for (int i = 0; i < count; ++i)
+						{
+							tables[i] = new Objects.Table(response.json["tables"][i].AsObject);
+						}
+					}
+					else
+					{
+						tables = null;
+					}
+
+					if (Manager.Instance.UseCaching)
+					{
+						cachedTables = tables;
+					}
+					
+					if (callback != null)
+					{
+						callback(tables);
+					}
+				}, false);
+			}
 		}
 		#endregion GetTables
 	}
