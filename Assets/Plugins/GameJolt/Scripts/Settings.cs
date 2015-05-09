@@ -11,6 +11,7 @@ namespace GJAPI
 		[Header("Settings")]
 		public float timeout = 10f;
 		public bool autoPing = true;
+		public bool useCaching = true;
 
 		[Header("Debug")]
 		public bool autoConnect = false;

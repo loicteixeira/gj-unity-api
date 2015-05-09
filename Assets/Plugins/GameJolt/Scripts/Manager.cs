@@ -13,6 +13,7 @@ namespace GJAPI
 
 		public float Timeout { get; set; }
 		public bool AutoPing { get; private set; }
+		public bool UseCaching { get; private set; }
 
 		Objects.User currentUser;
 		public Objects.User CurrentUser
@@ -59,6 +60,7 @@ namespace GJAPI
 				PrivateKey = settings.privateKey;
 				Timeout = settings.timeout;
 				AutoPing = settings.autoPing;
+				UseCaching = settings.useCaching;
 				
 				if (GameID == 0)
 				{
