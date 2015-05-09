@@ -22,9 +22,16 @@ namespace GJAPI
 			{
 				currentUser = value;
 
-				if (currentUser.IsAuthenticated)
+				if (currentUser != null)
 				{
-					StartAutoPing();
+					if (currentUser.IsAuthenticated)
+					{
+						StartAutoPing();
+					}
+				}
+				else
+				{
+					StopAutoPing();
 				}
 			}
 		}

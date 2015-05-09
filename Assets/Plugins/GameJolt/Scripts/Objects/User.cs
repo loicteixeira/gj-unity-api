@@ -141,7 +141,6 @@ namespace GJAPI.Objects
 			if (Manager.Instance.CurrentUser == this)
 			{
 				Manager.Instance.CurrentUser = null;
-				Manager.Instance.StopAutoPing();
 			}
 		}
 
