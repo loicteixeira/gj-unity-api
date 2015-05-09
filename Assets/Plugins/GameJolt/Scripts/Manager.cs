@@ -14,7 +14,20 @@ namespace GJAPI
 		public float Timeout { get; set; }
 		public bool AutoPing { get; private set; }
 
-		public Objects.User CurrentUser { get; set; }
+		Objects.User currentUser;
+		public Objects.User CurrentUser
+		{
+			get { return currentUser; }
+			set
+			{
+				currentUser = value;
+
+				if (currentUser.IsAuthenticated)
+				{
+					StartAutoPing();
+				}
+			}
+		}
 
 #if UNITY_EDITOR
 		bool DebugAutoConnect { get; set; }

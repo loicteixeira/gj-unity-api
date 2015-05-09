@@ -127,7 +127,6 @@ namespace GJAPI.Objects
 				if (response.success)
 				{
 					Manager.Instance.CurrentUser = this;
-					Manager.Instance.StartAutoPing();
 				}
 				
 				if (callback != null)
