@@ -10,7 +10,10 @@ namespace GJAPI
 		public const string SETTINGS_ASSET_PATH = "Assets/Plugins/GameJolt/Resources/";
 		public const string SETTINGS_ASSET_FULL_PATH = SETTINGS_ASSET_PATH + SETTINGS_ASSET_FULL_NAME;
 
-		public const string MANAGER_NAME = "Game Jolt API Manager";
+		public const string MANAGER_ASSET_NAME = "GameJoltAPI";
+		public const string MANAGER_ASSET_FULL_NAME = MANAGER_ASSET_NAME + ".prefab";
+		public const string MANAGER_ASSET_PATH = "Assets/Plugins/GameJolt/Prefabs/";
+		public const string MANAGER_ASSET_FULL_PATH = MANAGER_ASSET_PATH + MANAGER_ASSET_FULL_NAME;
 
 		public const string API_PROTOCOL = "http://";
 		public const string API_ROOT = "gamejolt.com/api/game/";
