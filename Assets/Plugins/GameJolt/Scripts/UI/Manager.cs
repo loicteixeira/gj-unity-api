@@ -5,68 +5,28 @@ using System;
 namespace GJAPI.UI
 {
 	[RequireComponent(typeof(Animator))]
-	public class Manager : MonoBehaviour
+	public class Manager : Core.MonoSingleton<Manager>
 	{
-		#region Singleton
-		protected static Manager instance;
-		public static Manager Instance
-		{
-			get
-			{
-				if (instance == null) 
-				{
-					instance = FindObjectOfType<Manager>();
-					
-					if (instance == null)
-					{
-						Debug.LogError("An instance of " + typeof(Manager) + " is needed in the scene, but there is none.");
-					}
-				}
-				
-				return instance;
-			}
-		}
-		#endregion Singleton
-
 		SignInWindow signinWindow;
 
-		void Awake()
+		override protected void Init()
 		{
-			if (Persist())
-			{
-				var animator = GetComponent<Animator>();
+			var animator = GetComponent<Animator>();
 
-				// GetComponentInChildren do look for inactive childrens.
-				// GetComponentsInChildren would alocate memory.
-				// Instead, looping over childrens for what we need.
-				foreach (Transform children in transform)
+			// GetComponentInChildren do look for inactive childrens.
+			// GetComponentsInChildren would alocate memory.
+			// Instead, looping over childrens for what we need.
+			foreach (Transform children in transform)
+			{
+				if (signinWindow == null)
 				{
-					if (signinWindow == null)
+					signinWindow = children.GetComponent<SignInWindow>();
+					if (signinWindow != null)
 					{
-						signinWindow = children.GetComponent<SignInWindow>();
-						if (signinWindow != null)
-						{
-							signinWindow.Init(animator);
-						}
+						signinWindow.Init(animator);
 					}
 				}
 			}
-		}
-
-		bool Persist()
-		{
-			if (instance == null)
-			{
-				instance = this;
-			}
-			else if (instance != this)
-			{
-				Destroy(this.gameObject);
-				return false;
-			}
-			
-			DontDestroyOnLoad(this.gameObject);
-			return true;
 		}
 
 		public void ShowSignIn()

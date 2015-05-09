@@ -5,29 +5,8 @@ using System.Collections.Generic;
 
 namespace GJAPI
 {
-	public class Manager : MonoBehaviour
+	public class Manager : Core.MonoSingleton<Manager>
 	{
-		#region Singleton
-		protected static Manager instance;
-		public static Manager Instance
-		{
-			get
-			{
-				if (instance == null) 
-				{
-					instance = FindObjectOfType<Manager>();
-					
-					if (instance == null)
-					{
-						Debug.LogError("An instance of " + typeof(Manager) + " is needed in the scene, but there is none.");
-					}
-				}
-				
-				return instance;
-			}
-		}
-		#endregion Singleton
-
 		#region Fields & Properties
 		public int GameID { get; private set; }
 		public string PrivateKey { get; private set; }
@@ -45,29 +24,10 @@ namespace GJAPI
 		#endregion Fields & Properties
 
 		#region Init
-		void Awake()
+		override protected void Init()
 		{
-			if (Persist())
-			{
-				Configure();
-				AutoConnectWebPlayer();
-			}
-		}
-
-		bool Persist()
-		{
-			if (instance == null)
-			{
-				instance = this;
-			}
-			else if (instance != this)
-			{
-				Destroy(this.gameObject);
-				return false;
-			}
-
-			DontDestroyOnLoad(this.gameObject);
-			return true;
+			Configure();
+			AutoConnectWebPlayer();
 		}
 
 		void Configure()
