@@ -108,6 +108,12 @@ namespace GJAPI.Objects
 			if (Manager.Instance.CurrentUser != null)
 			{
 				Debug.LogWarning("Another user is currently signed in. Sign it out first.");
+
+				if (callback != null)
+				{
+					callback(false);
+				}
+
 				return;
 			}
 
