@@ -28,6 +28,7 @@ namespace GJAPI
 					if (currentUser.IsAuthenticated)
 					{
 						StartAutoPing();
+						CacheTrophies();
 					}
 				}
 				else
@@ -257,6 +258,14 @@ SendMessage('{0}', 'OnGetUserFromWeb', message);
 			if (UseCaching)
 			{
 				Scores.GetTables(null);
+			}
+		}
+
+		void CacheTrophies()
+		{
+			if (UseCaching)
+			{
+				Trophies.Get(null);
 			}
 		}
 		#endregion Actions
