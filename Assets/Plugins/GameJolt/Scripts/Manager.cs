@@ -39,9 +39,9 @@ namespace GJAPI
 		}
 
 #if UNITY_EDITOR
-		bool DebugAutoConnect { get; set; }
-		string DebugUser { get; set; }
-		string DebugToken { get; set; }
+		public bool DebugAutoConnect { get; private set; }
+		public string DebugUser { get; private set; }
+		public string DebugToken { get; private set; }
 #endif
 		#endregion Fields & Properties
 
