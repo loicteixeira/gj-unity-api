@@ -265,7 +265,15 @@ SendMessage('{0}', 'OnGetUserFromWeb', message);
 		{
 			if (UseCaching)
 			{
-				Trophies.Get(null);
+				Trophies.Get((Objects.Trophy[] trophies) => {
+					if (trophies != null)
+					{
+						foreach(Objects.Trophy trophy in trophies)
+						{
+							trophy.DownloadImage();
+						}
+					}
+				});
 			}
 		}
 		#endregion Actions
