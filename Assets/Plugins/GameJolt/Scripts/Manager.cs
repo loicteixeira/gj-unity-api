@@ -96,7 +96,7 @@ namespace GJAPI
 			{
 				if (Time.time > timeout)
 				{
-					callback(new Core.Response("Timeout"));
+					callback(new Core.Response("Timeout for " + url));
 					yield break;
 				}
 				yield return new WaitForEndOfFrame();
@@ -120,7 +120,7 @@ namespace GJAPI
 			{
 				if (Time.time > timeout)
 				{
-					callback(new Core.Response("Timeout"));
+					callback(new Core.Response("Timeout for " + url));
 					yield break;
 				}
 				yield return new WaitForEndOfFrame();
