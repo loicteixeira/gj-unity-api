@@ -27,7 +27,9 @@ namespace GJAPI
 
 			Core.Request.Get(Constants.API_TROPHIES_ADD, parameters, (Core.Response response) => {
 				// Update the cache.
+				if (cachedTrophies != null && cachedTrophies.ContainsKey(id) && !cachedTrophies[id].Unlocked)
 				{
+					cachedTrophies[id].Unlocked = response.success;
 				}
 
 				if (callback != null)
