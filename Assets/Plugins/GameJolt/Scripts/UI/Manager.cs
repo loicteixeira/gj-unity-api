@@ -7,7 +7,9 @@ namespace GJAPI.UI
 	[RequireComponent(typeof(Animator))]
 	public class Manager : Core.MonoSingleton<Manager>
 	{
+		#region Init
 		SignInWindow signinWindow;
+		TrophiesWindow trophiesWindow;
 
 		override protected void Init()
 		{
@@ -26,9 +28,20 @@ namespace GJAPI.UI
 						signinWindow.Init(animator);
 					}
 				}
+
+				if (trophiesWindow == null)
+				{
+					trophiesWindow = children.GetComponent<TrophiesWindow>();
+					if (trophiesWindow != null)
+					{
+						trophiesWindow.Init(animator);
+					}
+				}
 			}
 		}
+		#endregion Init
 
+		#region SignIn
 		public void ShowSignIn()
 		{
 			ShowSignIn(null);
@@ -38,5 +51,18 @@ namespace GJAPI.UI
 		{
 			signinWindow.Show(callback);
 		}
+		#endregion SignIn
+
+		#region Trophies
+		public void ShowTrophies()
+		{
+			ShowTrophies(null);
+		}
+
+		public void ShowTrophies(Action<bool> callback)
+		{
+			trophiesWindow.Show(callback);
+		}
+		#endregion Trophies
 	}
 }
