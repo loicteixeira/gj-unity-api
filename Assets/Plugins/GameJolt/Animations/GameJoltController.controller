@@ -558,7 +558,7 @@ AnimatorState:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TrophiesWindowDisappears
+  m_Name: Disappears
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -576,7 +576,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TrophiesWindowAppears
+  m_Name: Appears
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -594,7 +594,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SignInDisappear
+  m_Name: Disappears
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -612,7 +612,7 @@ AnimatorState:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SignIn
+  m_Name: Show
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -651,7 +651,7 @@ AnimatorState:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SignInAppears
+  m_Name: Appears
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -669,7 +669,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TrophiesWindow
+  m_Name: Show
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -687,7 +687,7 @@ AnimatorState:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SignInProcessing
+  m_Name: Processing
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -809,13 +809,13 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions:
     data:
-      first: {fileID: 110743428}
+      first: {fileID: 110701254}
       second: []
     data:
       first: {fileID: 110737452}
       second: []
     data:
-      first: {fileID: 110701254}
+      first: {fileID: 110743428}
       second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -96, y: 24, z: 0}
