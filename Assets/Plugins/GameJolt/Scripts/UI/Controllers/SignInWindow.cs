@@ -41,6 +41,7 @@ namespace GJAPI.UI.Controllers
 			else
 			{
 				animator.SetTrigger("Lock");
+				animator.SetTrigger("ShowLoadingIndicator");
 
 				var user = new Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
 				user.SignIn((bool success) => {
@@ -55,6 +56,7 @@ namespace GJAPI.UI.Controllers
 						errorMessage.enabled = true;
 					}
 
+					animator.SetTrigger("HideLoadingIndicator");
 					animator.SetTrigger("Unlock");
 				});
 			}
