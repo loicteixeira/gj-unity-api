@@ -32,7 +32,7 @@ namespace GJAPI.Objects
 			this.ID = data["id"].AsInt;
 			this.Name = data["name"].Value;
 			this.Description = data["description"].Value;
-			this.Primary = data["primary"].AsBool;
+			this.Primary = data["primary"].Value == "1";
 		}
 		#endregion Update Attributes
 
