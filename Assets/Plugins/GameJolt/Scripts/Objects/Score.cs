@@ -11,7 +11,7 @@ namespace GJAPI.Objects
 		public string Extra { get; set; }
 		public string Time { get; set; }
 
-		public int UserId { get; set; }
+		public int UserID { get; set; }
 		public string UserName { get; set; }
 		public string GuestName { get; set; }
 		public string PlayerName
@@ -46,7 +46,7 @@ namespace GJAPI.Objects
 			this.Extra = data["extra_data"].Value;
 			this.Time = data["stored"].Value;
 
-			this.UserId = data["user_id"].AsInt;
+			this.UserID = data["user_id"].AsInt;
 			this.UserName = data["user"].Value;
 			this.GuestName = data["guest"].Value;
 		}
