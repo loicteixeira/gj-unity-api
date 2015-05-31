@@ -10,6 +10,7 @@ namespace GJAPI.UI
 		#region Init
 		SignInWindow signinWindow;
 		TrophiesWindow trophiesWindow;
+		LeaderboardsWindow leaderboardsWindow;
 
 		override protected void Init()
 		{
@@ -35,6 +36,15 @@ namespace GJAPI.UI
 					if (trophiesWindow != null)
 					{
 						trophiesWindow.Init(animator);
+					}
+				}
+
+				if (leaderboardsWindow == null)
+				{
+					leaderboardsWindow = children.GetComponent<LeaderboardsWindow>();
+					if (leaderboardsWindow != null)
+					{
+						leaderboardsWindow.Init(animator);
 					}
 				}
 			}
@@ -64,5 +74,17 @@ namespace GJAPI.UI
 			trophiesWindow.Show(callback);
 		}
 		#endregion Trophies
+
+		#region Leaderboards
+		public void ShowLeaderboards()
+		{
+			ShowLeaderboards(null);
+		}
+
+		public void ShowLeaderboards(Action<bool> callback)
+		{
+			leaderboardsWindow.Show(callback);
+		}
+		#endregion
 	}
 }
