@@ -127,6 +127,7 @@ namespace GJAPI.Objects
 				if (response.success)
 				{
 					Manager.Instance.CurrentUser = this;
+					Get();
 				}
 				
 				if (callback != null)
