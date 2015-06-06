@@ -11,7 +11,7 @@ namespace GJAPI.UI.Controllers
 		public Color defaultColour = Color.white;
 		public Color highlightColour = Color.green;
 
-		public void Init(Objects.Score score)
+		public void Init(GJAPI.Objects.Score score)
 		{
 			username.text = score.PlayerName;
 			value.text = score.Text;

@@ -22,7 +22,7 @@ namespace GJAPI.UI.Controllers
 			animator.SetTrigger("Leaderboards");
 			animator.SetTrigger("ShowLoadingIndicator");
 
-			GJAPI.Scores.GetTables((Objects.Table[] tables) => {
+			GJAPI.Scores.GetTables((GJAPI.Objects.Table[] tables) => {
 				if (tables != null)
 				{
 					// Create the right number of children.
@@ -80,7 +80,7 @@ namespace GJAPI.UI.Controllers
 
 		void SetScores(int tableID = 0)
 		{
-			GJAPI.Scores.Get((Objects.Score[] scores) => {
+			GJAPI.Scores.Get((GJAPI.Objects.Score[] scores) => {
 				if (scores != null)
 				{
 					scoresScrollRect.verticalNormalizedPosition = 0;

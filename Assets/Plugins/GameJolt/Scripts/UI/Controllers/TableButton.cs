@@ -20,7 +20,7 @@ namespace GJAPI.UI.Controllers
 			this.button = GetComponent<Button>();
 		}
 
-		public void Init(Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
+		public void Init(GJAPI.Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
 		{
 			title.text = table.Name;
 			tabIndex = index;

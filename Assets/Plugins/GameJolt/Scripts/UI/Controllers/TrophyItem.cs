@@ -10,7 +10,7 @@ namespace GJAPI.UI.Controllers
 		public Text title;
 		public Text description;
 
-		public void Init(Objects.Trophy trophy)
+		public void Init(GJAPI.Objects.Trophy trophy)
 		{
 			group.alpha = trophy.Unlocked ? 1f : .6f;
 			title.text = trophy.Title;

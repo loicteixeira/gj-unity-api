@@ -43,7 +43,7 @@ namespace GJAPI.UI.Controllers
 				animator.SetTrigger("Lock");
 				animator.SetTrigger("ShowLoadingIndicator");
 
-				var user = new Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
+				var user = new GJAPI.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
 				user.SignIn((bool success) => {
 					if (success)
 					{

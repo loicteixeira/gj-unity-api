@@ -15,7 +15,7 @@ namespace GJAPI.UI.Controllers
 		{
 			animator.SetTrigger("Trophies");
 			animator.SetTrigger("ShowLoadingIndicator");
-			GJAPI.Trophies.Get((Objects.Trophy[] trophies) => {
+			GJAPI.Trophies.Get((GJAPI.Objects.Trophy[] trophies) => {
 				if (trophies != null)
 				{
 					// Create children if there are none.
