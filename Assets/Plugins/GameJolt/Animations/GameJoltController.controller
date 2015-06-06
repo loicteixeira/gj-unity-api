@@ -13,58 +13,58 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dismiss
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Lock
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Unlock
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trophies
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ShowLoadingIndicator
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: HideLoadingIndicator
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Leaderboards
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Notification
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: Base
     m_StateMachine: {fileID: 110743428}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -76,7 +76,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 0}
   - serializedVersion: 5
-    m_Name: Base Layer Add
+    m_Name: Base Override
     m_StateMachine: {fileID: 110794912}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -99,7 +99,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 0}
-  m_MultiThreadedStateMachine: 0
+  m_MultiThreadedStateMachine: 1
 --- !u!114 &11418382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1450,7 +1450,7 @@ AnimatorStateMachine:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Default
+  m_Name: Base
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 110206236}
@@ -1472,13 +1472,13 @@ AnimatorStateMachine:
       first: {fileID: 110743428}
       second: []
     data:
-      first: {fileID: 110797252}
-      second: []
-    data:
       first: {fileID: 110701254}
       second: []
     data:
       first: {fileID: 110737452}
+      second: []
+    data:
+      first: {fileID: 110797252}
       second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -96, y: 24, z: 0}
@@ -1492,7 +1492,7 @@ AnimatorStateMachine:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Default Top
+  m_Name: Base Override
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 110294180}
