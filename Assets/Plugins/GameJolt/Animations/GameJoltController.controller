@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49b53b118d0c9b4397679b9c5ed01d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notificationPanelPath: NotificationPanel
 --- !u!114 &11464758
 MonoBehaviour:
   m_ObjectHideFlags: 1

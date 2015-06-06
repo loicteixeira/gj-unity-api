@@ -66,6 +66,7 @@ GameObject:
   - 224: {fileID: 22405302}
   - 222: {fileID: 22287434}
   - 225: {fileID: 22565924}
+  - 114: {fileID: 11439590}
   m_Layer: 5
   m_Name: NotificationPanel
   m_TagString: Untagged
@@ -1456,6 +1457,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11439590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 113414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbe9f8c0980cd1348831ee5f313e1c95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 11422224}
+  text: {fileID: 11440656}
 --- !u!114 &11440656
 MonoBehaviour:
   m_ObjectHideFlags: 1

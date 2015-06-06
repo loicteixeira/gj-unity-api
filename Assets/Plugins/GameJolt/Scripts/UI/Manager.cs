@@ -8,13 +8,15 @@ namespace GJAPI.UI
 	public class Manager : Core.MonoSingleton<Manager>
 	{
 		#region Init
-		SignInWindow signinWindow;
-		TrophiesWindow trophiesWindow;
-		LeaderboardsWindow leaderboardsWindow;
+		Controllers.SignInWindow signinWindow;
+		Controllers.TrophiesWindow trophiesWindow;
+		Controllers.LeaderboardsWindow leaderboardsWindow;
+		States.NotificationCentre notificationCentre;
 
 		override protected void Init()
 		{
 			var animator = GetComponent<Animator>();
+			notificationCentre = animator.GetBehaviour<States.NotificationCentre>();
 
 			// GetComponentInChildren do look for inactive childrens.
 			// GetComponentsInChildren would alocate memory.
@@ -85,6 +87,25 @@ namespace GJAPI.UI
 		{
 			leaderboardsWindow.Show(callback);
 		}
-		#endregion
+		#endregion Leaderboards
+
+		#region Notifications
+		public void QueueNotification(string text)
+		{
+			var notification = new Objects.Notification(text);
+			QueueNotification(notification);
+		}
+
+		public void QueueNotification(string text, Sprite image)
+		{
+			var notification = new Objects.Notification(text, image);
+			QueueNotification(notification);
+		}
+
+		public void QueueNotification(Objects.Notification notification)
+		{
+			notificationCentre.QueueNotification(notification);
+		}
+		#endregion Notidications
 	}
 }
