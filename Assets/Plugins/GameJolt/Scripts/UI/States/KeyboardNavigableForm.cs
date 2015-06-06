@@ -6,30 +6,35 @@ namespace GJAPI.UI.States
 {
 	public class KeyboardNavigableForm : StateMachineBehaviour
 	{
-		public string firstFieldName;
-		public string submitButtonName;
+		public string firstFieldPath;
+		public string submitButtonPath;
 
 		protected InputField firstField;
 		protected Button submitButton;
 
 		override public void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 		{
-			GameObject go;
-			
-			go = GameObject.Find(firstFieldName);
-			if (go != null)
+			if (firstField == null)
 			{
-				firstField = go.GetComponent<InputField>();
-				if (firstField != null)
+				var firstFieldTransform = animator.transform.Find(firstFieldPath);
+				if (firstFieldTransform != null)
 				{
-					firstField.Select();
+					firstField = firstFieldTransform.GetComponent<InputField>();
 				}
 			}
-			
-			go = GameObject.Find(submitButtonName);
-			if (go != null)
+
+			if (submitButton == null)
 			{
-				submitButton = go.GetComponent<Button>();
+				var submitButtonTransform = animator.transform.Find(submitButtonPath);
+				if (submitButtonTransform != null)
+				{
+					submitButton = submitButtonTransform.GetComponent<Button>();
+				}
+			}
+
+			if (firstField != null)
+			{
+				firstField.Select();
 			}
 		}
 

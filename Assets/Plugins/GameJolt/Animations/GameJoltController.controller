@@ -60,7 +60,7 @@ AnimatorController:
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99075a5c98f57084c97e00404e8b0d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstFieldName: UsernameField
-  submitButtonName: SignInButton
+  firstFieldPath: SignInPanel/UsernameField
+  submitButtonPath: SignInPanel/SignInButton
 --- !u!114 &11441444
 MonoBehaviour:
   m_ObjectHideFlags: 1
