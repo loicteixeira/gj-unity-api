@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace GJAPI.UI.States
+namespace GJAPI.UI.Behaviours
 {
 	public class NotificationCentre : StateMachineBehaviour
 	{

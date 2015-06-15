@@ -11,12 +11,12 @@ namespace GJAPI.UI
 		Controllers.SignInWindow signinWindow;
 		Controllers.TrophiesWindow trophiesWindow;
 		Controllers.LeaderboardsWindow leaderboardsWindow;
-		States.NotificationCentre notificationCentre;
+		Behaviours.NotificationCentre notificationCentre;
 
 		override protected void Init()
 		{
 			var animator = GetComponent<Animator>();
-			notificationCentre = animator.GetBehaviour<States.NotificationCentre>();
+			notificationCentre = animator.GetBehaviour<Behaviours.NotificationCentre>();
 
 			// GetComponentInChildren do look for inactive childrens.
 			// GetComponentsInChildren would alocate memory.

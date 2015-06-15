@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GJAPI.UI.States
+namespace GJAPI.UI.Behaviours
 {
 	public class DismissibleWindow : StateMachineBehaviour
 	{
