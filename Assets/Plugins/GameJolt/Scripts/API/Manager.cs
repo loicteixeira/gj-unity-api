@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GJAPI
+namespace GameJolt.API
 {
 	public class Manager : Core.MonoSingleton<Manager>
 	{

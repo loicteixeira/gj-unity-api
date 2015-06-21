@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System;
-using GJAPI.External.SimpleJSON;
+using GameJolt.External.SimpleJSON;
 
-namespace GJAPI.Objects
+namespace GameJolt.API.Objects
 {
 	public enum TrophyDifficulty { Undefined, Bronze, Silver, Gold, Platinum }
 
@@ -78,7 +78,7 @@ namespace GJAPI.Objects
 					}
 					else
 					{
-						var tex = Resources.Load(GJAPI.Constants.DEFAULT_TROPHY_ASSET_PATH) as Texture2D;
+						var tex = Resources.Load(GameJolt.API.Constants.DEFAULT_TROPHY_ASSET_PATH) as Texture2D;
 						Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
 					}
 					
@@ -100,7 +100,7 @@ namespace GJAPI.Objects
 		
 		public override string ToString()
 		{
-			return string.Format("GJAPI.Objects.Trophy: {0} - {1} - {2} - {3}Unlocked", Title, ID, Difficulty, Unlocked ? "" : "Not ");
+			return string.Format("GameJolt.API.Objects.Trophy: {0} - {1} - {2} - {3}Unlocked", Title, ID, Difficulty, Unlocked ? "" : "Not ");
 		}
 	}
 }

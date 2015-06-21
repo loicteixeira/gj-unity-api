@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GJAPI.Core
+namespace GameJolt.API.Core
 {
 	public static class Request
 	{

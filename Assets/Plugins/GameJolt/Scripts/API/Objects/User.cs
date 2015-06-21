@@ -1,9 +1,9 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using GJAPI.External.SimpleJSON;
+using GameJolt.External.SimpleJSON;
 
-namespace GJAPI.Objects
+namespace GameJolt.API.Objects
 {
 	public enum UserType { Undefined, User, Developer, Moderator, Admin };
 	public enum UserStatus { Undefined, Active, Banned };
@@ -162,7 +162,7 @@ namespace GJAPI.Objects
 					}
 					else
 					{
-						var tex = Resources.Load(GJAPI.Constants.DEFAULT_AVATAR_ASSET_PATH) as Texture2D;
+						var tex = Resources.Load(GameJolt.API.Constants.DEFAULT_AVATAR_ASSET_PATH) as Texture2D;
 						Avatar = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
 					}
 
@@ -184,7 +184,7 @@ namespace GJAPI.Objects
 
 		public override string ToString()
 		{
-			return string.Format("GJAPI.Objects.User: {0} - {1} - Authenticated: {2} - Status: {3}", Name, ID, IsAuthenticated, Status);
+			return string.Format("GameJolt.API.Objects.User: {0} - {1} - Authenticated: {2} - Status: {3}", Name, ID, IsAuthenticated, Status);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace GJAPI
+namespace GameJolt.API
 {
 	public static class Misc
 	{

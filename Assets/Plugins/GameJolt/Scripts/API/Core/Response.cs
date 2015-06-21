@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using GJAPI.External.SimpleJSON;
+using GameJolt.External.SimpleJSON;
 
-namespace GJAPI.Core
+namespace GameJolt.API.Core
 {
 	public enum ResponseFormat { Dump, Json, Raw, Texture }
 

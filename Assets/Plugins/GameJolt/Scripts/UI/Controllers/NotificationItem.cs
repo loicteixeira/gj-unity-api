@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	public class NotificationItem : MonoBehaviour
 	{

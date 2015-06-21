@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	public class LeaderboardsWindow: BaseWindow
 	{
@@ -22,7 +22,7 @@ namespace GJAPI.UI.Controllers
 			animator.SetTrigger("Leaderboards");
 			animator.SetTrigger("ShowLoadingIndicator");
 
-			GJAPI.Scores.GetTables((GJAPI.Objects.Table[] tables) => {
+			GameJolt.API.Scores.GetTables((GameJolt.API.Objects.Table[] tables) => {
 				if (tables != null)
 				{
 					// Create the right number of children.
@@ -80,7 +80,7 @@ namespace GJAPI.UI.Controllers
 
 		void SetScores(int tableID = 0)
 		{
-			GJAPI.Scores.Get((GJAPI.Objects.Score[] scores) => {
+			GameJolt.API.Scores.Get((GameJolt.API.Objects.Score[] scores) => {
 				if (scores != null)
 				{
 					scoresScrollRect.verticalNormalizedPosition = 0;

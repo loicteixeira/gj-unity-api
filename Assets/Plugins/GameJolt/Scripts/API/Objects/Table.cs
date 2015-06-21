@@ -1,6 +1,6 @@
-﻿using GJAPI.External.SimpleJSON;
+﻿using GameJolt.External.SimpleJSON;
 
-namespace GJAPI.Objects
+namespace GameJolt.API.Objects
 {
 	public class Table : Base
 	{
@@ -38,7 +38,7 @@ namespace GJAPI.Objects
 
 		public override string ToString()
 		{
-			return string.Format("GJAPI.Objects.Table: {0} - {1}", Name, ID);
+			return string.Format("GameJolt.API.Objects.Table: {0} - {1}", Name, ID);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using GJAPI.External.SimpleJSON;
+using GameJolt.External.SimpleJSON;
 
-namespace GJAPI.Objects
+namespace GameJolt.API.Objects
 {
 	public class Score : Base
 	{
@@ -61,7 +61,7 @@ namespace GJAPI.Objects
 		
 		public override string ToString()
 		{
-			return string.Format("GJAPI.Objects.Score: {0} - {1}", PlayerName, Value);
+			return string.Format("GameJolt.API.Objects.Score: {0} - {1}", PlayerName, Value);
 		}
 	}
 }

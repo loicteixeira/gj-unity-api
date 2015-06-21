@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace GJAPI.UI.Objects
+namespace GameJolt.UI.Objects
 {
 	public class Notification
 	{
@@ -15,7 +15,7 @@ namespace GJAPI.UI.Objects
 		{
 			this.Text = text;
 
-			var tex = Resources.Load(GJAPI.Constants.DEFAULT_NOTIFICATION_ASSET_PATH) as Texture2D;
+			var tex = Resources.Load(GameJolt.API.Constants.DEFAULT_NOTIFICATION_ASSET_PATH) as Texture2D;
 			this.Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
 		}
 

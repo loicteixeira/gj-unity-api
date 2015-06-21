@@ -39,7 +39,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Sign In. Click to see source.");
 
-		var user = new GJAPI.Objects.User(userNameField.text, userTokenField.text);
+		var user = new GameJolt.API.Objects.User(userNameField.text, userTokenField.text);
 		user.SignIn((bool success) => {
 			AddConsoleLine(string.Format("Sign In {0}.", success ? "Succeesful" : "Failed"));
 		});
@@ -49,10 +49,10 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Sign Out. Click to see source.");
 
-		var isSignedIn = GJAPI.Manager.Instance.CurrentUser != null;
+		var isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
 		if (isSignedIn)
 		{
-			GJAPI.Manager.Instance.CurrentUser.SignOut();
+			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
 		}
 
 		AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Succeesful" : "Failed"));
@@ -62,7 +62,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Session Open. Click to see source.");
 
-		GJAPI.Sessions.Open((bool success) => {
+		GameJolt.API.Sessions.Open((bool success) => {
 			AddConsoleLine(string.Format("Session Open {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
@@ -71,7 +71,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Session Ping Active. Click to see source.");
 
-		GJAPI.Sessions.Ping(GJAPI.SessionStatus.Active, (bool success) => {
+		GameJolt.API.Sessions.Ping(GameJolt.API.SessionStatus.Active, (bool success) => {
 			AddConsoleLine(string.Format("Session Ping Active {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
@@ -80,7 +80,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Session Ping Idle. Click to see source.");
 
-		GJAPI.Sessions.Ping(GJAPI.SessionStatus.Idle, (bool success) => {
+		GameJolt.API.Sessions.Ping(GameJolt.API.SessionStatus.Idle, (bool success) => {
 			AddConsoleLine(string.Format("Session Ping Idle {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
@@ -89,7 +89,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Session Close. Click to see source.");
 
-		GJAPI.Sessions.Close((bool success) => {
+		GameJolt.API.Sessions.Close((bool success) => {
 			AddConsoleLine(string.Format("Session Close {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
@@ -98,10 +98,10 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Get Tables. Click to see source.");
 
-		GJAPI.Scores.GetTables((GJAPI.Objects.Table[] tables) => {
+		GameJolt.API.Scores.GetTables((GameJolt.API.Objects.Table[] tables) => {
 			if (tables != null)
 			{
-				foreach (var table in tables.Reverse<GJAPI.Objects.Table>())
+				foreach (var table in tables.Reverse<GameJolt.API.Objects.Table>())
 				{
 					AddConsoleLine(string.Format("> {0} - {1}", table.Name, table.ID));
 				}
@@ -119,7 +119,7 @@ public class CSharpConsole : MonoBehaviour
 			var scoreValue = scoreValueField.text != string.Empty ? int.Parse(scoreValueField.text) : 0;
 			var tableID = tableField.text != string.Empty ? int.Parse(tableField.text) : 0;
 
-			GJAPI.Scores.Add(scoreValue, scoreTextField.text, guestNameField.text, tableID, "", (bool success) => {
+			GameJolt.API.Scores.Add(scoreValue, scoreTextField.text, guestNameField.text, tableID, "", (bool success) => {
 				AddConsoleLine(string.Format("Score Add (for Guest) {0}.", success ? "Succeesful" : "Failed"));
 			});
 		}
@@ -130,7 +130,7 @@ public class CSharpConsole : MonoBehaviour
 			var scoreValue = scoreValueField.text != string.Empty ? int.Parse(scoreValueField.text) : 0;
 			var tableID = tableField.text != string.Empty ? int.Parse(tableField.text) : 0;
 
-			GJAPI.Scores.Add(scoreValue, scoreTextField.text, tableID, "", (bool success) => {
+			GameJolt.API.Scores.Add(scoreValue, scoreTextField.text, tableID, "", (bool success) => {
 				AddConsoleLine(string.Format("Score Add {0}.", success ? "Succeesful" : "Failed"));
 			});
 		}
@@ -142,10 +142,10 @@ public class CSharpConsole : MonoBehaviour
 
 		var tableID = tableField.text != string.Empty ? int.Parse(tableField.text) : 0;
 		var limit = limitField.text != string.Empty ? int.Parse(limitField.text) : 10;
-		GJAPI.Scores.Get((GJAPI.Objects.Score[] scores) => {
+		GameJolt.API.Scores.Get((GameJolt.API.Objects.Score[] scores) => {
 			if (scores != null)
 			{
-				foreach (var score in scores.Reverse<GJAPI.Objects.Score>())
+				foreach (var score in scores.Reverse<GameJolt.API.Objects.Score>())
 				{
 					AddConsoleLine(string.Format("> {0} - {1}", score.PlayerName, score.Value));
 				}
@@ -159,7 +159,7 @@ public class CSharpConsole : MonoBehaviour
 		Debug.Log("Unlock Trophy. Click to see source.");
 
 		var trophyID = trophyIDField.text != string.Empty ? int.Parse(trophyIDField.text) : 0;
-		GJAPI.Trophies.Unlock(trophyID, (bool success) => {
+		GameJolt.API.Trophies.Unlock(trophyID, (bool success) => {
 			AddConsoleLine(string.Format("Unlock Trophy {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
@@ -171,7 +171,7 @@ public class CSharpConsole : MonoBehaviour
 			Debug.Log("Get Single Trophy. Click to see source.");
 
 			var trophyID = trophyIDsField.text != string.Empty ? int.Parse(trophyIDsField.text) : 0;
-			GJAPI.Trophies.Get(trophyID, (GJAPI.Objects.Trophy trophy) => {
+			GameJolt.API.Trophies.Get(trophyID, (GameJolt.API.Objects.Trophy trophy) => {
 				if (trophy != null)
 				{
 					AddConsoleLine(string.Format("> {0} - {1} - {2} - {3}Unlocked", trophy.Title, trophy.ID, trophy.Difficulty, trophy.Unlocked ? "" : "Not "));
@@ -189,10 +189,10 @@ public class CSharpConsole : MonoBehaviour
 				trophyIDs[i] = idStrings[i] != string.Empty ? int.Parse(idStrings[i]) : 0;
 			}
 
-			GJAPI.Trophies.Get(trophyIDs, (GJAPI.Objects.Trophy[] trophies) => {
+			GameJolt.API.Trophies.Get(trophyIDs, (GameJolt.API.Objects.Trophy[] trophies) => {
 				if (trophies != null)
 				{
-					foreach (var trophy in trophies.Reverse<GJAPI.Objects.Trophy>())
+					foreach (var trophy in trophies.Reverse<GameJolt.API.Objects.Trophy>())
 					{
 						AddConsoleLine(string.Format("> {0} - {1} - {2} - {3}Unlocked", trophy.Title, trophy.ID, trophy.Difficulty, trophy.Unlocked ? "" : "Not "));
 					}
@@ -206,10 +206,10 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Get All Trophies. Click to see source.");
 
-		GJAPI.Trophies.Get((GJAPI.Objects.Trophy[] trophies) => {
+		GameJolt.API.Trophies.Get((GameJolt.API.Objects.Trophy[] trophies) => {
 			if (trophies != null)
 			{
-				foreach (var trophy in trophies.Reverse<GJAPI.Objects.Trophy>())
+				foreach (var trophy in trophies.Reverse<GameJolt.API.Objects.Trophy>())
 				{
 					AddConsoleLine(string.Format("> {0} - {1} - {2} - {3}Unlocked", trophy.Title, trophy.ID, trophy.Difficulty, trophy.Unlocked ? "" : "Not "));
 				}
@@ -222,10 +222,10 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Get Trophies by Status (Unlocked or not). Click to see source.");
 
-		GJAPI.Trophies.Get(unlockedTrophiesOnlyToggle.isOn, (GJAPI.Objects.Trophy[] trophies) => {
+		GameJolt.API.Trophies.Get(unlockedTrophiesOnlyToggle.isOn, (GameJolt.API.Objects.Trophy[] trophies) => {
 			if (trophies != null)
 			{
-				foreach (var trophy in trophies.Reverse<GJAPI.Objects.Trophy>())
+				foreach (var trophy in trophies.Reverse<GameJolt.API.Objects.Trophy>())
 				{
 					AddConsoleLine(string.Format("> {0} - {1} - {2} - {3}Unlocked", trophy.Title, trophy.ID, trophy.Difficulty, trophy.Unlocked ? "" : "Not "));
 				}
@@ -238,7 +238,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Get DataStore Key. Click to see source.");
 
-		GJAPI.DataStore.Get(keyField.text, globalToggle.isOn, (string value) => {
+		GameJolt.API.DataStore.Get(keyField.text, globalToggle.isOn, (string value) => {
 			if (value != null)
 			{
 				AddConsoleLine(string.Format("> {0}", value));
@@ -250,7 +250,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Get DataStore Keys. Click to see source.");
 
-		GJAPI.DataStore.GetKeys(globalToggle.isOn, (string[] keys) => {
+		GameJolt.API.DataStore.GetKeys(globalToggle.isOn, (string[] keys) => {
 			if (keys != null)
 			{
 				foreach (var key in keys)
@@ -270,7 +270,7 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Remove DataStore Key. Click to see source.");
 
-		GJAPI.DataStore.Delete(keyField.text, globalToggle.isOn, (bool success) => {
+		GameJolt.API.DataStore.Delete(keyField.text, globalToggle.isOn, (bool success) => {
 			AddConsoleLine(string.Format("Remove DataStore Key {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
@@ -279,17 +279,17 @@ public class CSharpConsole : MonoBehaviour
 	{
 		Debug.Log("Set DataStore Key. Click to see source.");
 
-		GJAPI.DataStore.Set(keyField.text, valueField.text, globalToggle.isOn, (bool success) => {
+		GameJolt.API.DataStore.Set(keyField.text, valueField.text, globalToggle.isOn, (bool success) => {
 			AddConsoleLine(string.Format("Set DataStore Key {0}.", success ? "Succeesful" : "Failed"));
 		});
 	}
 
 	public void UpdateDataStoreKey()
 	{
-		GJAPI.DataStoreOperation mode;
+		GameJolt.API.DataStoreOperation mode;
 		try
 		{
-			mode = (GJAPI.DataStoreOperation) System.Enum.Parse(typeof(GJAPI.DataStoreOperation), modeField.text);
+			mode = (GameJolt.API.DataStoreOperation) System.Enum.Parse(typeof(GameJolt.API.DataStoreOperation), modeField.text);
 		}
 		catch
 		{
@@ -299,7 +299,7 @@ public class CSharpConsole : MonoBehaviour
 
 		Debug.Log("Update DataStore Key. Click to see source.");
 
-		GJAPI.DataStore.Update(keyField.text, valueField.text, mode, globalToggle.isOn, (string value) => {
+		GameJolt.API.DataStore.Update(keyField.text, valueField.text, mode, globalToggle.isOn, (string value) => {
 			if (value != null)
 			{
 				AddConsoleLine(string.Format("> {0}", value));
@@ -312,7 +312,7 @@ public class CSharpConsole : MonoBehaviour
 	void Start()
 	{
 		// Do not try this at home! Seriously, you shouldn't.
-		var settings = Resources.Load(GJAPI.Constants.SETTINGS_ASSET_NAME) as GJAPI.Settings;
+		var settings = Resources.Load(GameJolt.API.Constants.SETTINGS_ASSET_NAME) as GameJolt.API.Settings;
 		if (settings != null)
 		{
 			userNameField.text = settings.user;

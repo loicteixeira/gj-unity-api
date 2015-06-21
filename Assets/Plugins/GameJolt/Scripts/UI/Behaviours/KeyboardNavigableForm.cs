@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace GJAPI.UI.Behaviours
+namespace GameJolt.UI.Behaviours
 {
 	public class KeyboardNavigableForm : StateMachineBehaviour
 	{

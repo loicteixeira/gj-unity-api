@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	public class TableButton : MonoBehaviour
 	{
@@ -20,7 +20,7 @@ namespace GJAPI.UI.Controllers
 			this.button = GetComponent<Button>();
 		}
 
-		public void Init(GJAPI.Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
+		public void Init(GameJolt.API.Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
 		{
 			title.text = table.Name;
 			tabIndex = index;

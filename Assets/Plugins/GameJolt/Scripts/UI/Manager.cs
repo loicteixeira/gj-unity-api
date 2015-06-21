@@ -1,16 +1,16 @@
-﻿using GJAPI.UI.Controllers;
+﻿using GameJolt.UI.Controllers;
 using UnityEngine;
 using System;
 
-namespace GJAPI.UI
+namespace GameJolt.UI
 {
 	[RequireComponent(typeof(Animator))]
-	public class Manager : Core.MonoSingleton<Manager>
+	public class Manager : GameJolt.API.Core.MonoSingleton<Manager>
 	{
 		#region Init
-		Controllers.SignInWindow signinWindow;
-		Controllers.TrophiesWindow trophiesWindow;
-		Controllers.LeaderboardsWindow leaderboardsWindow;
+		SignInWindow signinWindow;
+		TrophiesWindow trophiesWindow;
+		LeaderboardsWindow leaderboardsWindow;
 		Behaviours.NotificationCentre notificationCentre;
 
 		override protected void Init()

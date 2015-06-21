@@ -10,7 +10,7 @@ public class UITest : MonoBehaviour
 
 	public void SignInButtonClicked()
 	{
-		GJAPI.UI.Manager.Instance.ShowSignIn((bool success) => {
+		GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
 			if (success)
 			{
 				showTrophiesButton.interactable = true;
@@ -25,16 +25,16 @@ public class UITest : MonoBehaviour
 
 	public void SignOutButtonClicked()
 	{
-		if (GJAPI.Manager.Instance.CurrentUser != null)
+		if (GameJolt.API.Manager.Instance.CurrentUser != null)
 		{
 			showTrophiesButton.interactable = false;
-			GJAPI.Manager.Instance.CurrentUser.SignOut();
+			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
 		}
 	}
 
 	public void QueueNotification()
 	{
-		GJAPI.UI.Manager.Instance.QueueNotification(
+		GameJolt.UI.Manager.Instance.QueueNotification(
 			string.Format("Notification <b>#{0}</b>", ++notificationQueued));
 	}
 }

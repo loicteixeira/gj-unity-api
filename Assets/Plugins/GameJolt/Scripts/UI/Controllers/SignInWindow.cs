@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	public class SignInWindow: BaseWindow
 	{
@@ -43,7 +43,7 @@ namespace GJAPI.UI.Controllers
 				animator.SetTrigger("Lock");
 				animator.SetTrigger("ShowLoadingIndicator");
 
-				var user = new GJAPI.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
+				var user = new GameJolt.API.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
 				user.SignIn((bool success) => {
 					if (success)
 					{

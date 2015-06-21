@@ -7,7 +7,7 @@ public class RestrictedButton : MonoBehaviour
 	{
 		var button = GetComponent<Button>();
 
-		if (GJAPI.Manager.Instance.DebugAutoConnect)
+		if (GameJolt.API.Manager.Instance.DebugAutoConnect)
 		{
 			button.interactable = true;
 		}

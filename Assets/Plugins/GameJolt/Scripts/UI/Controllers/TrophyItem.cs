@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	public class TrophyItem : MonoBehaviour
 	{
@@ -10,7 +10,7 @@ namespace GJAPI.UI.Controllers
 		public Text title;
 		public Text description;
 
-		public void Init(GJAPI.Objects.Trophy trophy)
+		public void Init(GameJolt.API.Objects.Trophy trophy)
 		{
 			group.alpha = trophy.Unlocked ? 1f : .6f;
 			title.text = trophy.Title;

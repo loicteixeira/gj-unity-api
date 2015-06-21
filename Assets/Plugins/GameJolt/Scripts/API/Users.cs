@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GJAPI
+namespace GameJolt.API
 {
 	public static class Users
 	{

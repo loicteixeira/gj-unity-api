@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	abstract public class BaseWindow : MonoBehaviour
 	{

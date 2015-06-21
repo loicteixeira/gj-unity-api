@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System;
 
-namespace GJAPI.UI.Controllers
+namespace GameJolt.UI.Controllers
 {
 	public class TrophiesWindow: BaseWindow
 	{
@@ -15,7 +15,7 @@ namespace GJAPI.UI.Controllers
 		{
 			animator.SetTrigger("Trophies");
 			animator.SetTrigger("ShowLoadingIndicator");
-			GJAPI.Trophies.Get((GJAPI.Objects.Trophy[] trophies) => {
+			GameJolt.API.Trophies.Get((GameJolt.API.Objects.Trophy[] trophies) => {
 				if (trophies != null)
 				{
 					// Create children if there are none.

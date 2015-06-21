@@ -1,6 +1,6 @@
-﻿using GJAPI.External.SimpleJSON;
+﻿using GameJolt.External.SimpleJSON;
 
-namespace GJAPI.Objects
+namespace GameJolt.API.Objects
 {
 	public abstract class Base
 	{

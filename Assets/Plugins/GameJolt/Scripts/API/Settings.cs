@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GJAPI
+namespace GameJolt.API
 {
 	[System.Serializable]
 	public class Settings : ScriptableObject {

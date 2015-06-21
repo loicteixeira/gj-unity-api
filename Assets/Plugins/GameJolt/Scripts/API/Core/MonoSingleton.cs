@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GJAPI.Core
+namespace GameJolt.API.Core
 {
 	public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 	{
