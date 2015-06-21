@@ -18,8 +18,8 @@ namespace GameJolt.UI
 			var animator = GetComponent<Animator>();
 			notificationCentre = animator.GetBehaviour<Behaviours.NotificationCentre>();
 
-			// GetComponentInChildren do look for inactive childrens.
-			// GetComponentsInChildren would alocate memory.
+			// GetComponentInChildren does not look in inactive childrens.
+			// GetComponentsInChildren does look in inactive children but would alocate memory.
 			// Instead, looping over childrens for what we need.
 			foreach (Transform children in transform)
 			{
