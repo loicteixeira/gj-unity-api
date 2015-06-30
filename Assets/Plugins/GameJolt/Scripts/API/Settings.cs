@@ -5,7 +5,7 @@ namespace GameJolt.API
 	[System.Serializable]
 	public class Settings : ScriptableObject {
 		[Header("Game")]
-		public int gameId;
+		public int gameID;
 		public string privateKey;
 
 		[Header("Settings")]

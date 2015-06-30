@@ -58,7 +58,7 @@ namespace GameJolt.API
 			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;
 			if (settings != null)
 			{
-				GameID = settings.gameId;
+				GameID = settings.gameID;
 				PrivateKey = settings.privateKey;
 				Timeout = settings.timeout;
 				AutoPing = settings.autoPing;
