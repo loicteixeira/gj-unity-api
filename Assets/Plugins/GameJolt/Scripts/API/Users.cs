@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameJolt.API
 {
@@ -50,7 +51,7 @@ namespace GameJolt.API
 		public static void Get(int[] ids, Action<Objects.User[]> callback)
 		{
 			var parameters = new Dictionary<string, string>();
-			parameters.Add(Constants.API_USERS_FETCH, string.Join(",", Array.ConvertAll(ids, id => id.ToString())));
+			parameters.Add(Constants.API_USERS_FETCH, string.Join(",", ids.Select(id => id.ToString()).ToArray()));
 
 			Core.Request.Get("users/", parameters, (Core.Response response) => {
 				Objects.User[] users;

@@ -87,7 +87,7 @@ namespace GameJolt.API
 			else
 			{
 				var parameters = new Dictionary<string, string>();
-				parameters.Add("trophy_id", string.Join(",", Array.ConvertAll(ids, t => t.ToString())));
+				parameters.Add("trophy_id", string.Join(",", ids.Select(id => id.ToString()).ToArray()));
 
 				Get(parameters, callback);
 			}
