@@ -97,10 +97,10 @@ namespace GameJolt.API.Core
 
 		static string MD5(string input)
 		{
-			var bytes = Encoding.ASCII.GetBytes(input);
+			var bytes = Encoding.UTF8.GetBytes(input);
 
 #if UNITY_WINRT
-			var hashBytes = Windows.Crypto.ComputeMD5Hash(bytes);
+			var hashBytes = UnityEngine.Windows.Crypto.ComputeMD5Hash(bytes);
 #else
 			var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
 			var hashBytes = md5.ComputeHash(bytes);
