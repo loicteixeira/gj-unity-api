@@ -7,6 +7,7 @@ public class RestrictedButton : MonoBehaviour
 	{
 		var button = GetComponent<Button>();
 
+#if UNITY_EDITOR
 		if (GameJolt.API.Manager.Instance.DebugAutoConnect)
 		{
 			button.interactable = true;
@@ -15,5 +16,8 @@ public class RestrictedButton : MonoBehaviour
 		{
 			button.interactable = false;
 		}
+#else
+		button.interactable = true;
+#endif
 	}
 }
