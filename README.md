@@ -3,12 +3,12 @@ Game Jolt [Game API](http://gamejolt.com/api/doc/game/) wrapper for [Unity](http
 
 ## Compatibility
 
-### Unity
+#### Unity
 
 - Works for Unity 5.x and above.
 - Can be used from either C# and Javascript.
 
-### Build Targets
+#### Build Targets
 
 Target | Build Successful | Runs Properly
 :--- | :---: | :---:
@@ -36,7 +36,7 @@ PS Vita | Not Tested | Not Tested
 
 You can contribute in several ways:
 - Share your ideas. Either create a ticket in the [issue tracker](https://github.com/loicteixeira/gj-unity-api/issues) or leave a comment on [Game Jolt](http://gamejolt.com/games/unity-api/15887).
-- Help building the compatibility table above. Message me on [Twitter](https://twitter.com/loicteixeira) or leave a comment on [Game Jolt](http://gamejolt.com/games/unity-api/15887) if you are able to test on those paltform.
+- Help building the compatibility table above if you are able to test on those paltform. Either message me on [Twitter](https://twitter.com/loicteixeira) or leave a comment on [Game Jolt](http://gamejolt.com/games/unity-api/15887) 
 - Report [issues](https://github.com/loicteixeira/gj-unity-api/issues)
 - (NOT YET) Fix Bug and create a Pull Request.
 
