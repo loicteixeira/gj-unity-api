@@ -89,8 +89,12 @@ namespace GameJolt.API
 		#region Requests
 		public IEnumerator GetRequest(string url, Core.ResponseFormat format, Action<Core.Response> callback)
 		{
-			float timeout = Time.time + Timeout;
+			if (GameID == 0 || PrivateKey == null) {
+				callback(new Core.Response("Bad Credentials"));
+				yield break;
+			}
 
+			float timeout = Time.time + Timeout;
 			var www = new WWW(url);
 			while (!www.isDone)
 			{
@@ -101,12 +105,16 @@ namespace GameJolt.API
 				}
 				yield return new WaitForEndOfFrame();
 			}
-
 			callback(new Core.Response(www, format));
 		}
 
 		public IEnumerator PostRequest(string url, Dictionary<string, string> payload, Core.ResponseFormat format, Action<Core.Response> callback)
 		{
+			if (GameID == 0 || PrivateKey == null) {
+				callback(new Core.Response("Bad Credentials"));
+				yield break;
+			}
+
 			var form = new WWWForm();
 			foreach (KeyValuePair<string,string> field in payload)
 			{
