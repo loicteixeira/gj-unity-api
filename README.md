@@ -10,27 +10,30 @@ Game Jolt [Game API](http://gamejolt.com/api/doc/game/) wrapper for [Unity](http
 
 #### Build Targets
 
-Target | Build Successful | Runs Properly
-:--- | :---: | :---:
-WebPlayer | OK | OK
-WebGL (Preview) | OK | OK
-PC Standalone | Not Tested | Not Tested
-Mac Standalone | Not Tested | Not Tested
-Linux Standalone | Not Tested | Not Tested
-iOS | Not Tested | Not Tested
-Android | Not Tested | Not Tested
-BlackBerry | Not Tested | Not Tested
-Windows Store - SDK 8.0 | OK | Not Tested
-Windows Store - SDK 8.1 | Not Tested | Not Tested
-Windows Store - Phone 8.1 | Not Tested | Not Tested
-Windows Store - Universal 8.1 | Not Tested | Not Tested
-Windows Phone 8 | OK | Not Tested
-Samsung TOK | Not Tested | Not Tested
-Xbox 360 | Not Tested | Not Tested
-Xbox One | Not Tested | Not Tested
-PS3 | Not Tested | Not Tested
-PS4 | Not Tested | Not Tested
-PS Vita | Not Tested | Not Tested
+Target | Build Successful | Runs Properly | Extra
+:--- | :---: | :---: | :---
+WebPlayer | OK | OK | Firefox
+WebGL (Preview) | OK | OK | Chrome
+PC Standalone - x86 | OK | OK | Windows 7 Pro SP1
+PC Standalone - x86_64 | OK | OK | Windows 7 Pro SP1
+Mac Standalone - x86 | OK | OK | OSX Yosemite
+Mac Standalone - x86_64 | OK | OK | OSX Yosemite
+Mac Standalone - Universal | OK | OK | OSX Yosemite
+Linux Standalone | Not Tested | Not Tested | -
+iOS | Not Tested | Not Tested | -
+Android | Not Tested | Not Tested | -
+BlackBerry | Not Tested | Not Tested | -
+Windows Store - SDK 8.0 | OK | Not Tested | Windows 8.1 Entreprise on VM
+Windows Store - SDK 8.1 | OK | Not Tested | Windows 8.1 Entreprise on VM
+Windows Store - Phone 8.1 | OK | Not Tested | Windows 8.1 Entreprise on VM
+Windows Store - Universal 8.1 | OK | Not Tested | Windows 8.1 Entreprise on VM
+Windows Phone 8 | OK | Not Tested | Windows 8.1 Entreprise on VM
+Samsung TV | Not Tested | Not Tested | -
+Xbox 360 | Not Tested | Not Tested | -
+Xbox One | Not Tested | Not Tested | -
+PS3 | Not Tested | Not Tested | -
+PS4 | Not Tested | Not Tested | -
+PS Vita | Not Tested | Not Tested | -
 
 ## Contributing
 
