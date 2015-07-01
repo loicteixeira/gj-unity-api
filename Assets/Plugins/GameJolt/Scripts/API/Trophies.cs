@@ -32,11 +32,52 @@ namespace GameJolt.API
 					cachedTrophies[id].Unlocked = response.success;
 				}
 
+				// Show the notification
+				PrepareNotification(id);
+
 				if (callback != null)
 				{
 					callback(response.success);
 				}
 			});
+		}
+
+		static void PrepareNotification(int id)
+		{
+			if (cachedTrophies != null && cachedTrophies.ContainsKey(id))
+			{
+				if (cachedTrophies[id].Image != null)
+				{
+					ShowNotification(cachedTrophies[id]);
+				}
+				else
+				{
+					cachedTrophies[id].DownloadImage((bool success) => {
+						ShowNotification(cachedTrophies[id]);
+					});
+				}
+			}
+			else
+			{
+				Get (id, (Objects.Trophy trophy) => {
+					if (trophy != null)
+					{
+						trophy.DownloadImage((bool success) => {
+							ShowNotification(trophy);
+						});
+					}
+				});
+			}
+		}
+
+		static void ShowNotification(Objects.Trophy trophy)
+		{
+			if (trophy.Unlocked)
+			{
+				GameJolt.UI.Manager.Instance.QueueNotification(
+					string.Format("Unlocked <b>#{0}</b>", trophy.Title),
+					trophy.Image);
+			}
 		}
 		#endregion Unlock
 
