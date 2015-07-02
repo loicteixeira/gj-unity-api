@@ -1,6 +1,8 @@
 @mainpage
 
 Game Jolt [Game API](http://gamejolt.com/api/doc/game/) wrapper for [Unity](http://unity3d.com/).
+
+Follow the project on [Game Jolt](http://gamejolt.com/games/unity-api/15887) to get notified about updates.
 # Compatibility
 
 ## Unity
