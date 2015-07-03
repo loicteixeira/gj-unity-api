@@ -61,13 +61,13 @@ bool isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
 For standalone builds, you have to sign the player yourself in. The easiest way is to display the default sign in form.
 
 ```
-GameJolt.UI.Manager.UI.ShowSignIn();
+GameJolt.UI.Manager.Instance.ShowSignIn();
 ```
 
 You can also pass a callback to get notified whether the player has signed in or not.
 
 ```
-GameJolt.UI.Manager.UI.ShowSignIn((bool success) => {
+GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
 	if (success)
 	{
 		Debug.Log("The user signed in!");
@@ -134,7 +134,7 @@ GameJolt.API.Trophies.Unlock(trophyID, (bool success) => {
 It's as simple as a single line!
 
 ```
-GameJolt.UI.Manager.UI.ShowTrophies();
+GameJolt.UI.Manager.Instance.ShowTrophies();
 ```
 
 **Tip:** You can even show this window without a single line of code! If you have a *Trophies Collection* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowTrophies ()* from the dropdown.
