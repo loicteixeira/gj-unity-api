@@ -1,5 +1,8 @@
 @page tutorial Getting Started
 
+[1]: @ref documentation
+[2]: @ref downloads
+
 # Setup
 
 ## Create your game on Game Jolt
@@ -16,7 +19,7 @@
 
 ## Import the package in Unity
 
-1. [Download](@ref downloads) the Unity Package. 
+1. [Download][2] the Unity Package. 
 2. Right click in the *Project* tab.
 3. Select *Import Package > Custom Package...* and locate the *Unity Package*.
 
@@ -50,8 +53,10 @@ There's quite a few options here, let's get through them:
 
 # Sign in
 
+Authentication is the corner stone of the API. If you user isn't signed in, you won't have access to trophies and sessions. All you can do is post scores as guest. Let's fix that!
+
 ## Web Player and WebGL builds
-For *Web Player* or *WebGL* builds hosted on Game Jolt the player will be automatically signed in. This is how you check if a player is currently signed in or not (Guest).
+For *Web Player* or *WebGL* builds hosted on Game Jolt the player will  automatically be signed in. This is how you check if a player is currently signed in or not (Guest).
 
 ```
 bool isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
@@ -144,10 +149,10 @@ GameJolt.UI.Manager.Instance.ShowTrophies();
 ### Custom UI
 You can query one or more trophy and display it/them yourself.
 
-Get one specific trophy
+Get one specific trophy.
 
 ```
-var trophyID = 123;
+var trophyID = 26534;
 GameJolt.API.Trophies.Get(trophyID, (GameJolt.API.Objects.Trophy trophy) => {
 	if (trophy != null)
 	{
@@ -159,6 +164,7 @@ GameJolt.API.Trophies.Get(trophyID, (GameJolt.API.Objects.Trophy trophy) => {
 Get multiple trophies.
 
 ```
+var trophyIDs = new int[] { 68935, 26534, 34235 };
 GameJolt.API.Trophies.Get(trophyIDs, (GameJolt.API.Objects.Trophy[] trophies) => {
 	if (trophies != null)
 	{
@@ -186,6 +192,8 @@ GameJolt.API.Trophies.Get((GameJolt.API.Objects.Trophy[] trophies) => {
 });
 ```
 
+Take a look at the [documentation][1] to find more ways to query trophies.
+
 # Scores
 ## Add
 You can either add a score for a signed in player.
@@ -211,6 +219,8 @@ GameJolt.API.Scores.Add(scoreValue, scoreText, guestName, tableID, extraData, (b
 });
 ```
 
+**Tip:** *Table ID* and *Extra Data* are optional. The former will default to the *primary* table as defined on your dashboard, the later will just be blank. This means that if you don't need the callback, you can add a score really simply `GameJolt.API.Scores.Add(scoreValue, scoreText);`
+
 ## Show
 ### Default UI
 Show all the highscore tables with a single line of code.
@@ -222,7 +232,65 @@ GameJolt.UI.Manager.Instance.ShowLeaderboards();
 **Tip:** If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a *Leaderboards* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowLeaderboards ()* from the dropdown.
 
 ### Custom UI
-Coming soon. In the meantime, you can have a look at the documentation.
+Have a look at the [documentation][1] to see how to query *highscore tables* and *scores* to display them yourself.
 
-# Ping, Data Store & more
-Coming soon. In the meantime, you can have a look at the documentation.
+# Sessions
+
+In order for session information (like *average session length*) to be available on your dashbaord, as soon as a user is signed in, you need to create a new session and then ping it on a regular basis. Luckily, the *Unity API* does it for you, just remember to enable **Auto Ping** in the *API settings* (and make sure to turn it off if you want to handle it yourself). 
+
+# Data Store
+
+Game Jolt allows you to save data in the cloud like game save (so the user can continue to play from another computer) or user generated content (community levels \*hoop\* \*hoop\*).
+
+The data store function as a key/value store. The key is the name under which the data will be saved (like a variable in your code) and the value holds the value (who would have though ahah?). Be awayre that even if you store numerical values, you need to convert them as string before saving them.
+
+Each key can either be global or belong to a specific user. Only the later require the user to be signed in.
+
+**Note:** *Game Jolt Game API* recently added a third case where the data is global but can only be modified by the user who initially created it. This is not supported by the *Unity API* just yet but is of course on the road map.
+
+## Set data
+
+```
+string key = "hp";
+string value = Player.health.toString(); // Player is an imaginary script.
+bool isGlobal = False;
+
+GameJolt.API.DataStore.Set(key, value, isGlobal, (bool success) => {});
+```
+
+## Get data
+
+```
+string key = "hp";
+bool isGlobal = False;
+
+GameJolt.API.DataStore.Get(key, isGlobal, (string value) => {
+	if (value != null)
+	{
+		Player.health = float.Parse(value);
+	}
+});
+```
+
+## More
+
+Check the [documentation][1] to find out how to:
+
+- Remove keys.
+- Update string data with *append/prepend* operations or numerical data with *add/subtract/multiply/delete* operations.
+- Retrieve all the saved keys.
+
+# Notifications
+
+You can use the *Unity API* notification system to display custom notifications.
+
+```
+// Text only
+GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!");
+
+// Text & Image (UnityEngine.Sprite)
+GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!", image);
+```
+
+# What else?
+It really just is a getting started tutorial. Have a look at the [documentation][1] to see what else you can do.
