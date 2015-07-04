@@ -44,7 +44,9 @@ There's quite a few options here, let's get through them:
 1. Open your first scene (the first that will load).
 2. Select *GameObject > Game Jolt API Manager* to add the prefab to the scene.
 
-**Tip:** You can import the prefab in any scene for testing (so you don't have to load your game from the start everytime) but remember to remove it and only leave it in the very first scene.
+**Tip:** Technically it doesn't have to be the very first scene. If your scene flow is something like *splash screen > main menu > game* and that you don't call the API at all in your *splash screen* scene, you can import the prefab in the *main menu* scene. However, it is highly recommended to still import it in the very first scene so everything will be ready when you need it (i.e. trophies will be caches, the user will be automatically logged in for web players, etc.).
+
+**Tip:** You can import the prefab in any scene for testing (so you don't have to load your game from the start everytime) but remember to remove it before building your game and only leave the first one.
 
 # Sign in
 
@@ -79,7 +81,7 @@ GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
 });
 ```
 
-**Tip:** You can even show this form without a single line of code! If you have a *Sign In with Game Jolt* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowSignIn ()* from the dropdown.
+**Tip:** If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a *Sign In with Game Jolt* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowSignIn ()* from the dropdown.
 
 ### Custom UI
 If you don't like the default UI and use some custom UI that better fit your game that's fine too! Once you've got the user name and token sign him in manually.
@@ -137,7 +139,7 @@ It's as simple as a single line!
 GameJolt.UI.Manager.Instance.ShowTrophies();
 ```
 
-**Tip:** You can even show this window without a single line of code! If you have a *Trophies Collection* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowTrophies ()* from the dropdown.
+**Tip:** If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a *Trophies Collection* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowTrophies ()* from the dropdown.
 
 ### Custom UI
 You can query one or more trophy and display it/them yourself.
@@ -217,7 +219,7 @@ Show all the highscore tables with a single line of code.
 GameJolt.UI.Manager.Instance.ShowLeaderboards();
 ```
 
-**Tip:** You can even show this window without a single line of code! If you have a *Leaderboards* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowLeaderboards ()* from the dropdown.
+**Tip:** If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a *Leaderboards* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowLeaderboards ()* from the dropdown.
 
 ### Custom UI
 Coming soon. In the meantime, you can have a look at the documentation.
