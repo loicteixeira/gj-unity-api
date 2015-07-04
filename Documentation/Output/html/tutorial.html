@@ -87,17 +87,19 @@
 <li>Open your first scene (the first that will load).</li>
 <li>Select <em>GameObject &gt; Game Jolt API Manager</em> to add the prefab to the scene.</li>
 </ol>
-<p><b>Tip:</b> You can import the prefab in any scene for testing (so you don't have to load your game from the start everytime) but remember to remove it and only leave it in the very first scene.</p>
+<p><b>Tip:</b> Technically it doesn't have to be the very first scene. If your scene flow is something like <em>splash screen &gt; main menu &gt; game</em> and that you don't call the API at all in your <em>splash screen</em> scene, you can import the prefab in the <em>main menu</em> scene. However, it is highly recommended to still import it in the very first scene so everything will be ready when you need it (i.e. trophies will be caches, the user will be automatically logged in for web players, etc.).</p>
+<p><b>Tip:</b> You can import the prefab in any scene for testing (so you don't have to load your game from the start everytime) but remember to remove it before building your game and only leave the first one.</p>
 <h1>Sign in</h1>
+<p>Authentication is the corner stone of the API. If you user isn't signed in, you won't have access to trophies and sessions. All you can do is post scores as guest. Let's fix that!</p>
 <h2>Web Player and WebGL builds</h2>
-<p>For <em>Web Player</em> or <em>WebGL</em> builds hosted on Game Jolt the player will be automatically signed in. This is how you check if a player is currently signed in or not (Guest).</p>
+<p>For <em>Web Player</em> or <em>WebGL</em> builds hosted on Game Jolt the player will automatically be signed in. This is how you check if a player is currently signed in or not (Guest).</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;bool isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;</div>
 </div><!-- fragment --><h2>Standalone Builds</h2>
 <h3>Default UI</h3>
 <p>For standalone builds, you have to sign the player yourself in. The easiest way is to display the default sign in form.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.UI.ShowSignIn();</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.Instance.ShowSignIn();</div>
 </div><!-- fragment --><p>You can also pass a callback to get notified whether the player has signed in or not.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.UI.ShowSignIn((bool success) =&gt; {</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.Instance.ShowSignIn((bool success) =&gt; {</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    if (success)</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;        Debug.Log(&quot;The user signed in!&quot;);</div>
@@ -107,7 +109,7 @@
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        Debug.Log(&quot;The user failed to signed in or closed the window :(&quot;);</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    }</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;});</div>
-</div><!-- fragment --><p><b>Tip:</b> You can even show this form without a single line of code! If you have a <em>Sign In with Game Jolt</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowSignIn ()</em> from the dropdown.</p>
+</div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a <em>Sign In with Game Jolt</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowSignIn ()</em> from the dropdown.</p>
 <h3>Custom UI</h3>
 <p>If you don't like the default UI and use some custom UI that better fit your game that's fine too! Once you've got the user name and token sign him in manually.</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;var user = new GameJolt.API.Objects.User(userName, userToken);</div>
@@ -145,12 +147,12 @@
 </div><!-- fragment --><h2>Show</h2>
 <h3>Default UI</h3>
 <p>It's as simple as a single line!</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.UI.ShowTrophies();</div>
-</div><!-- fragment --><p><b>Tip:</b> You can even show this window without a single line of code! If you have a <em>Trophies Collection</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowTrophies ()</em> from the dropdown.</p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.Instance.ShowTrophies();</div>
+</div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Trophies Collection</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowTrophies ()</em> from the dropdown.</p>
 <h3>Custom UI</h3>
 <p>You can query one or more trophy and display it/them yourself.</p>
-<p>Get one specific trophy</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;var trophyID = 123;</div>
+<p>Get one specific trophy.</p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;var trophyID = 26534;</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;GameJolt.API.Trophies.Get(trophyID, (GameJolt.API.Objects.Trophy trophy) =&gt; {</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    if (trophy != null)</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    {</div>
@@ -158,16 +160,17 @@
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    }</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;});</div>
 </div><!-- fragment --><p>Get multiple trophies.</p>
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.API.Trophies.Get(trophyIDs, (GameJolt.API.Objects.Trophy[] trophies) =&gt; {</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    if (trophies != null)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    {</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;        foreach (var trophy in trophies.Reverse&lt;GameJolt.API.Objects.Trophy&gt;())</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;        {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;            Debug.Log(string.Format(&quot;&gt; {0} - {1} - {2} - {3}Unlocked&quot;, trophy.Title, trophy.ID, trophy.Difficulty, trophy.Unlocked ? &quot;&quot; : &quot;Not &quot;));</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        }</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        Debug.Log(string.Format(&quot;Found {0} trophies.&quot;, trophies.Length));</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    }</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;});</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;var trophyIDs = new int[] { 68935, 26534, 34235 };</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;GameJolt.API.Trophies.Get(trophyIDs, (GameJolt.API.Objects.Trophy[] trophies) =&gt; {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    if (trophies != null)</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;        foreach (var trophy in trophies.Reverse&lt;GameJolt.API.Objects.Trophy&gt;())</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;            Debug.Log(string.Format(&quot;&gt; {0} - {1} - {2} - {3}Unlocked&quot;, trophy.Title, trophy.ID, trophy.Difficulty, trophy.Unlocked ? &quot;&quot; : &quot;Not &quot;));</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        }</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        Debug.Log(string.Format(&quot;Found {0} trophies.&quot;, trophies.Length));</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;});</div>
 </div><!-- fragment --><p>Or get all of them!</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.API.Trophies.Get((GameJolt.API.Objects.Trophy[] trophies) =&gt; {</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    if (trophies != null)</div>
@@ -179,7 +182,8 @@
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        Debug.Log(string.Format(&quot;Found {0} trophies.&quot;, trophies.Length));</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    }</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;});</div>
-</div><!-- fragment --><h1>Scores</h1>
+</div><!-- fragment --><p>Take a look at the documentation to find more ways to query trophies.</p>
+<h1>Scores</h1>
 <h2>Add</h2>
 <p>You can either add a score for a signed in player.</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;int scoreValue = 1337; // The actual score.</div>
@@ -196,15 +200,53 @@
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;GameJolt.API.Scores.Add(scoreValue, scoreText, guestName, tableID, extraData, (bool success) =&gt; {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    Debug.Log(string.Format(&quot;Score Add {0}.&quot;, success ? &quot;Successful&quot; : &quot;Failed&quot;));</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;});</div>
-</div><!-- fragment --><h2>Show</h2>
+</div><!-- fragment --><p><b>Tip:</b> <em>Table ID</em> and <em>Extra Data</em> are optional. The former will default to the <em>primary</em> table as defined on your dashboard, the later will just be blank. This means that if you don't need the callback, you can add a score really simply <code>GameJolt.API.Scores.Add(scoreValue, scoreText);</code></p>
+<h2>Show</h2>
 <h3>Default UI</h3>
 <p>Show all the highscore tables with a single line of code.</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;GameJolt.UI.Manager.Instance.ShowLeaderboards();</div>
-</div><!-- fragment --><p><b>Tip:</b> You can even show this window without a single line of code! If you have a <em>Leaderboards</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowLeaderboards ()</em> from the dropdown.</p>
+</div><!-- fragment --><p><b>Tip:</b> If the manager prefab is in the current scene, you can even show this window without a single line of code! If you have a <em>Leaderboards</em> button for example, in the <em>On Click</em> event listener field, drag the <em>GameJoltAPI &gt; UI</em> and select <em>Manager &gt; ShowLeaderboards ()</em> from the dropdown.</p>
 <h3>Custom UI</h3>
-<p>Coming soon. In the meantime, you can have a look at the documentation.</p>
-<h1>Ping, Data Store &amp; more</h1>
-<p>Coming soon. In the meantime, you can have a look at the documentation. </p>
+<p>Have a look at the documentation to see how to query <em>highscore tables</em> and <em>scores</em> to display them yourself.</p>
+<h1>Sessions</h1>
+<p>In order for session information (like <em>average session length</em>) to be available on your dashbaord, as soon as a user is signed in, you need to create a new session and then ping it on a regular basis. Luckily, the <em>Unity API</em> does it for you, just remember to enable <b>Auto Ping</b> in the <em>API settings</em> (and make sure to turn it off if you want to handle it yourself).</p>
+<h1>Data Store</h1>
+<p>Game Jolt allows you to save data in the cloud like game save (so the user can continue to play from another computer) or user generated content (community levels *hoop* *hoop*).</p>
+<p>The data store function as a key/value store. The key is the name under which the data will be saved (like a variable in your code) and the value holds the value (who would have though ahah?). Be awayre that even if you store numerical values, you need to convert them as string before saving them.</p>
+<p>Each key can either be global or belong to a specific user. Only the later require the user to be signed in.</p>
+<p><b>Note:</b> <em>Game Jolt Game API</em> recently added a third case where the data is global but can only be modified by the user who initially created it. This is not supported by the <em>Unity API</em> just yet but is of course on the road map.</p>
+<h2>Set data</h2>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;string key = &quot;hp&quot;;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;string value = Player.health.toString(); // Player is an imaginary script.</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;bool isGlobal = False;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;GameJolt.API.DataStore.Set(key, value, isGlobal, (bool success) =&gt; {});</div>
+</div><!-- fragment --><h2>Get data</h2>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;string key = &quot;hp&quot;;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;bool isGlobal = False;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;GameJolt.API.DataStore.Get(key, isGlobal, (string value) =&gt; {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    if (value != null)</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        Player.health = float.Parse(value);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    }</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;});</div>
+</div><!-- fragment --><h2>More</h2>
+<p>Check the documentation to find out how to:</p>
+<ul>
+<li>Remove keys.</li>
+<li>Update string data with <em>append/prepend</em> operations or numerical data with <em>add/subtract/multiply/delete</em> operations.</li>
+<li>Retrieve all the saved keys.</li>
+</ul>
+<h1>Notifications</h1>
+<p>You can use the <em>Unity API</em> notification system to display custom notifications.</p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;// Text only</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;GameJolt.UI.Manager.Instance.QueueNotification(&quot;GameJolt is awesome!&quot;);</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;// Text &amp; Image (UnityEngine.Sprite)</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;GameJolt.UI.Manager.Instance.QueueNotification(&quot;GameJolt is awesome!&quot;, image);</div>
+</div><!-- fragment --><h1>What else?</h1>
+<p>It really just is a getting started tutorial. Have a look at the documentation to see what else you can do. </p>
 </div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.10-->
 <!-- start footer part -->
