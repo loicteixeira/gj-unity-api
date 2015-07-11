@@ -11,31 +11,31 @@ namespace GameJolt.API.Objects
 	public class User : Base
 	{
 		#region Fields & Properties
-		string name;
+		string name = "";
 		public string Name
 		{ 
 			get { return name; }
 			set
 			{
-				if (name != value)
+				if (name.ToLower() != value.ToLower())
 				{
-					name = value;
 					IsAuthenticated = false;
 				}
+				name = value;
 			}
 		}
 
-		string token;
+		string token = "";
 		public string Token
 		{ 
 			get { return token; }
 			set
 			{
-				if (token != value)
+				if (token.ToLower() != value.ToLower())
 				{
-					token = value;
 					IsAuthenticated = false;
 				}
+				token = value;
 			}
 		}
 
