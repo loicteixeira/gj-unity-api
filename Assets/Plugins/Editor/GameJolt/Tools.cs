@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEditor;
 
 namespace GameJolt.Editor
@@ -39,6 +40,16 @@ namespace GameJolt.Editor
 				{
 					var clone = PrefabUtility.InstantiatePrefab(prefab) as GameObject; 
 					Selection.activeObject = clone;
+
+					if (FindObjectOfType<EventSystem>() == null)
+					{
+						new GameObject(
+							"EventSystem",
+							typeof(EventSystem),
+							typeof(StandaloneInputModule),
+							typeof(StandaloneInputModule)
+						);
+					}
 				}
 			}
 		}
