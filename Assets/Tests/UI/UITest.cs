@@ -37,4 +37,14 @@ public class UITest : MonoBehaviour
 		GameJolt.UI.Manager.Instance.QueueNotification(
 			string.Format("Notification <b>#{0}</b>", ++notificationQueued));
 	}
+
+	public void Pause()
+	{
+		Time.timeScale = 0f;
+	}
+
+	public void Resume()
+	{
+		Time.timeScale = 1f;
+	}
 }
