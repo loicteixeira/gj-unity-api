@@ -39,7 +39,7 @@ namespace GameJolt.API.Objects
 			}
 		}
 
-		public bool IsAuthenticated { get; set; }
+		public bool IsAuthenticated { get; private set; }
 
 		public int ID { get; set; }
 
