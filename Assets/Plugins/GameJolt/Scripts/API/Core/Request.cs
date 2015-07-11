@@ -58,8 +58,8 @@ namespace GameJolt.API.Core
 				{
 					return "Missing Authenticated User.";
 				}
-				parameters.Add("username", Manager.Instance.CurrentUser.Name);
-				parameters.Add("user_token", Manager.Instance.CurrentUser.Token);
+				parameters.Add("username", Manager.Instance.CurrentUser.Name.ToLower());
+				parameters.Add("user_token", Manager.Instance.CurrentUser.Token.ToLower());
 			}
 			
 			parameters.Add("format", format.ToString().ToLower());

@@ -24,7 +24,7 @@ namespace GameJolt.API
 			var parameters = new Dictionary<string, string>();
 			if(user.Name != null && user.Name != string.Empty)
 			{
-				parameters.Add ("username", user.Name);
+				parameters.Add ("username", user.Name.ToLower());
 			}
 			else if (user.ID != 0)
 			{

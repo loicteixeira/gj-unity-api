@@ -118,8 +118,8 @@ namespace GameJolt.API.Objects
 			}
 
 			var parameters = new Dictionary<string, string>();
-			parameters.Add("username", Name);
-			parameters.Add("user_token", Token);
+			parameters.Add("username", Name.ToLower());
+			parameters.Add("user_token", Token.ToLower());
 
 			Core.Request.Get(Constants.API_USERS_AUTH, parameters, (Core.Response response) => {
 				IsAuthenticated = response.success;
