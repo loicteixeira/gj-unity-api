@@ -180,7 +180,7 @@ else {{
 	message = '';
 }}
 
-SendMessage('{0}', 'OnGetUserFromWeb', message);
+SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		", this.gameObject.name));
 				#endif
 			}
