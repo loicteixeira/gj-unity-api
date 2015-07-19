@@ -312,7 +312,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 196864351}
---- !u!114 &250601043
+--- !u!114 &250601043 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11426848, guid: 7a2e587034d846647b593aa159d7ed8d,
     type: 2}

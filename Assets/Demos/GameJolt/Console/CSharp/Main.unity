@@ -4918,7 +4918,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 996462222}
---- !u!224 &1021494619
+--- !u!224 &1021494619 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22497400, guid: 9e6c55c6b22700145a3ad929a57a91e3,
     type: 2}
@@ -6780,7 +6780,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1499430675}
---- !u!224 &1539082797
+--- !u!224 &1539082797 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22497400, guid: 9e6c55c6b22700145a3ad929a57a91e3,
     type: 2}
