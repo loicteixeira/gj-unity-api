@@ -19,10 +19,9 @@ namespace GameJolt.UI.Controllers
 		
 		override public void Show(Action<bool> callback)
 		{
-			this.callback = callback; 
-
 			animator.SetTrigger("Leaderboards");
 			animator.SetTrigger("ShowLoadingIndicator");
+			this.callback = callback; 
 
 			GameJolt.API.Scores.GetTables((GameJolt.API.Objects.Table[] tables) => {
 				if (tables != null)

@@ -15,6 +15,8 @@ namespace GameJolt.UI.Controllers
 		{
 			animator.SetTrigger("Trophies");
 			animator.SetTrigger("ShowLoadingIndicator");
+			this.callback = callback;
+
 			GameJolt.API.Trophies.Get((GameJolt.API.Objects.Trophy[] trophies) => {
 				if (trophies != null)
 				{
@@ -46,8 +48,6 @@ namespace GameJolt.UI.Controllers
 					Dismiss(false);
 				}
 			});
-
-			this.callback = callback;
 		}
 		
 		override public void Dismiss(bool success)
