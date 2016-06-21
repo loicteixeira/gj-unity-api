@@ -33,7 +33,7 @@ namespace GameJolt.API
 		public const string API_SCORES_FETCH = "/scores";
 		public const string API_SCORES_TABLES_FETCH = "/scores/tables";
 
-		public const string API_TROPHIES_ADD = "trophies/add-achieved";
+		public const string API_TROPHIES_ADD = "/trophies/add-achieved";
 		public const string API_TROPHIES_FETCH = "/trophies";
 
 		public const string API_DATASTORE_SET = "/data-store/set";
