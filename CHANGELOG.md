@@ -6,6 +6,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ...
 
+##[2.1.1] (2016-06-21)
+
+### Fixed
+- Could not unlock trophies. #64
+  - *Thanks to RomejanicDev for reporting the issue.*
+
 ##[2.1.0] (2016-06-19)
 
 ### Warning
@@ -47,7 +53,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
 [2.1.0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.0
 [2.0.2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.2
 [2.0.1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.1
