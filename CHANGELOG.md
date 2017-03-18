@@ -2,17 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [Unreleased][Unreleased]
 
 ...
 
-##[2.1.1] (2016-06-21)
+## [2.1.1][v2_1_1] (2016-06-21)
 
 ### Fixed
 - Could not unlock trophies. #64
   - *Thanks to RomejanicDev for reporting the issue.*
 
-##[2.1.0] (2016-06-19)
+## [2.1.0][v2_1_0] (2016-06-19)
 
 ### Warning
 - The minimum version to use the API is now **Unity 5.0.1**.
@@ -28,7 +28,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Thanks to @andyman for helping other users on Twitter.
 
 
-##[2.0.2] (2015-07-18)
+## [2.0.2][v2_0_2] (2015-07-18)
 
 ### Fixed
 - AutoConnect for WebGL builds was broken. #46.
@@ -40,7 +40,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Unity 5.0.0 has a bug regarding md5 calculations for WebGL builds. It has been fixed in Unity 5.0.1. Therefore **the API will require Unity 5.0.1 from the next update.**
 
 
-##[2.0.1] (2015-07-11)
+## [2.0.1][v2_0_1] (2015-07-11)
 
 ### Fixed
 - Allow UI do display when Time.timeScale is set to 0.
@@ -49,14 +49,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Prevent user to be unauthenticated if he signed in with his name with a different case as what is stored in GameJolt database.
   - *Thanks to @sebasrez for reporting the issue and providing useful information.*
 
-##[2.0.0] (2015-07-02)
+## [2.0.0][v2_0_0] (2015-07-02)
 
 Initial release
 
 [Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.1...HEAD
-[2.1.1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
-[2.1.0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.0
-[2.0.2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.2
-[2.0.1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.1
-[2.0.0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.0
+[v2_1_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
+[v2_1_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.0
+[v2_0_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.2
+[v2_0_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.1
+[v2_0_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.0
 
