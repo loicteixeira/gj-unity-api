@@ -4,4 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Tests/Load/One.unity
+  - enabled: 1
+    path: Assets/Tests/Load/Two.unity
+  - enabled: 1
+    path: Assets/Tests/UI/UI.unity
+  - enabled: 1
+    path: Assets/Tests/Console/Console.unity
