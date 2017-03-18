@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Linq;
 
-public class CSharpConsole : MonoBehaviour
+public class ConsoleTest : MonoBehaviour
 {
 	#region Inspector Fields
 	// Console
