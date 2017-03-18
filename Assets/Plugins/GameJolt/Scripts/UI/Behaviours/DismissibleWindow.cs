@@ -10,7 +10,14 @@ namespace GameJolt.UI.Behaviours
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				animator.GetComponentInChildren<UI.Controllers.BaseWindow>().Dismiss(returnValue);
+				var baseWindow = animator.GetComponentInChildren<UI.Controllers.BaseWindow>();
+				// Because a window might be inactive (e.g. during transitions), it might be null.
+				// It would be possible to manually loop through children and do GetComponent instead,
+				// but dimissing an inactive/transisionning window might have some side effects,
+				// so it's better off not dismissing it (it will be a bit weird to the user though).
+				if (baseWindow != null) {
+					baseWindow.Dismiss(returnValue);
+				}
 			}
 		}
 	}
