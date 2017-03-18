@@ -43,8 +43,6 @@ namespace GameJolt.UI.Controllers
 						}
 					}
 
-					animator.SetTrigger("Unlock");
-
 					SetScores();
 				}
 				else
