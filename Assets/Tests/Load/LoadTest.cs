@@ -30,6 +30,10 @@ public class LoadTest : MonoBehaviour
 
 	public void LoadSceneButtonClicked(string sceneName) {
 		Debug.Log("Loading Scene " + sceneName);
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2
 		Application.LoadLevel(sceneName);
+#else
+		UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+#endif
 	}
 }
