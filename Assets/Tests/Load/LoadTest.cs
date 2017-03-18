@@ -9,22 +9,22 @@ public class LoadTest : MonoBehaviour
 		GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
 			if (success)
 			{
-				Debug.Log("Logged In");
+				GameJolt.UI.Manager.Instance.QueueNotification("Welcome");
 			}
 			else
 			{
-				Debug.Log("Dismissed");
+				GameJolt.UI.Manager.Instance.QueueNotification("Closed the window :(");
 			}
 		});
 	}
 
 	public void IsSignedInButtonClicked() {
-		bool isSignedIn = GameJolt.API.Manager.Instance.CurrentUser != null;
-		if (isSignedIn) {
-			Debug.Log("Signed In");
+		if (GameJolt.API.Manager.Instance.CurrentUser != null) {
+			GameJolt.UI.Manager.Instance.QueueNotification(
+				"Signed in as " + GameJolt.API.Manager.Instance.CurrentUser.Name);
 		}
 		else {
-			Debug.Log("Not Signed In");
+			GameJolt.UI.Manager.Instance.QueueNotification("Not Signed In :(");
 		}
 	}
 
