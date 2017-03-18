@@ -4,7 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
-...
+- Fix Unity 5.5 compatibility. #70
+  - *Thanks to Moire (hkid800) for reporting the issue*
+- Fix leaderboard window sometimes not showing scores. #47, #65
+  - Thanks to Derpybunneh, Nanapus and sebasrez for reporting the issue and helping diagnosing it*
 
 ## [2.1.1][v2_1_1] (2016-06-21)
 
