@@ -42,8 +42,12 @@ namespace GameJolt.API.Core
 				Destroy(this.gameObject);
 				return false;
 			}
-			
-			DontDestroyOnLoad(this.gameObject);
+
+			// Only set DontDestroyOnLoad to top level objects.
+			if (this.gameObject.transform.parent == null) {
+				DontDestroyOnLoad (this.gameObject);
+			}
+
 			return true;
 		}
 
