@@ -19,7 +19,7 @@ namespace GameJolt.API
 			Add(value, text, "", table, extra, callback);
 		}
 
-		public static void Add(int value, string text, string guestName = "Guest", int table = 0, string extra = "", Action<bool> callback = null)
+		public static void Add(int value, string text, string guestName, int table = 0, string extra = "", Action<bool> callback = null)
 		{
 			var guestScore = guestName != null && guestName != string.Empty;
 
