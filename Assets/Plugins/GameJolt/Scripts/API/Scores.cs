@@ -4,21 +4,50 @@ using System.Collections.Generic;
 
 namespace GameJolt.API
 {
+	/// <summary>
+	/// Scores API methods
+	/// </summary>
 	public static class Scores
 	{
+		/// <summary>
+		/// The cached high score tables.
+		/// </summary>
 		static Objects.Table[] cachedTables = null;
 
 		#region Add
+		/// <summary>
+		/// Add a <see cref="GameJolt.API.Objects.Score"/>.
+		/// </summary>
+		/// <param name="score">The <see cref="GameJolt.API.Objects.Score"/> to add.</param>
+		/// <param name="table">The ID of the HighScore <see cref="GameJolt.API.Objects.Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public static void Add(Objects.Score score, int table = 0, Action<bool> callback = null)
 		{
 			Add(score.Value, score.Text, score.GuestName, table, score.Extra, callback);
 		}
 
+		/// <summary>
+		/// Add a <see cref="GameJolt.API.Objects.Score"/>.
+		/// </summary>
+		/// <param name="value">The numerical value of the score (i.e. 123).</param>
+		/// <param name="text">The textual value of the score (i.e. "123 Jumps").</param>
+		/// <param name="table">The ID of the HighScore <see cref="GameJolt.API.Objects.Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="extra">Extra logging information. Defaults to an empty string.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public static void Add(int value, string text, int table = 0, string extra = "", Action<bool> callback = null)
 		{
 			Add(value, text, "", table, extra, callback);
 		}
 
+		/// <summary>
+		/// Add a score <see cref="GameJolt.API.Objects.Score"/>.
+		/// </summary>
+		/// <param name="value">The numerical value of the score (i.e. 123).</param>
+		/// <param name="text">The textual value of the score (i.e. "123 Jumps").</param>
+		/// <param name="guestName">The guest name if guest score. Leave blank otherwise.</param>
+		/// <param name="table">The ID of the HighScore <see cref="GameJolt.API.Objects.Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="extra">Extra logging information. Defaults to an empty string.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success..</param>
 		public static void Add(int value, string text, string guestName, int table = 0, string extra = "", Action<bool> callback = null)
 		{
 			var guestScore = guestName != null && guestName != string.Empty;
@@ -49,6 +78,13 @@ namespace GameJolt.API
 		#endregion Add
 
 		#region Get
+		/// <summary>
+		/// Get the specified callback, table, limit and currentUserOnly.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="GameJolt.API.Objects.Score"/>s</param>
+		/// <param name="table">The ID of the HighScore <see cref="GameJolt.API.Objects.Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="limit">The maximum number of <see cref="GameJolt.API.Objects.Score"/>s to return. Defaults to 10.</param>
+		/// <param name="currentUserOnly">If set to <c>true</c> only return scores of the current user; otherwise for all the users.</param>
 		public static void Get(Action<Objects.Score[]> callback, int table = 0, int limit = 10, bool currentUserOnly = false)
 		{
 			var parameters = new Dictionary<string, string>();
@@ -84,6 +120,10 @@ namespace GameJolt.API
 		#endregion Get
 
 		#region GetTables
+		/// <summary>
+		/// Gets the high score tables.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, an array of HighScore <see cref="GameJolt.API.Objects.Table"/>s.</param>
 		public static void GetTables(Action<Objects.Table[]> callback)
 		{
 			if (cachedTables != null)

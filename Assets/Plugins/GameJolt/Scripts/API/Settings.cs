@@ -3,6 +3,9 @@
 namespace GameJolt.API
 {
 	[System.Serializable]
+	/// <summary>
+	/// API Settings Config Object.
+	/// </summary>
 	public class Settings : ScriptableObject {
 		[Header("Game")]
 		[Tooltip("The game ID. It can be found on the Game Jolt website under Dashboard > YOUR-GAME > Game API > API Settings.")]

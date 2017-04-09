@@ -2,6 +2,9 @@
 
 namespace GameJolt.API.Core
 {
+	/// <summary>
+	/// Singleton utility for managers.
+	/// </summary>
 	public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 	{
 		protected static T instance;

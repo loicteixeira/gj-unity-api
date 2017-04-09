@@ -5,17 +5,72 @@ using System.Collections.Generic;
 
 namespace GameJolt.API
 {
+	/// <summary>
+	/// The Core API Manager.
+	/// </summary>
 	public class Manager : Core.MonoSingleton<Manager>
 	{
 		#region Fields & Properties
+		/// <summary>
+		/// Gets the game ID.
+		/// </summary>
+		/// <value>The game ID.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public int GameID { get; private set; }
+
+		/// <summary>
+		/// Gets the game private key.
+		/// </summary>
+		/// <value>The game private key.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public string PrivateKey { get; private set; }
 
+		/// <summary>
+		/// Gets or sets the time in seconds before an API call should timeout and return failure.
+		/// </summary>
+		/// <value>The timeout.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public float Timeout { get; set; }
+
+		/// <summary>
+		/// Gets a value indicating whether it should sutomatically create and ping sessions once a user has been authentified.
+		/// </summary>
+		/// <value><c>true</c> to auto ping; otherwise, <c>false</c>.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public bool AutoPing { get; private set; }
+
+		/// <summary>
+		/// Gets a value indicating whether High Score Tables and Trophies information should be cached for faster display.
+		/// </summary>
+		/// <value><c>true</c> to use caching; otherwise, <c>false</c>.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public bool UseCaching { get; private set; }
 
 		Objects.User currentUser;
+		/// <summary>
+		/// Gets or sets the current user.
+		/// </summary>
+		/// <value>The current user.</value>
 		public Objects.User CurrentUser
 		{
 			get { return currentUser; }
@@ -39,13 +94,45 @@ namespace GameJolt.API
 		}
 
 #if UNITY_EDITOR
+		/// <summary>
+		/// Emulate auto connect in the editor, the same way it would happen with a WebGL build.
+		/// </summary>
+		/// <value><c>true</c> to auto connect in the editor; otherwise, <c>false</c>.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public bool DebugAutoConnect { get; private set; }
+
+		/// <summary>
+		/// Gets the debug user name.
+		/// </summary>
+		/// <value>The debug user name to use for `DebugAutoConnect`.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public string DebugUser { get; private set; }
+
+		/// <summary>
+		/// Gets the debug user token.
+		/// </summary>
+		/// <value>The debug user token to use for `DebugAutoConnect`.</value>
+		/// <remarks>
+		/// <para>
+		/// Set this in the API settings (Edit > Project Settings > GameJolt API).
+		/// </para>
+		/// </remarks>
 		public string DebugToken { get; private set; }
 #endif
 		#endregion Fields & Properties
 
 		#region Init
+		/// <summary>
+		/// Init this instance.
+		/// </summary>
 		override protected void Init()
 		{
 			Configure();
@@ -53,6 +140,9 @@ namespace GameJolt.API
 			CacheTables();
 		}
 
+		/// <summary>
+		/// Configure this instance.
+		/// </summary>
 		void Configure()
 		{
 			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;

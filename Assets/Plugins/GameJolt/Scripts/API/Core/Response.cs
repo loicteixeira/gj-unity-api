@@ -5,22 +5,79 @@ using GameJolt.External.SimpleJSON;
 
 namespace GameJolt.API.Core
 {
+	/// <summary>
+	/// API Response Formats.
+	/// </summary>
 	public enum ResponseFormat { Dump, Json, Raw, Texture }
 
+	/// <summary>
+	/// Response object to parse API responses.
+	/// </summary>
 	public class Response
-	{			
+	{
+		/// <summary>
+		/// The Response Format.
+		/// </summary>
 		public readonly ResponseFormat format;
+
+		/// <summary>
+		/// Whether the response is successful.
+		/// </summary>
 		public readonly bool success = false;
+
+		/// <summary>
+		/// The response bytes.
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Raw`./> 
+		/// </para>
+		/// </remarks>
 		public readonly byte[] bytes = null;
+
+		/// <summary>
+		/// The response dump.
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Dump`./> 
+		/// </para>
+		/// </remarks>
 		public readonly string dump = null;
+
+		/// <summary>
+		/// The response JSON.
+		/// </summary>
+		/// <para>
+		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Json`./> 
+		/// </para>
+		/// </remarks>
 		public readonly JSONNode json = null;
+
+		/// <summary>
+		/// The response texture.
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Texture`./> 
+		/// </para>
+		/// </remarks>
 		public readonly Texture2D texture = null;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="GameJolt.API.Core.Response"/> class.
+		/// </summary>
+		/// <param name="errorMessage">Error message.</param>
 		public Response(string errorMessage) {
 			this.success = false;
 			Debug.LogWarning(errorMessage);
 		}
-		
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="GameJolt.API.Core.Response"/> class.
+		/// </summary>
+		/// <param name="www">The API Fesponse.</param>
+		/// <param name="format">The format of the response.</param>
 		public Response(WWW www, ResponseFormat format = ResponseFormat.Json)
 		{
 			if (www.error != null)

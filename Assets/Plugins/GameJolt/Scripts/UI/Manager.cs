@@ -5,6 +5,9 @@ using System;
 namespace GameJolt.UI
 {
 	[RequireComponent(typeof(Animator))]
+	/// <summary>
+	/// The UI API Manager.
+	/// </summary>
 	public class Manager : GameJolt.API.Core.MonoSingleton<Manager>
 	{
 		#region Init
@@ -13,6 +16,9 @@ namespace GameJolt.UI
 		LeaderboardsWindow leaderboardsWindow;
 		Behaviours.NotificationCentre notificationCentre;
 
+		/// <summary>
+		/// Init this instance.
+		/// </summary>
 		override protected void Init()
 		{
 			var animator = GetComponent<Animator>();
@@ -54,11 +60,18 @@ namespace GameJolt.UI
 		#endregion Init
 
 		#region SignIn
+		/// <summary>
+		/// Shows the sign in window.
+		/// </summary>
 		public void ShowSignIn()
 		{
 			ShowSignIn(null);
 		}
 
+		/// <summary>
+		/// Shows the sign in windows.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public void ShowSignIn(Action<bool> callback)
 		{
 			signinWindow.Show(callback);
@@ -66,11 +79,18 @@ namespace GameJolt.UI
 		#endregion SignIn
 
 		#region Trophies
+		/// <summary>
+		/// Shows the trophies windows.
+		/// </summary>
 		public void ShowTrophies()
 		{
 			ShowTrophies(null);
 		}
 
+		/// <summary>
+		/// Shows the trophies windows.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public void ShowTrophies(Action<bool> callback)
 		{
 			trophiesWindow.Show(callback);
@@ -78,11 +98,18 @@ namespace GameJolt.UI
 		#endregion Trophies
 
 		#region Leaderboards
+		/// <summary>
+		/// Shows the leaderboards window.
+		/// </summary>
 		public void ShowLeaderboards()
 		{
 			ShowLeaderboards(null);
 		}
 
+		/// <summary>
+		/// Shows the leaderboards window.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public void ShowLeaderboards(Action<bool> callback)
 		{
 			leaderboardsWindow.Show(callback);
@@ -90,18 +117,31 @@ namespace GameJolt.UI
 		#endregion Leaderboards
 
 		#region Notifications
+		/// <summary>
+		/// Queues a notification.
+		/// </summary>
+		/// <param name="text">The notification text.</param>
 		public void QueueNotification(string text)
 		{
 			var notification = new Objects.Notification(text);
 			QueueNotification(notification);
 		}
 
+		/// <summary>
+		/// Queues a notification.
+		/// </summary>
+		/// <param name="text">The notification text.</param>
+		/// <param name="image">The notification image.</param>
 		public void QueueNotification(string text, Sprite image)
 		{
 			var notification = new Objects.Notification(text, image);
 			QueueNotification(notification);
 		}
 
+		/// <summary>
+		/// Queues a notification.
+		/// </summary>
+		/// <param name="notification">The <see cref="GameJolt.UI.Objects.Notification"/>.</param>
 		public void QueueNotification(Objects.Notification notification)
 		{
 			notificationCentre.QueueNotification(notification);
