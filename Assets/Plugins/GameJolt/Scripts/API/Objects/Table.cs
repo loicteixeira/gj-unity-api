@@ -2,6 +2,9 @@
 
 namespace GameJolt.API.Objects
 {
+	/// <summary>
+	/// Table object.
+	/// </summary>
 	public class Table : Base
 	{
 		#region Fields & Properties

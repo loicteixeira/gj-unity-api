@@ -4,7 +4,7 @@ using GameJolt.External.SimpleJSON;
 namespace GameJolt.API.Objects
 {
 	/// <summary>
-	/// Score.
+	/// Score object.
 	/// </summary>
 	public class Score : Base
 	{

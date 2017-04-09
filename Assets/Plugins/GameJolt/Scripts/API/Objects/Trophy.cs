@@ -9,6 +9,9 @@ namespace GameJolt.API.Objects
 	/// </summary>
 	public enum TrophyDifficulty { Undefined, Bronze, Silver, Gold, Platinum }
 
+	/// <summary>
+	/// Trophy object.
+	/// </summary>
 	public class Trophy : Base
 	{
 		#region Fields & Properties

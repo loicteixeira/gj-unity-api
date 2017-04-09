@@ -15,6 +15,9 @@ namespace GameJolt.API.Objects
 	/// </summary>
 	public enum UserStatus { Undefined, Active, Banned };
 
+	/// <summary>
+	/// User objects.
+	/// </summary>
 	public class User : Base
 	{
 		#region Fields & Properties

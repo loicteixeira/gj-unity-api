@@ -5,7 +5,7 @@ using System.Text;
 namespace GameJolt.API.Core
 {
 	/// <summary>
-	/// Request object to call API.
+	/// Request object to send API calls.
 	/// </summary>
 	public static class Request
 	{
