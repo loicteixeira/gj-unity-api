@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+...
+
+## [2.1.2][v2_1_2] (2017-04-09)
+
 - Fix Unity 5.5 compatibility. #70
   - *Thanks to Moire (hkid800) for reporting the issue*
 - Fix leaderboard window sometimes not showing scores. #47, #65
@@ -56,7 +60,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.2...HEAD
+[v2_1_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.2
 [v2_1_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
 [v2_1_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.0
 [v2_0_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.2
