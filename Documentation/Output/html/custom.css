@@ -1,5 +1,6 @@
 /* RESET */
 #titlearea,
+#main-menu,
 .tabs,
 .tabs2,
 .tabs3,
@@ -25,7 +26,7 @@
 
 /* Each bar is slightly lighter */
 #titlearea { background-color: #191919; }
-.tabs { background-color: #2a2a2a; }
+#main-menu, .tabs { background-color: #2a2a2a; }
 .tabs2 { background-color: #303030; }
 .navpath ul { background-color: #3e3e3e; }
 
@@ -33,11 +34,17 @@
   color: #fff;
 }
 
-.tablist li a:hover {
+#main-menu li a {
+  color: #c1c1c1;
+  text-shadow: none;
+  background-image: none;
+}
+
+#main-menu li a:hover {
   background-color: #3e3e3e;
 }
 
-.tablist li.current a {
+#main-menu li.current a {
   background-color: #2f7f6f;
   color: #cf0;
   text-shadow: none;
