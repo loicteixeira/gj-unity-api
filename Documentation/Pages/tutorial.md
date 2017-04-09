@@ -294,3 +294,5 @@ GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!", image);
 
 # What else?
 It really just is a getting started tutorial. Have a look at the [documentation][1] to see what else you can do.
+
+Also consider having a look at the [test scenes](https://github.com/loicteixeira/gj-unity-api/tree/master/Assets/Tests), especially the `console` one. While they aren't the easiest to digest, they provide a good example on how to use everything.
