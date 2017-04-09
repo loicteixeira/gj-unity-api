@@ -37,7 +37,7 @@ There's quite a few options here, let's get through them:
 - *Use Caching:* Cache High Score Tables and Trophies information for faster display.
 - *Auto Connect:* AutoConnect in the Editor as if the game was hosted on GameJolt.
 - *User:* The username to use for AutoConnect.
-- *Token:* The token to use for AutoConnect.
+- *Token:* The token to use for AutoConnect. *Important Note: Passwords and Tokens are different things on GameJolt. You can find your token on GameJolt by clicking on your user picture then selecting `Game Token`.*
 
 **Tip:** Leave your mouse above the option in the inspector to see its description.
 
