@@ -7,7 +7,7 @@ Follow the project on [Game Jolt](http://gamejolt.com/games/unity-api/15887) to 
 
 ## Unity
 
-- Works for Unity 5.x and above.
+- Works for Unity 5.0.1 and above.
 - Can be used from either C# and Javascript.
 
 ## Build Targets
@@ -43,4 +43,4 @@ You can contribute in several ways:
 - Share your ideas. Either create a ticket in the [issue tracker](https://github.com/loicteixeira/gj-unity-api/issues) or leave a comment on [Game Jolt](http://gamejolt.com/games/unity-api/15887).
 - Help building the compatibility table above if you are able to test on some of those platforms. Either message me on [Twitter](https://twitter.com/loicteixeira) or leave a comment on [Game Jolt](http://gamejolt.com/games/unity-api/15887)
 - Report [issues](https://github.com/loicteixeira/gj-unity-api/issues).
-- (NOT YET) Clone the [repository](https://github.com/loicteixeira/gj-unity-api/issues), fix bugs and create a *Pull Request*.
+- Clone the [repository](https://github.com/loicteixeira/gj-unity-api/issues), fix bugs and create a *Pull Request*.
