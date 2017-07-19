@@ -6,11 +6,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ...
 
+## [2.1.3][v2_1_3] (2017-07-19)
+
+### Fixed
+- Unity 2017.1 compatibility. #73
+  - *Thanks to @DanielJMus for his contribution and @mgeorgedeveloper for his help*
+
 ## [2.1.2][v2_1_2] (2017-04-09)
 
-- Fix Unity 5.5 compatibility. #70
+### Fixed
+- Unity 5.5 compatibility. #70
   - *Thanks to Moire (hkid800) for reporting the issue*
-- Fix leaderboard window sometimes not showing scores. #47, #65
+- Leaderboard window sometimes not showing scores. #47, #65
   - Thanks to Derpybunneh, Nanapus and sebasrez for reporting the issue and helping diagnosing it*
 
 ## [2.1.1][v2_1_1] (2016-06-21)
@@ -60,11 +67,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.2...HEAD
+[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.3...HEAD
+[v2_1_3]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.3
 [v2_1_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.2
 [v2_1_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
 [v2_1_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.0
 [v2_0_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.2
 [v2_0_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.1
 [v2_0_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.0.0
-
