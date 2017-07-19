@@ -80,7 +80,7 @@ namespace GameJolt.API.Core
 		/// <param name="format">The format of the response.</param>
 		public Response(WWW www, ResponseFormat format = ResponseFormat.Json)
 		{
-			if (www.error != null)
+			if (!string.IsNullOrEmpty(www.error))
 			{
 				this.success = false;
 				Debug.LogWarning(www.error);
