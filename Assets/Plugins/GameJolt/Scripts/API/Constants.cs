@@ -17,7 +17,7 @@ namespace GameJolt.API
 		public const string MANAGER_ASSET_PATH = "Assets/Plugins/GameJolt/Prefabs/";
 		public const string MANAGER_ASSET_FULL_PATH = MANAGER_ASSET_PATH + MANAGER_ASSET_FULL_NAME;
 
-		public const string API_PROTOCOL = "http://";
+		public const string API_PROTOCOL = "https://";
 		public const string API_ROOT = "gamejolt.com/api/game/";
 		public const string API_VERSION = "1";
 		public const string API_BASE_URL = API_PROTOCOL + API_ROOT + "v" + API_VERSION;
