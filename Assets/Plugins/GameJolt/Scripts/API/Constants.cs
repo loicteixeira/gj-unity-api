@@ -19,7 +19,7 @@ namespace GameJolt.API
 
 		public const string API_PROTOCOL = "https://";
 		public const string API_ROOT = "gamejolt.com/api/game/";
-		public const string API_VERSION = "1";
+		public const string API_VERSION = "1_1"; // `1_1` actually targets the API version `1.2`..
 		public const string API_BASE_URL = API_PROTOCOL + API_ROOT + "v" + API_VERSION;
 
 		public const string API_USERS_AUTH = "/users/auth";
