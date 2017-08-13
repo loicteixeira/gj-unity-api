@@ -65,16 +65,17 @@ namespace GameJolt.UI
 		/// </summary>
 		public void ShowSignIn()
 		{
-			ShowSignIn(null);
+			ShowSignIn(null, null);
 		}
 
 		/// <summary>
 		/// Shows the sign in windows.
 		/// </summary>
-		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
-		public void ShowSignIn(Action<bool> callback)
+		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
+		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>
+		public void ShowSignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null)
 		{
-			signinWindow.Show(callback);
+			signinWindow.Show(signedInCallback, userFetchedCallback);
 		}
 		#endregion SignIn
 

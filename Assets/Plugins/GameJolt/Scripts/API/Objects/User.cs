@@ -198,16 +198,21 @@ namespace GameJolt.API.Objects
 		/// <summary>
 		/// Signs in the user.
 		/// </summary>
-		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
-		public void SignIn(Action<bool> callback = null)
+		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
+		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>
+		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null)
 		{
 			if (Manager.Instance.CurrentUser != null)
 			{
 				Debug.LogWarning("Another user is currently signed in. Sign it out first.");
 
-				if (callback != null)
+				if (signedInCallback != null)
 				{
-					callback(false);
+					signedInCallback(false);
+				}
+				if (userFetchedCallback != null)
+				{
+					userFetchedCallback(false);
 				}
 
 				return;
@@ -223,12 +228,29 @@ namespace GameJolt.API.Objects
 				if (response.success)
 				{
 					Manager.Instance.CurrentUser = this;
-					Get();
+
+					if (signedInCallback != null)
+					{
+						signedInCallback(true);
+					}
+
+					Get((user) => {
+						if (userFetchedCallback != null)
+						{
+							userFetchedCallback(user != null);
+						}
+					});
 				}
-				
-				if (callback != null)
+				else
 				{
-					callback(response.success);
+					if (signedInCallback != null)
+					{
+						signedInCallback(false);
+					}
+					if (userFetchedCallback != null)
+					{
+						userFetchedCallback(false);
+					}
 				}
 			}, false);
 		}

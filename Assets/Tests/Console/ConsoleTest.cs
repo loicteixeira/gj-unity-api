@@ -40,9 +40,13 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Sign In. Click to see source.");
 
 		var user = new GameJolt.API.Objects.User(userNameField.text, userTokenField.text);
-		user.SignIn((bool success) => {
-			AddConsoleLine(string.Format("Sign In {0}.", success ? "Successful" : "Failed"));
-		});
+		user.SignIn(
+			(bool signInSuccess) => {
+				AddConsoleLine(string.Format("Sign In {0}.", signInSuccess ? "Successful" : "Failed"));
+			},
+			(bool userFetchSuccess) => {
+				AddConsoleLine(string.Format("User's Information Fetch {0}.", userFetchSuccess ? "Successful" : "Failed"));
+			});
 	}
 
 	public void SignOut()

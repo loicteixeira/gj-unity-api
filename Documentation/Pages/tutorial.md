@@ -19,7 +19,7 @@
 
 ## Import the package in Unity
 
-1. [Download][2] the Unity Package. 
+1. [Download][2] the Unity Package.
 2. Right click in the *Project* tab.
 3. Select *Import Package > Custom Package...* and locate the *Unity Package*.
 
@@ -49,7 +49,7 @@ There's quite a few options here, let's get through them:
 
 **Tip:** Technically it doesn't have to be the very first scene. If your scene flow is something like *splash screen > main menu > game* and that you don't call the API at all in your *splash screen* scene, you can import the prefab in the *main menu* scene. However, it is highly recommended to still import it in the very first scene so everything will be ready when you need it (i.e. trophies will be caches, the user will be automatically logged in for web players, etc.).
 
-**Tip:** You can import the prefab in any scene for testing (so you don't have to load your game from the start everytime) but remember to remove it before building your game and only leave the first one.
+**Tip:** You can import the prefab in any scene for testing (so you don't have to load your game from the start every time) but remember to remove it before building your game and only leave the first one.
 
 # Sign in
 
@@ -74,35 +74,53 @@ GameJolt.UI.Manager.Instance.ShowSignIn();
 You can also pass a callback to get notified whether the player has signed in or not.
 
 ```
-GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
-	if (success)
-	{
-		Debug.Log("The user signed in!");
-	}
-	else
-	{
-		Debug.Log("The user failed to signed in or closed the window :(");
-	}
+GameJolt.UI.Manager.Instance.ShowSignIn(
+  (bool signInSuccess) => {
+    Debug.Log(string.Format("Sign-in {0}", signInSuccess ? "successful" : "failed or user's dismissed the window"));
+  },
+  (bool userFetchedSuccess) => {
+    Debug.Log(string.Format("User details fetched {0}", signInSuccess ? "successfully" : "failed"));
+  }
 });
 ```
 
-**Tip:** If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a *Sign In with Game Jolt* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowSignIn ()* from the dropdown.
+As you can see, there are 2 callbacks. The first one returns as soon as the user is logged in, however some attributes (e.g. `user.AvatarURL`) will not be populated yet (this is also when the window is dismissed). The second one returns once all the users attributes have been populated (minus `user.Avatar` for which you have to manually call `user.DownloadAvatar()`). Depending on what you are the most interested, you will probably only subscribe to one callback like so:
+
+```
+// Get the callback as soon as the user is signed-in.
+GameJolt.UI.Manager.Instance.ShowSignIn((bool signInSuccess) => { /* Do Something */ });
+
+// Get the callback once all the user's information have been fetched.
+GameJolt.UI.Manager.Instance.ShowSignIn(null, (bool userFetchedSuccess) => { /* Do Something */ });
+```
+
+**Tip:** If the manager prefab is in the current scene, you can even show this form without a single line of code! If you have a *Sign In with Game Jolt* button for example, in the *On Click* event listener field, drag the *GameJoltAPI > UI* and select *Manager > ShowSignIn ()* from the dropdown. However you cannot subscribe to callback this way.
 
 ### Custom UI
 If you don't like the default UI and use some custom UI that better fit your game that's fine too! Once you've got the user name and token sign him in manually.
 
 ```
 var user = new GameJolt.API.Objects.User(userName, userToken);
-user.SignIn((bool success) => {
-	if (success)
-	{
-		Debug.Log("Success!");
-	}
-	else
-	{
-		Debug.Log("The user failed to signed in :(");
+user.SignIn(
+	(bool signInSuccess) => {
+		Debug.Log(string.Format("Sign-in {0}", signInSuccess ? "successful" : "failed"));
+	},
+	(bool userFetchedSuccess) => {
+		Debug.Log(string.Format("User details fetched {0}", signInSuccess ? "successfully" : "failed"));
 	}
 });
+```
+
+As you can see, there are 2 callbacks. The first one returns as soon as the user is logged in, however some attributes (e.g. `user.AvatarURL`) will not be populated yet. The second one returns once all the users attributes have been populated (minus `user.Avatar` for which you have to manually call `user.DownloadAvatar()`). Depending on what you are the most interested, you will probably only subscribe to one callback like so:
+
+```
+var user = new GameJolt.API.Objects.User(userName, userToken);
+
+// Get the callback as soon as the user is signed-in.
+user.SignIn((bool signInSuccess) => { /* Do Something */ });
+
+// Get the callback once all the user's information have been fetched.
+user.SignIn(null, (bool userFetchedSuccess) => { /* Do Something */ });
 ```
 
 # Sign Out
@@ -236,7 +254,7 @@ Have a look at the [documentation][1] to see how to query *highscore tables* and
 
 # Sessions
 
-In order for session information (like *average session length*) to be available on your dashbaord, as soon as a user is signed in, you need to create a new session and then ping it on a regular basis. Luckily, the *Unity API* does it for you, just remember to enable **Auto Ping** in the *API settings* (and make sure to turn it off if you want to handle it yourself). 
+In order for session information (like *average session length*) to be available on your dashbaord, as soon as a user is signed in, you need to create a new session and then ping it on a regular basis. Luckily, the *Unity API* does it for you, just remember to enable **Auto Ping** in the *API settings* (and make sure to turn it off if you want to handle it yourself).
 
 # Data Store
 

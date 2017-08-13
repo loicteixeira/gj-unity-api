@@ -10,16 +10,18 @@ public class UITest : MonoBehaviour
 
 	public void SignInButtonClicked()
 	{
-		GameJolt.UI.Manager.Instance.ShowSignIn((bool success) => {
-			if (success)
+		GameJolt.UI.Manager.Instance.ShowSignIn((bool signInSuccess) => {
+			if (signInSuccess)
 			{
 				showTrophiesButton.interactable = true;
 				Debug.Log("Logged In");
 			}
 			else
 			{
-				Debug.Log("Dismissed");
+				Debug.Log("Dismissed or Failed");
 			}
+		}, (bool userFetchSuccess) => {
+			Debug.Log(string.Format("User's Information Fetch {0}.", userFetchSuccess ? "Successful" : "Failed"));
 		});
 	}
 

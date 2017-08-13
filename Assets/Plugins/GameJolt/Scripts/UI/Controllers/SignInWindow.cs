@@ -10,22 +10,29 @@ namespace GameJolt.UI.Controllers
 		public InputField tokenField;
 		public Text errorMessage;
 
-		Action<bool> callback;
+		Action<bool> signedInCallback;
+		Action<bool> userFetchedCallback;
 
 		override public void Show(Action<bool> callback)
 		{
+			Show(callback, null);
+		}
+
+		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback)
+		{
 			errorMessage.enabled = false;
 			animator.SetTrigger("SignIn");
-			this.callback = callback;
+			this.signedInCallback = signedInCallback;
+			this.userFetchedCallback = userFetchedCallback;
 		}
 
 		override public void Dismiss(bool success)
 		{
 			animator.SetTrigger("Dismiss");
-			if (callback != null)
+			if (signedInCallback != null)
 			{
-				callback(success);
-				callback = null;
+				signedInCallback(success);
+				signedInCallback = null;
 			}
 		}
 
@@ -44,8 +51,8 @@ namespace GameJolt.UI.Controllers
 				animator.SetTrigger("ShowLoadingIndicator");
 
 				var user = new GameJolt.API.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
-				user.SignIn((bool success) => {
-					if (success)
+				user.SignIn((bool signInSuccess) => {
+					if (signInSuccess)
 					{
 						Dismiss(true);
 					}
@@ -58,6 +65,12 @@ namespace GameJolt.UI.Controllers
 
 					animator.SetTrigger("HideLoadingIndicator");
 					animator.SetTrigger("Unlock");
+				}, (bool userFetchedSuccess) => {
+					if (userFetchedCallback != null) {
+						// This will potentially be called after a user dismissed the window..
+						userFetchedCallback(userFetchedSuccess);
+						userFetchedCallback = null;
+					}
 				});
 			}
 		}

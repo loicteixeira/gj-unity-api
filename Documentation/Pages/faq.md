@@ -1,5 +1,7 @@
 @page faq FAQ
 
+[1]: @ref tutorial
+
 # I can't click the UI
 You are probably missing the EventSystem in your scene. Manually add one to your scene (`GameObject > UI > EventSystem`) or make sure to use the API v2.0.1 or more so it is automatically added when you add the API to your scene (`GameObject > GameJolt API Manager`).
 
@@ -23,3 +25,6 @@ string scoreText = String.Format("Race completed in {0}s!", score); // Will be `
 
 GameJolt.API.Scores.Add(scoreValue, scoreText);
 ```
+
+# After singing in a user, some attributes are missing.
+The sign-in methods accepts 2 callbacks, the first one returns as soon as the user is logged in, however some attributes (e.g. `user.AvatarURL`) will not be populated yet. The second one returns once all the users attributes have been populated (minus `user.Avatar` for which you have to manually call `user.DownloadAvatar()`). Make sure to subscribe to the second one. See the [tutorial][1] for code examples.
