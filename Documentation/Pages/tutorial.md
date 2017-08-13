@@ -239,6 +239,18 @@ GameJolt.API.Scores.Add(scoreValue, scoreText, guestName, tableID, extraData, (b
 
 **Tip:** *Table ID* and *Extra Data* are optional. The former will default to the *primary* table as defined on your dashboard, the later will just be blank. This means that if you don't need the callback, you can add a score really simply `GameJolt.API.Scores.Add(scoreValue, scoreText);`
 
+## GetRank
+You can get a score value rank easily.
+
+```
+int scoreValue = 10;
+int tableID = 0;
+
+GameJolt.API.Scores.GetRank(scoreValue, tableID, (int rank) => {
+	Debug.Log(string.Format("Rank {0}", rank));
+});
+```
+
 ## Show
 ### Default UI
 Show all the highscore tables with a single line of code.
@@ -255,6 +267,8 @@ Have a look at the [documentation][1] to see how to query *highscore tables* and
 # Sessions
 
 In order for session information (like *average session length*) to be available on your dashbaord, as soon as a user is signed in, you need to create a new session and then ping it on a regular basis. Luckily, the *Unity API* does it for you, just remember to enable **Auto Ping** in the *API settings* (and make sure to turn it off if you want to handle it yourself).
+
+Check the [documentation][1] to manage sessions manually.
 
 # Data Store
 
@@ -308,6 +322,16 @@ GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!");
 
 // Text & Image (UnityEngine.Sprite)
 GameJolt.UI.Manager.Instance.QueueNotification("GameJolt is awesome!", image);
+```
+
+# Time
+
+If your game uses timers (e.g. free gift every 24h), you might not be able to use the computer clock because the user might manipulate it. Instead, you want to fetch the server's time.
+
+```
+GameJolt.API.Misc.GetTime((System.DateTime serverTime) => {
+	Debug.Log(string.Format("Server Time: {0}", time));
+});
 ```
 
 # What else?
