@@ -36,5 +36,22 @@ namespace GameJolt.API
 				}
 			}));
 		}
+
+		/// <summary>
+		/// Get the server time.
+		/// </summary>
+		/// <param name="callback">A callback function accepting a single parameter, a System.DateTime.</param>
+		public static void GetTime(Action<DateTime> callback)
+		{
+			Core.Request.Get(Constants.API_TIME_GET, null, (Core.Response response) => {
+				if (callback != null)
+				{
+					double timestamp = response.json["timestamp"].AsDouble;
+					DateTime serverTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified);
+					serverTime = serverTime.AddSeconds(timestamp);
+					callback(serverTime);
+				}
+			}, false);
+		}
 	}
 }

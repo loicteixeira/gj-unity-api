@@ -43,6 +43,8 @@ namespace GameJolt.API
 		public const string API_DATASTORE_REMOVE = "/data-store/remove";
 		public const string API_DATASTORE_KEYS_FETCH = "/data-store/get-keys";
 
+		public const string API_TIME_GET = "/get-time";
+
 		public const string IMAGE_RESOURCE_REL_PATH = "Images/";
 
 		public const string DEFAULT_AVATAR_ASSET_NAME = "GJAPIDefaultAvatar";

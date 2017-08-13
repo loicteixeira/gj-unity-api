@@ -318,6 +318,15 @@ public class ConsoleTest : MonoBehaviour
 			}
 		});
 	}
+
+	public void GetTime()
+	{
+		Debug.Log("Get Time. Click to see source.");
+
+		GameJolt.API.Misc.GetTime((System.DateTime time) => {
+			AddConsoleLine(string.Format("Server Time: {0}", time));
+		});
+	}
 	#endregion Click Actions
 
 	#region Internal
