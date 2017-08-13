@@ -154,6 +154,18 @@ public class ConsoleTest : MonoBehaviour
 		}, tableID, limit, userScoresToggle.isOn);
 	}
 
+	public void GetRank()
+	{
+		Debug.Log("Get Rank. Click to see source.");
+
+		var scoreValue = scoreValueField.text != string.Empty ? int.Parse(scoreValueField.text) : 0;
+		var tableID = tableField.text != string.Empty ? int.Parse(tableField.text) : 0;
+
+		GameJolt.API.Scores.GetRank(scoreValue, tableID, (int rank) => {
+			AddConsoleLine(string.Format("Rank {0}", rank));
+		});
+	}
+
 	public void UnlockTrophy()
 	{
 		Debug.Log("Unlock Trophy. Click to see source.");

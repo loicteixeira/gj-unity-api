@@ -119,9 +119,43 @@ namespace GameJolt.API
 		}
 		#endregion Get
 
+		#region GetRank
+		/// <summary>
+		/// Get the score's rank.
+		/// </summary>
+		/// <param name="value">The numerical value of the score (i.e. 123).</param>
+		/// <param name="table">The ID of the HighScore <see cref="GameJolt.API.Objects.Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="callback">A callback function accepting a single parameter, an int.</param>
+		public static void GetRank(int value, int table = 0, Action<int> callback = null)
+		{
+			var parameters = new Dictionary<string, string> ();
+			if (table != 0)
+			{
+				parameters.Add("table_id", table.ToString());
+			}
+			parameters.Add("sort", value.ToString());
+
+			Core.Request.Get(Constants.API_SCORES_RANK, parameters, (Core.Response response) => {
+				if (callback != null)
+				{
+					int rank;
+					if (response.success)
+					{
+						rank = response.json["rank"].AsInt;
+					}
+					else
+					{
+						rank = 0;
+					}
+					callback(rank);
+				}
+			}, false);
+		}
+		#endregion GetRank
+
 		#region GetTables
 		/// <summary>
-		/// Gets the high score tables.
+		/// Get the high score tables.
 		/// </summary>
 		/// <param name="callback">A callback function accepting a single parameter, an array of HighScore <see cref="GameJolt.API.Objects.Table"/>s.</param>
 		public static void GetTables(Action<Objects.Table[]> callback)
