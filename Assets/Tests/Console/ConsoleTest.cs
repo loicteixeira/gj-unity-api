@@ -41,7 +41,7 @@ public class ConsoleTest : MonoBehaviour
 
 		var user = new GameJolt.API.Objects.User(userNameField.text, userTokenField.text);
 		user.SignIn((bool success) => {
-			AddConsoleLine(string.Format("Sign In {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Sign In {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -55,7 +55,7 @@ public class ConsoleTest : MonoBehaviour
 			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
 		}
 
-		AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Succeesful" : "Failed"));
+		AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Successful" : "Failed"));
 	}
 
 	public void SessionOpen()
@@ -63,7 +63,7 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Session Open. Click to see source.");
 
 		GameJolt.API.Sessions.Open((bool success) => {
-			AddConsoleLine(string.Format("Session Open {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Session Open {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -72,7 +72,7 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Session Ping Active. Click to see source.");
 
 		GameJolt.API.Sessions.Ping(GameJolt.API.SessionStatus.Active, (bool success) => {
-			AddConsoleLine(string.Format("Session Ping Active {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Session Ping Active {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -81,7 +81,7 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Session Ping Idle. Click to see source.");
 
 		GameJolt.API.Sessions.Ping(GameJolt.API.SessionStatus.Idle, (bool success) => {
-			AddConsoleLine(string.Format("Session Ping Idle {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Session Ping Idle {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -90,7 +90,7 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Session Close. Click to see source.");
 
 		GameJolt.API.Sessions.Close((bool success) => {
-			AddConsoleLine(string.Format("Session Close {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Session Close {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -120,7 +120,7 @@ public class ConsoleTest : MonoBehaviour
 			var tableID = tableField.text != string.Empty ? int.Parse(tableField.text) : 0;
 
 			GameJolt.API.Scores.Add(scoreValue, scoreTextField.text, guestNameField.text, tableID, "", (bool success) => {
-				AddConsoleLine(string.Format("Score Add (for Guest) {0}.", success ? "Succeesful" : "Failed"));
+				AddConsoleLine(string.Format("Score Add (for Guest) {0}.", success ? "Successful" : "Failed"));
 			});
 		}
 		else
@@ -131,7 +131,7 @@ public class ConsoleTest : MonoBehaviour
 			var tableID = tableField.text != string.Empty ? int.Parse(tableField.text) : 0;
 
 			GameJolt.API.Scores.Add(scoreValue, scoreTextField.text, tableID, "", (bool success) => {
-				AddConsoleLine(string.Format("Score Add {0}.", success ? "Succeesful" : "Failed"));
+				AddConsoleLine(string.Format("Score Add {0}.", success ? "Successful" : "Failed"));
 			});
 		}
 	}
@@ -172,7 +172,7 @@ public class ConsoleTest : MonoBehaviour
 
 		var trophyID = trophyIDField.text != string.Empty ? int.Parse(trophyIDField.text) : 0;
 		GameJolt.API.Trophies.Unlock(trophyID, (bool success) => {
-			AddConsoleLine(string.Format("Unlock Trophy {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Unlock Trophy {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -283,7 +283,7 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Remove DataStore Key. Click to see source.");
 
 		GameJolt.API.DataStore.Delete(keyField.text, globalToggle.isOn, (bool success) => {
-			AddConsoleLine(string.Format("Remove DataStore Key {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Remove DataStore Key {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
@@ -292,7 +292,7 @@ public class ConsoleTest : MonoBehaviour
 		Debug.Log("Set DataStore Key. Click to see source.");
 
 		GameJolt.API.DataStore.Set(keyField.text, valueField.text, globalToggle.isOn, (bool success) => {
-			AddConsoleLine(string.Format("Set DataStore Key {0}.", success ? "Succeesful" : "Failed"));
+			AddConsoleLine(string.Format("Set DataStore Key {0}.", success ? "Successful" : "Failed"));
 		});
 	}
 
