@@ -4,13 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
-...
+### Add
+- New `GameJolt.API.Scores.GetRank(int value, int table = 0, Action<int> callback = null)` method to fetch the rank of a given score value. #29
+- New `GameJolt.API.Misc.GetTime(Action<DateTime> callback)` method to get the server time. #24
+- `User.SignIn` and `GameJolt.UI.Manager.Instance.ShowSignIn` now accept a second callback `Action<bool> userFetchedCallback = null` which is called once all the attributes of the user have been populated. The first callback is called like before, as soon as the user has been successfully signed-in. #48
+  - *Thanks to @movrajr for reporting the issue and discussing solutions.*
+
+### Changed
+- Use HTTPS for API calls. #76
+- Use API version `1.2`. #23
+  - *Thanks to @jianmingyong for his insight.*
 
 ## [2.1.3][v2_1_3] (2017-07-19)
 
 ### Fixed
 - Unity 2017.1 compatibility. #73
-  - *Thanks to @DanielJMus for his contribution and @mgeorgedeveloper for his help*
+  - *Thanks to @DanielJMus for his contribution and @mgeorgedeveloper for his help.*
 
 ## [2.1.2][v2_1_2] (2017-04-09)
 
@@ -36,7 +45,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - ShowLeaderboards callback not being called. #51
   - *Thanks to @michidk for his contribution and @WizzardMaker for his help.*
 - Call signature could be invalid when using URL with forward slash. #59
-  - *Thanks to DerpVulpes for his contribution*
+  - *Thanks to DerpVulpes for his contribution.*
 
 ### Other
 - Thanks to @andyman for helping other users on Twitter.
