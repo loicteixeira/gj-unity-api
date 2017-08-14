@@ -5,7 +5,7 @@ namespace GameJolt.API
 {
 	public static class Constants
 	{
-		public const string VERSION = "2.1.3";
+		public const string VERSION = "2.2.0";
 
 		public const string SETTINGS_ASSET_NAME = "GJAPISettings";
 		public const string SETTINGS_ASSET_FULL_NAME = SETTINGS_ASSET_NAME + ".asset";

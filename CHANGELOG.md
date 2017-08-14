@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+## [2.2.0][v2_2_0] (2017-08-13)
+
 ### Add
 - New `GameJolt.API.Scores.GetRank(int value, int table = 0, Action<int> callback = null)` method to fetch the rank of a given score value. #29
 - New `GameJolt.API.Misc.GetTime(Action<DateTime> callback)` method to get the server time. #24
@@ -76,7 +78,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial release
 
-[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.1.3...HEAD
+[Unreleased]: https://github.com/loicteixeira/gj-unity-api/compare/v2.2.0...HEAD
+[v2_2_0]: https://github.com/loicteixeira/gj-unity-api/tree/v2.2.0
 [v2_1_3]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.3
 [v2_1_2]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.2
 [v2_1_1]: https://github.com/loicteixeira/gj-unity-api/tree/v2.1.1
