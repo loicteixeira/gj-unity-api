@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.1.2</span>
+   &#160;<span id="projectnumber">v2.2.0</span>
    </div>
   </td>
  </tr>
@@ -69,9 +69,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afec6ebfda3adf94a48b24b37f6666c89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#afec6ebfda3adf94a48b24b37f6666c89">ShowSignIn</a> ()</td></tr>
 <tr class="memdesc:afec6ebfda3adf94a48b24b37f6666c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in window.  <a href="#afec6ebfda3adf94a48b24b37f6666c89">More...</a><br /></td></tr>
 <tr class="separator:afec6ebfda3adf94a48b24b37f6666c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b6d0e50e68fa32a8dabffa7ade51c7a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#a1b6d0e50e68fa32a8dabffa7ade51c7a">ShowSignIn</a> (Action&lt; bool &gt; callback)</td></tr>
-<tr class="memdesc:a1b6d0e50e68fa32a8dabffa7ade51c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in windows.  <a href="#a1b6d0e50e68fa32a8dabffa7ade51c7a">More...</a><br /></td></tr>
-<tr class="separator:a1b6d0e50e68fa32a8dabffa7ade51c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf18fdb2fe0c8aaa259e930bf61a6d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#abf18fdb2fe0c8aaa259e930bf61a6d9b">ShowSignIn</a> (Action&lt; bool &gt; signedInCallback=null, Action&lt; bool &gt; userFetchedCallback=null)</td></tr>
+<tr class="memdesc:abf18fdb2fe0c8aaa259e930bf61a6d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in windows.  <a href="#abf18fdb2fe0c8aaa259e930bf61a6d9b">More...</a><br /></td></tr>
+<tr class="separator:abf18fdb2fe0c8aaa259e930bf61a6d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f6f59a872743d34c71eb9f829ee55e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#a4f6f59a872743d34c71eb9f829ee55e1">ShowTrophies</a> ()</td></tr>
 <tr class="memdesc:a4f6f59a872743d34c71eb9f829ee55e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the trophies windows.  <a href="#a4f6f59a872743d34c71eb9f829ee55e1">More...</a><br /></td></tr>
 <tr class="separator:a4f6f59a872743d34c71eb9f829ee55e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -344,8 +344,8 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
 
 </div>
 </div>
-<a id="a1b6d0e50e68fa32a8dabffa7ade51c7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b6d0e50e68fa32a8dabffa7ade51c7a">&#9670;&nbsp;</a></span>ShowSignIn() <span class="overload">[2/2]</span></h2>
+<a id="abf18fdb2fe0c8aaa259e930bf61a6d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf18fdb2fe0c8aaa259e930bf61a6d9b">&#9670;&nbsp;</a></span>ShowSignIn() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -357,8 +357,18 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
           <td class="memname">void GameJolt.UI.Manager.ShowSignIn </td>
           <td>(</td>
           <td class="paramtype">Action&lt; bool &gt;&#160;</td>
-          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td class="paramname"><em>signedInCallback</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Action&lt; bool &gt;&#160;</td>
+          <td class="paramname"><em>userFetchedCallback</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -371,7 +381,8 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
 <p>Shows the sign in windows. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating success.</td></tr>
+    <tr><td class="paramname">signedInCallback</td><td>A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</td></tr>
+    <tr><td class="paramname">userFetchedCallback</td><td>A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</td></tr>
   </table>
   </dd>
 </dl>

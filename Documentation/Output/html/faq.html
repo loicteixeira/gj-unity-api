@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.1.2</span>
+   &#160;<span id="projectnumber">v2.2.0</span>
    </div>
   </td>
  </tr>
@@ -53,7 +53,9 @@ $(function() {
 <p>Make sure you use the API <code>v2.1.0</code> or higher and Unity <code>5.0.1</code> or higher. There is a bug in previous versions.</p>
 <h1>How can I add a float as a score?</h1>
 <p>You can't use <code>floats</code> directly as scores are saved as integer on the server. However, if you have a fixed number of decimals, you can convert your <code>float</code> to <code>int</code> before saving it (and use the score display string to still show a <code>float</code>).</p>
-<p>For example: </p><div class="fragment"><div class="line">float score = 54.359f;</div><div class="line">int scoreValue = (int)(score * 1000);  // Will be `54359`.</div><div class="line">string scoreText = String.Format(&quot;Race completed in {0}s!&quot;, score); // Will be `Race completed in 54.359s!`.</div><div class="line"></div><div class="line">GameJolt.API.Scores.Add(scoreValue, scoreText);</div></div><!-- fragment --> </div></div><!-- contents -->
+<p>For example: </p><div class="fragment"><div class="line">float score = 54.359f;</div><div class="line">int scoreValue = (int)(score * 1000);  // Will be `54359`.</div><div class="line">string scoreText = String.Format(&quot;Race completed in {0}s!&quot;, score); // Will be `Race completed in 54.359s!`.</div><div class="line"></div><div class="line">GameJolt.API.Scores.Add(scoreValue, scoreText);</div></div><!-- fragment --><h1>After singing in a user, some attributes are missing.</h1>
+<p>The sign-in methods accepts 2 callbacks, the first one returns as soon as the user is logged in, however some attributes (e.g. <code>user.AvatarURL</code>) will not be populated yet. The second one returns once all the users attributes have been populated (minus <code>user.Avatar</code> for which you have to manually call <code>user.DownloadAvatar()</code>). Make sure to subscribe to the second one. See the <a class="el" href="tutorial.html">tutorial</a> for code examples. </p>
+</div></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.10-->
 <!-- start footer part -->
 <hr class="footer"/>

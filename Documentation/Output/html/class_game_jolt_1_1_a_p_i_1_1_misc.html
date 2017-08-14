@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.1.2</span>
+   &#160;<span id="projectnumber">v2.2.0</span>
    </div>
   </td>
  </tr>
@@ -59,6 +59,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f3946ff9e71110e303d6eb3fed3d602"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_misc.html#a8f3946ff9e71110e303d6eb3fed3d602">DownloadImage</a> (string url, Action&lt; Sprite &gt; callback)</td></tr>
 <tr class="memdesc:a8f3946ff9e71110e303d6eb3fed3d602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Downloads an image.  <a href="#a8f3946ff9e71110e303d6eb3fed3d602">More...</a><br /></td></tr>
 <tr class="separator:a8f3946ff9e71110e303d6eb3fed3d602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4e1a68b69a98475472f016c0526320"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_misc.html#acf4e1a68b69a98475472f016c0526320">GetTime</a> (Action&lt; DateTime &gt; callback)</td></tr>
+<tr class="memdesc:acf4e1a68b69a98475472f016c0526320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server time.  <a href="#acf4e1a68b69a98475472f016c0526320">More...</a><br /></td></tr>
+<tr class="separator:acf4e1a68b69a98475472f016c0526320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_misc.html" title="Misc API methods. ">Misc</a> <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a> methods. </p>
@@ -102,6 +105,40 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">url</td><td>The image URL.</td></tr>
     <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a UnityEngine.Sprite.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acf4e1a68b69a98475472f016c0526320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf4e1a68b69a98475472f016c0526320">&#9670;&nbsp;</a></span>GetTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.Misc.GetTime </td>
+          <td>(</td>
+          <td class="paramtype">Action&lt; DateTime &gt;&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a System.DateTime.</td></tr>
   </table>
   </dd>
 </dl>

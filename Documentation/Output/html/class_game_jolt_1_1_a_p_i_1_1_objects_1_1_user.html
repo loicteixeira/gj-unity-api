@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.1.2</span>
+   &#160;<span id="projectnumber">v2.2.0</span>
    </div>
   </td>
  </tr>
@@ -76,9 +76,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7a3c34fbc046510e959f533f161da9ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html#a7a3c34fbc046510e959f533f161da9ae">User</a> (JSONClass data)</td></tr>
 <tr class="memdesc:a7a3c34fbc046510e959f533f161da9ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html" title="User objects. ">GameJolt.API.Objects.User</a> class.  <a href="#a7a3c34fbc046510e959f533f161da9ae">More...</a><br /></td></tr>
 <tr class="separator:a7a3c34fbc046510e959f533f161da9ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23683d3934af334457724b75445c2742"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html#a23683d3934af334457724b75445c2742">SignIn</a> (Action&lt; bool &gt; callback=null)</td></tr>
-<tr class="memdesc:a23683d3934af334457724b75445c2742"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs in the user.  <a href="#a23683d3934af334457724b75445c2742">More...</a><br /></td></tr>
-<tr class="separator:a23683d3934af334457724b75445c2742"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8038f16d3975b615958a4006ede778b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html#a8038f16d3975b615958a4006ede778b8">SignIn</a> (Action&lt; bool &gt; signedInCallback=null, Action&lt; bool &gt; userFetchedCallback=null)</td></tr>
+<tr class="memdesc:a8038f16d3975b615958a4006ede778b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs in the user.  <a href="#a8038f16d3975b615958a4006ede778b8">More...</a><br /></td></tr>
+<tr class="separator:a8038f16d3975b615958a4006ede778b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9708d8cd0ebf16d1f4a4070f7ca04560"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html#a9708d8cd0ebf16d1f4a4070f7ca04560">SignOut</a> ()</td></tr>
 <tr class="memdesc:a9708d8cd0ebf16d1f4a4070f7ca04560"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs out the user.  <a href="#a9708d8cd0ebf16d1f4a4070f7ca04560">More...</a><br /></td></tr>
 <tr class="separator:a9708d8cd0ebf16d1f4a4070f7ca04560"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -352,8 +352,8 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a23683d3934af334457724b75445c2742"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23683d3934af334457724b75445c2742">&#9670;&nbsp;</a></span>SignIn()</h2>
+<a id="a8038f16d3975b615958a4006ede778b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8038f16d3975b615958a4006ede778b8">&#9670;&nbsp;</a></span>SignIn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,8 +365,18 @@ Properties</h2></td></tr>
           <td class="memname">void GameJolt.API.Objects.User.SignIn </td>
           <td>(</td>
           <td class="paramtype">Action&lt; bool &gt;&#160;</td>
-          <td class="paramname"><em>callback</em> = <code>null</code></td><td>)</td>
+          <td class="paramname"><em>signedInCallback</em> = <code>null</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Action&lt; bool &gt;&#160;</td>
+          <td class="paramname"><em>userFetchedCallback</em> = <code>null</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -379,7 +389,8 @@ Properties</h2></td></tr>
 <p>Signs in the user. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating success.</td></tr>
+    <tr><td class="paramname">signedInCallback</td><td>A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</td></tr>
+    <tr><td class="paramname">userFetchedCallback</td><td>A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</td></tr>
   </table>
   </dd>
 </dl>
