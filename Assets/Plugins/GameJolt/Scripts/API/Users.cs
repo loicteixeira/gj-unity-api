@@ -24,7 +24,7 @@ namespace GameJolt.API
 		/// <summary>
 		/// Get the <see cref="GameJolt.API.Objects.User"/> by ID.
 		/// </summary>
-		/// <param name="name">The <see cref="GameJolt.API.Objects.User"/> `ID`.</param>
+		/// <param name="id">The <see cref="GameJolt.API.Objects.User"/> `ID`.</param>
 		/// <param name="callback">A callback function accepting a single parameter, a <see cref="GameJolt.API.Objects.User"/>.</param>
 		public static void Get(int id, Action<Objects.User> callback)
 		{
@@ -40,7 +40,7 @@ namespace GameJolt.API
 		public static void Get(Objects.User user, Action<Objects.User> callback)
 		{
 			var parameters = new Dictionary<string, string>();
-			if(user.Name != null && user.Name != string.Empty)
+			if(!string.IsNullOrEmpty(user.Name))
 			{
 				parameters.Add("username", user.Name.ToLower());
 			}
@@ -69,14 +69,14 @@ namespace GameJolt.API
 		/// <summary>
 		/// Get the <see cref="GameJolt.API.Objects.User"/>s by ID.
 		/// </summary>
-		/// <param name="user">An array of <see cref="GameJolt.API.Objects.User"/>s IDs</param>
+		/// <param name="ids">An array of <see cref="GameJolt.API.Objects.User"/>s IDs</param>
 		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="GameJolt.API.Objects.User"/>s.</param>
 		public static void Get(int[] ids, Action<Objects.User[]> callback)
 		{
 			var parameters = new Dictionary<string, string>();
-			parameters.Add(Constants.API_USERS_FETCH, string.Join(",", ids.Select(id => id.ToString()).ToArray()));
+			parameters.Add("user_id", string.Join(",", ids.Select(id => id.ToString()).ToArray()));
 
-			Core.Request.Get("users/", parameters, (Core.Response response) => {
+			Core.Request.Get(Constants.API_USERS_FETCH, parameters, (Core.Response response) => {
 				Objects.User[] users;
 				if(response.success)
 				{
