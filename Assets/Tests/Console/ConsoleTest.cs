@@ -32,6 +32,7 @@ public class ConsoleTest : MonoBehaviour
 	public InputField keyField;
 	public InputField valueField;
 	public InputField modeField;
+	public InputField patternField;
 	public Toggle globalToggle;
 	#endregion Inspector Fields
 
@@ -274,7 +275,7 @@ public class ConsoleTest : MonoBehaviour
 	{
 		Debug.Log("Get DataStore Keys. Click to see source.");
 
-		GameJolt.API.DataStore.GetKeys(globalToggle.isOn, (string[] keys) => {
+		GameJolt.API.DataStore.GetKeys(globalToggle.isOn, patternField.text, (string[] keys) => {
 			if (keys != null)
 			{
 				foreach (var key in keys)

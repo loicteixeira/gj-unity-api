@@ -123,7 +123,21 @@ namespace GameJolt.API
 		/// <param name="callback">A callback function accepting a single parameter, a list of key names.</param>
 		public static void GetKeys(bool global, Action<string[]> callback)
 		{
-			Core.Request.Get(Constants.API_DATASTORE_KEYS_FETCH, null, (Core.Response response) => {
+			GetKeys(global, null, callback);
+		}
+
+		/// <summary>
+		/// Gets the list of available keys in the DataStore.
+		/// </summary>
+		/// <param name="global">A boolean indicating whether the keys are global (<c>true<c/>) or private to the user (<c>false<c/>).</param>
+		/// <param name="pattern">Only keys matching this pattern will be returned. Placeholder character is *</param>
+		/// <param name="callback">A callback function accepting a single parameter, a list of key names.</param>
+		public static void GetKeys(bool global, string pattern, Action<string[]> callback)
+		{
+			var parameters = new Dictionary<string, string>();
+			if(!string.IsNullOrEmpty(pattern))
+				parameters.Add("pattern", pattern);
+			Core.Request.Get(Constants.API_DATASTORE_KEYS_FETCH, parameters, (Core.Response response) => {
 				string[] keys;
 				if (response.success)
 				{
