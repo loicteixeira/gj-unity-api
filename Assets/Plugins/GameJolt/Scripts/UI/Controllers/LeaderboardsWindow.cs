@@ -17,13 +17,13 @@ namespace GameJolt.UI.Controllers
 		int[] tableIDs;
 		int currentTab;
 		
-		override public void Show(Action<bool> callback)
+		public override void Show(Action<bool> callback)
 		{
 			animator.SetTrigger("Leaderboards");
 			animator.SetTrigger("ShowLoadingIndicator");
 			this.callback = callback; 
 
-			GameJolt.API.Scores.GetTables((GameJolt.API.Objects.Table[] tables) => {
+			API.Scores.GetTables(tables => {
 				if (tables != null)
 				{
 					// Create the right number of children.
@@ -33,7 +33,7 @@ namespace GameJolt.UI.Controllers
 					tableIDs = new int[tables.Length];
 					for (int i = 0; i < tables.Length; ++i)
 					{
-						tabsContainer.GetChild(i).GetComponent<TableButton>().Init(tables[i], i,this, tables[i].Primary);
+						tabsContainer.GetChild(i).GetComponent<TableButton>().Init(tables[i], i, this, tables[i].Primary);
 
 						// Keep IDs information and current tab for use when switching tabs.
 						tableIDs[i] = tables[i].ID;
@@ -54,7 +54,7 @@ namespace GameJolt.UI.Controllers
 			});
 		}
 		
-		override public void Dismiss(bool success)
+		public override void Dismiss(bool success)
 		{
 			animator.SetTrigger("Dismiss");
 			if (callback != null)
@@ -79,7 +79,7 @@ namespace GameJolt.UI.Controllers
 
 		void SetScores(int tableID = 0)
 		{
-			GameJolt.API.Scores.Get((GameJolt.API.Objects.Score[] scores) => {
+			API.Scores.Get(scores => {
 				if (scores != null)
 				{
 					scoresScrollRect.verticalNormalizedPosition = 0;

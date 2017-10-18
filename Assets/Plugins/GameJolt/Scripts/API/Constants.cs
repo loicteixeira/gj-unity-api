@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace GameJolt.API
+﻿namespace GameJolt.API
 {
 	public static class Constants
 	{

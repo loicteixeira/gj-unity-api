@@ -133,7 +133,7 @@ namespace GameJolt.API
 		/// <summary>
 		/// Init this instance.
 		/// </summary>
-		override protected void Init()
+		protected override void Init()
 		{
 			Configure();
 			AutoConnectWebPlayer();
@@ -286,7 +286,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		{
 			if (response != string.Empty)
 			{
-				var credentials = response.Split(new char[] { ':' }, 2);
+				var credentials = response.Split(new[] {':'}, 2);
 				if (credentials.Length == 2)
 				{
 					var user = new Objects.User(credentials[0], credentials[1]);
@@ -312,7 +312,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				return;
 			}
 
-			Sessions.Open((bool success) => {
+			Sessions.Open(success => {
 				// What should we do if it fails? Retry later?
 				// Without smart handling, it will probably just fail again...
 				if (success)
@@ -324,7 +324,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 
 		void Ping()
 		{
-			Sessions.Ping(SessionStatus.Active, (bool success) => {
+			Sessions.Ping(SessionStatus.Active, success => {
 				// Sessions are automatically closed after 120 seconds
 				// which will happen if the application has been in the background for too long.
 				// It would be nice to Ping an Idle state when the app is in the background,
@@ -333,7 +333,6 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				if (!success)
 				{
 					Invoke("StartAutoPing", 1f); // Try reconnecting.
-					return;
 				}
 				else
 				{
@@ -363,7 +362,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 		{
 			if (UseCaching)
 			{
-				Trophies.Get((Objects.Trophy[] trophies) => {
+				Trophies.Get(trophies => {
 					if (trophies != null)
 					{
 						foreach(Objects.Trophy trophy in trophies)

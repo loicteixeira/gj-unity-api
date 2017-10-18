@@ -12,7 +12,7 @@ namespace GameJolt.API.Objects
 	/// <summary>
 	/// Trophy object.
 	/// </summary>
-	public class Trophy : Base
+	public sealed class Trophy : Base
 	{
 		#region Fields & Properties
 		/// <summary>
@@ -60,7 +60,7 @@ namespace GameJolt.API.Objects
 		public TrophyDifficulty Difficulty { get; set; }
 
 		/// <summary>
-		/// Gets or sets a value indicating whether this <see cref="GameJolt.API.Objects.Trophy"/> is unlocked.
+		/// Gets or sets a value indicating whether this <see cref="Trophy"/> is unlocked.
 		/// </summary>
 		/// <value><c>true</c> if unlocked; otherwise, <c>false</c>.</value>
 		/// <remarks>
@@ -95,29 +95,29 @@ namespace GameJolt.API.Objects
 		
 		#region Constructors
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.API.Objects.Trophy"/> class.
+		/// Initializes a new instance of the <see cref="Trophy"/> class.
 		/// </summary>
-		/// <param name="id">The <see cref="GameJolt.API.Objects.Trophy"/> ID.</param>
-		/// <param name="title">The <see cref="GameJolt.API.Objects.Trophy"/> title.</param>
-		/// <param name="description">The <see cref="GameJolt.API.Objects.Trophy"/> description.</param>
-		/// <param name="difficulty">The <see cref="GameJolt.API.Objects.Trophy"/> difficulty.</param>
+		/// <param name="id">The <see cref="Trophy"/> ID.</param>
+		/// <param name="title">The <see cref="Trophy"/> title.</param>
+		/// <param name="description">The <see cref="Trophy"/> description.</param>
+		/// <param name="difficulty">The <see cref="Trophy"/> difficulty.</param>
 		/// <param name="unlocked">If set to <c>true</c> unlocked.</param>
 		public Trophy(int id, string title, string description, TrophyDifficulty difficulty, bool unlocked)
 		{
-			this.ID = id;
-			this.Title = title;
-			this.Description = description;
-			this.Difficulty = difficulty;
-			this.Unlocked = unlocked;
+			ID = id;
+			Title = title;
+			Description = description;
+			Difficulty = difficulty;
+			Unlocked = unlocked;
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.API.Objects.Trophy"/> class.
+		/// Initializes a new instance of the <see cref="Trophy"/> class.
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
 		public Trophy(JSONClass data)
 		{
-			this.PopulateFromJSON(data);
+			PopulateFromJSON(data);
 		}
 		#endregion Constructors
 		
@@ -128,26 +128,26 @@ namespace GameJolt.API.Objects
 		/// <param name="data">JSON data from the API calls.</param>
 		protected override void PopulateFromJSON(JSONClass data)
 		{
-			this.ID = data["id"].AsInt;
-			this.Title = data["title"].Value;
-			this.Description = data["description"].Value;
-			this.ImageURL = data["image_url"].Value;
-			this.Unlocked = data["achieved"].Value != "false";
+			ID = data["id"].AsInt;
+			Title = data["title"].Value;
+			Description = data["description"].Value;
+			ImageURL = data["image_url"].Value;
+			Unlocked = data["achieved"].Value != "false";
 
 			try
 			{
-				this.Difficulty = (TrophyDifficulty)Enum.Parse(typeof(TrophyDifficulty), data["difficulty"].Value);
+				Difficulty = (TrophyDifficulty)Enum.Parse(typeof(TrophyDifficulty), data["difficulty"].Value);
 			}
 			catch
 			{
-				this.Difficulty = TrophyDifficulty.Undefined;
+				Difficulty = TrophyDifficulty.Undefined;
 			}
 		}
 		#endregion Update Attributes
 
 		#region Interface
 		/// <summary>
-		/// Unlock the <see cref="GameJolt.API.Objects.Trophy"/>.
+		/// Unlock the <see cref="Trophy"/>.
 		/// </summary>
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		/// <remarks>
@@ -157,7 +157,7 @@ namespace GameJolt.API.Objects
 		/// </remarks>
 		public void Unlock(Action<bool> callback = null)
 		{
-			Trophies.Unlock(this, (bool success) => {
+			Trophies.Unlock(this, success => {
 				Unlocked = success;
 
 				if (callback != null)
@@ -168,7 +168,7 @@ namespace GameJolt.API.Objects
 		}
 
 		/// <summary>
-		/// Downloads the <see cref="GameJolt.API.Objects.Trophy"/> image.
+		/// Downloads the <see cref="Trophy"/> image.
 		/// </summary>
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		/// <remarks>
@@ -180,14 +180,14 @@ namespace GameJolt.API.Objects
 		{
 			if (!string.IsNullOrEmpty(ImageURL))
 			{
-				Misc.DownloadImage(ImageURL, (Sprite image) => {
+				Misc.DownloadImage(ImageURL, image => {
 					if (image != null)
 					{
 						Image = image;
 					}
 					else
 					{
-						var tex = Resources.Load(GameJolt.API.Constants.DEFAULT_TROPHY_ASSET_PATH) as Texture2D;
+						var tex = Resources.Load<Texture2D>(Constants.DEFAULT_TROPHY_ASSET_PATH);
 						Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
 					}
 					
@@ -208,9 +208,9 @@ namespace GameJolt.API.Objects
 		#endregion Interface
 
 		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents the current <see cref="GameJolt.API.Objects.Trophy"/>.
+		/// Returns a <see cref="string"/> that represents the current <see cref="Trophy"/>.
 		/// </summary>
-		/// <returns>A <see cref="System.String"/> that represents the current <see cref="GameJolt.API.Objects.Trophy"/>.</returns>
+		/// <returns>A <see cref="string"/> that represents the current <see cref="Trophy"/>.</returns>
 		public override string ToString()
 		{
 			return string.Format("GameJolt.API.Objects.Trophy: {0} - {1} - {2} - {3}Unlocked", Title, ID, Difficulty, Unlocked ? "" : "Not ");

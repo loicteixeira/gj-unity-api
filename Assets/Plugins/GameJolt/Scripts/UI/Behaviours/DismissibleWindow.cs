@@ -4,13 +4,13 @@ namespace GameJolt.UI.Behaviours
 {
 	public class DismissibleWindow : StateMachineBehaviour
 	{
-		public bool returnValue = false;
+		public bool returnValue;
 
-		override public void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+		public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				var baseWindow = animator.GetComponentInChildren<UI.Controllers.BaseWindow>();
+				var baseWindow = animator.GetComponentInChildren<Controllers.BaseWindow>();
 				// Because a window might be inactive (e.g. during transitions), it might be null.
 				// It would be possible to manually loop through children and do GetComponent instead,
 				// but dimissing an inactive/transisionning window might have some side effects,

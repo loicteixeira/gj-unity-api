@@ -150,7 +150,7 @@ namespace GameJolt.External.SimpleJSON
         {
             if (b == null && a is JSONLazyCreator)
                 return true;
-            return System.Object.ReferenceEquals(a,b);
+            return ReferenceEquals(a,b);
         }
  
         public static bool operator !=(JSONNode a, object b)
@@ -159,7 +159,7 @@ namespace GameJolt.External.SimpleJSON
         }
         public override bool Equals (object obj)
         {
-            return System.Object.ReferenceEquals(this, obj);
+            return ReferenceEquals(this, obj);
         }
         public override int GetHashCode ()
         {
@@ -598,8 +598,8 @@ namespace GameJolt.External.SimpleJSON
  
     internal class JSONLazyCreator : JSONNode
     {
-        private JSONNode m_Node = null;
-        private string m_Key = null;
+        private JSONNode m_Node;
+        private string m_Key;
  
         public JSONLazyCreator(JSONNode aNode)
         {
@@ -668,7 +668,7 @@ namespace GameJolt.External.SimpleJSON
         {
             if (b == null)
                 return true;
-            return System.Object.ReferenceEquals(a,b);
+            return ReferenceEquals(a,b);
         }
  
         public static bool operator !=(JSONLazyCreator a, object b)
@@ -679,7 +679,7 @@ namespace GameJolt.External.SimpleJSON
         {
             if (obj == null)
                 return true;
-            return System.Object.ReferenceEquals(this, obj);
+            return ReferenceEquals(this, obj);
         }
         public override int GetHashCode ()
         {

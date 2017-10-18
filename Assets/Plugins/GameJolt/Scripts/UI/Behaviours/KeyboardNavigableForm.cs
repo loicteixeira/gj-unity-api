@@ -12,7 +12,7 @@ namespace GameJolt.UI.Behaviours
 		protected InputField firstField;
 		protected Button submitButton;
 
-		override public void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+		public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 		{
 			if (firstField == null)
 			{
@@ -38,7 +38,7 @@ namespace GameJolt.UI.Behaviours
 			}
 		}
 
-		override public void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+		public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 		{
 			if (Input.GetKeyDown(KeyCode.Tab))
 			{
@@ -58,7 +58,7 @@ namespace GameJolt.UI.Behaviours
 			}
 		}
 
-		virtual protected void NavigateUp()
+		protected virtual void NavigateUp()
 		{
 			if (EventSystem.current.currentSelectedGameObject == null)
 			{
@@ -72,7 +72,7 @@ namespace GameJolt.UI.Behaviours
 			}
 		}
 
-		virtual protected void NavigateDown()
+		protected virtual void NavigateDown()
 		{
 			if (EventSystem.current.currentSelectedGameObject == null)
 			{
@@ -86,7 +86,7 @@ namespace GameJolt.UI.Behaviours
 			}
 		}
 		
-		virtual protected void Submmit()
+		protected virtual void Submmit()
 		{
 			if (submitButton != null)
 			{

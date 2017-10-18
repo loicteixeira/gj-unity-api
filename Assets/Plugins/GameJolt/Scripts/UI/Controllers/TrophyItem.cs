@@ -10,7 +10,7 @@ namespace GameJolt.UI.Controllers
 		public Text title;
 		public Text description;
 
-		public void Init(GameJolt.API.Objects.Trophy trophy)
+		public void Init(API.Objects.Trophy trophy)
 		{
 			group.alpha = trophy.Unlocked ? 1f : .6f;
 			title.text = trophy.Title;

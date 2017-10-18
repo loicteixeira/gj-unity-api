@@ -14,20 +14,20 @@ namespace GameJolt.API.Core
 		/// </summary>
 		/// <param name="method">The API endpoint.</param>
 		/// <param name="parameters">The API parameters.</param>
-		/// <param name="callback">A callback function accepting a single parameter, a <see cref="GameJolt.API.Core.Response"/>.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a <see cref="Response"/>.</param>
 		/// <param name="requireVerified">Whether a signed in user is required <c>true</c> or not <c>false</c>.</param>
-		/// <param name="format">The <see cref="GameJolt.API.Core.ResponseFormat"/> to receive the <see cref="GameJolt.API.Core.Response"/> in.</param>
+		/// <param name="format">The <see cref="ResponseFormat"/> to receive the <see cref="Response"/> in.</param>
 		public static void Get(
 			string method,
 		    Dictionary<string,string> parameters,
-			Action<Core.Response> callback,
+			Action<Response> callback,
 			bool requireVerified=true,
-			Core.ResponseFormat format = Core.ResponseFormat.Json)
+			ResponseFormat format = ResponseFormat.Json)
 		{
 			var error = Prepare(ref parameters, requireVerified, format);
 			if (error != null)
 			{
-				callback(new Core.Response(error));
+				callback(new Response(error));
 			}
 			else
 			{
@@ -42,21 +42,21 @@ namespace GameJolt.API.Core
 		/// <param name="method">The API endpoint.</param>
 		/// <param name="parameters">The API parameters.</param>
 		/// <param name="payload">The API body payload.</param>
-		/// <param name="callback">A callback function accepting a single parameter, a <see cref="GameJolt.API.Core.Response"/>.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a <see cref="Response"/>.</param>
 		/// <param name="requireVerified">Whether a signed in user is required <c>true</c> or not <c>false</c>.</param>
-		/// <param name="format">The <see cref="GameJolt.API.Core.ResponseFormat"/> to receive the <see cref="GameJolt.API.Core.Response"/> in.</param>
+		/// <param name="format">The <see cref="ResponseFormat"/> to receive the <see cref="Response"/> in.</param>
 		public static void Post(
 			string method,
 			Dictionary<string,string> parameters,
 			Dictionary<string,string> payload,
-			Action<Core.Response> callback,
+			Action<Response> callback,
 			bool requireVerified=true,
-			Core.ResponseFormat format = Core.ResponseFormat.Json)
+			ResponseFormat format = ResponseFormat.Json)
 		{
 			var error = Prepare(ref parameters, requireVerified, format);
 			if (error != null)
 			{
-				callback(new Core.Response(error));
+				callback(new Response(error));
 			}
 			else
 			{
@@ -70,8 +70,8 @@ namespace GameJolt.API.Core
 		/// </summary>
 		/// <param name="parameters">The API parameters.</param>
 		/// <param name="requireVerified">Whether a signed in user is required <c>true</c> or not <c>false</c>.</param>
-		/// <param name="format">The <see cref="GameJolt.API.Core.ResponseFormat"/> to receive the <see cref="GameJolt.API.Core.Response"/> in.</param>
-		static string Prepare(ref Dictionary<string, string> parameters, bool requireVerified, Core.ResponseFormat format)
+		/// <param name="format">The <see cref="ResponseFormat"/> to receive the <see cref="Response"/> in.</param>
+		static string Prepare(ref Dictionary<string, string> parameters, bool requireVerified, ResponseFormat format)
 		{
 			if (parameters == null)
 			{
@@ -148,13 +148,12 @@ namespace GameJolt.API.Core
 			var hashBytes = md5.ComputeHash(bytes);
 #endif
 
-			string hashString = "";
-			for (int i=0; i < hashBytes.Length; i++)
-			{
-				hashString += hashBytes[i].ToString("x2").ToLower();
+			var hashString = new StringBuilder();
+			foreach(byte b in hashBytes) {
+				hashString.Append(b.ToString("x2").ToLower());
 			}
 
-			return hashString.PadLeft(32, '0');
+			return hashString.ToString().PadLeft(32, '0');
 		}
 	}
 }

@@ -19,12 +19,12 @@ namespace GameJolt.API
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public static void Open(Action<bool> callback = null)
 		{
-			Core.Request.Get(Constants.API_SESSIONS_OPEN, null, (Core.Response response) => {
+			Core.Request.Get(Constants.API_SESSIONS_OPEN, null, response => {
 				if (callback != null)
 				{
 					callback(response.success);
 				}
-			}, true, Core.ResponseFormat.Json);
+			});
 		}
 
 		/// <summary>
@@ -34,15 +34,14 @@ namespace GameJolt.API
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		public static void Ping(SessionStatus status = SessionStatus.Active, Action<bool> callback = null)
 		{
-			var parameters = new Dictionary<string, string>();
-			parameters.Add("status", status.ToString().ToLower());
+			var parameters = new Dictionary<string, string> {{"status", status.ToString().ToLower()}};
 
-			Core.Request.Get(Constants.API_SESSIONS_PING, null, (Core.Response response) => {
+			Core.Request.Get(Constants.API_SESSIONS_PING, parameters, response => {
 				if (callback != null)
 				{
 					callback(response.success);
 				}
-			}, true, Core.ResponseFormat.Json);
+			});
 		}
 
 		/// <summary>
@@ -51,12 +50,12 @@ namespace GameJolt.API
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success..</param>
 		public static void Close(Action<bool> callback = null)
 		{
-			Core.Request.Get(Constants.API_SESSIONS_CLOSE, null, (Core.Response response) => {
+			Core.Request.Get(Constants.API_SESSIONS_CLOSE, null, response => {
 				if (callback != null)
 				{
 					callback(response.success);
 				}
-			}, true, Core.ResponseFormat.Json);
+			});
 		}
 	}
 }
