@@ -64,7 +64,10 @@ public class ConsoleTest : MonoBehaviour
 		AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Successful" : "Failed"));
 	}
 
-	public void GetUsersById() {
+	public void GetUsersById()
+	{
+		Debug.Log("Get Users By Id. Click to see source.");
+
 		var ids = ParseIds(userIdsField.text);
 		GameJolt.API.Users.Get(ids, (GameJolt.API.Objects.User[] users) => {
 			if(users != null) {
