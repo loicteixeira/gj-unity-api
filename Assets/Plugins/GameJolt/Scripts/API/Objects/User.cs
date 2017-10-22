@@ -200,7 +200,8 @@ namespace GameJolt.API.Objects
 		/// </summary>
 		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
 		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>
-		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null)
+		/// <param name="rememberMe">Whether the user's credentials should be stored in the player prefs.</param>
+		public void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null, bool rememberMe = false)
 		{
 			if (Manager.Instance.CurrentUser != null)
 			{
@@ -225,6 +226,10 @@ namespace GameJolt.API.Objects
 				if (response.success)
 				{
 					Manager.Instance.CurrentUser = this;
+
+					if(rememberMe) {
+						Manager.Instance.RememberUserCredentials(Name, Token);
+					}
 
 					if (signedInCallback != null)
 					{
@@ -260,6 +265,7 @@ namespace GameJolt.API.Objects
 			if (Manager.Instance.CurrentUser == this)
 			{
 				Manager.Instance.CurrentUser = null;
+				Manager.Instance.ClearUserCredentials();
 			}
 		}
 

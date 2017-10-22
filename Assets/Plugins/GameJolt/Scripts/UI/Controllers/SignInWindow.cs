@@ -8,21 +8,26 @@ namespace GameJolt.UI.Controllers
 		public InputField usernameField;
 		public InputField tokenField;
 		public Text errorMessage;
+		public Toggle rememberMeToggle;
 
 		Action<bool> signedInCallback;
 		Action<bool> userFetchedCallback;
 
 		public override void Show(Action<bool> callback)
 		{
-			Show(callback, null);
+			Show(callback, null, false);
 		}
 
-		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback)
-		{
+		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback, bool autoLogin) {
 			errorMessage.enabled = false;
 			animator.SetTrigger("SignIn");
 			this.signedInCallback = signedInCallback;
 			this.userFetchedCallback = userFetchedCallback;
+			string username, token;
+			rememberMeToggle.isOn = API.Manager.Instance.GetStoredUserCredentials(out username, out token);
+			usernameField.text = username;
+			tokenField.text = token;
+			if(rememberMeToggle.isOn && autoLogin) Submit();
 		}
 
 		public override void Dismiss(bool success)
@@ -51,12 +56,9 @@ namespace GameJolt.UI.Controllers
 
 				var user = new API.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
 				user.SignIn(signInSuccess => {
-					if (signInSuccess)
-					{
+					if(signInSuccess) {
 						Dismiss(true);
-					}
-					else
-					{
+					} else {
 						// Technically this could be because of another user being already signed in.
 						errorMessage.text = "Wrong username and/or token.";
 						errorMessage.enabled = true;
@@ -65,12 +67,12 @@ namespace GameJolt.UI.Controllers
 					animator.SetTrigger("HideLoadingIndicator");
 					animator.SetTrigger("Unlock");
 				}, userFetchedSuccess => {
-					if (userFetchedCallback != null) {
+					if(userFetchedCallback != null) {
 						// This will potentially be called after a user dismissed the window..
 						userFetchedCallback(userFetchedSuccess);
 						userFetchedCallback = null;
 					}
-				});
+				}, rememberMeToggle.isOn);
 			}
 		}
 	}

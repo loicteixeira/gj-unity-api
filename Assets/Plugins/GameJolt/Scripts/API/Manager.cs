@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameJolt.External;
 
 namespace GameJolt.API
 {
@@ -66,7 +67,12 @@ namespace GameJolt.API
 		/// </remarks>
 		public bool UseCaching { get; private set; }
 
-		Objects.User currentUser;
+		private string UserCredentialsPreferences { get; set; }
+
+		private string EncryptionKey { get; set; }
+
+
+		private Objects.User currentUser;
 		/// <summary>
 		/// Gets or sets the current user.
 		/// </summary>
@@ -153,6 +159,8 @@ namespace GameJolt.API
 				Timeout = settings.timeout;
 				AutoPing = settings.autoPing;
 				UseCaching = settings.useCaching;
+				UserCredentialsPreferences = settings.userCredentialsPreferences;
+				EncryptionKey = settings.encryptionKey;
 				
 				if (GameID == 0)
 				{
@@ -374,5 +382,53 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			}
 		}
 		#endregion Actions
+
+		#region Helper
+		/// <summary>
+		/// If the user's credentials are stored in PlayerPrefs, this method will retrieve them.
+		/// </summary>
+		/// <param name="username">Contains the username if retrieval was successfull, empty string otherwise.</param>
+		/// <param name="token">Contains the token if retrieval was successfull, empty string otherwise.</param>
+		/// <returns>Whether retrieval was successfull or not.</returns>
+		public bool GetStoredUserCredentials(out string username, out string token) {
+			username = token = "";
+			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(EncryptionKey) ||
+			   !PlayerPrefs.HasKey(UserCredentialsPreferences)) return false;
+			var credentials = PlayerPrefs.GetString(UserCredentialsPreferences).Split('#');
+			if(credentials.Length != 2) return false;
+			try {
+				username = XTEA.Decrypt(credentials[0], EncryptionKey);
+				token = XTEA.Decrypt(credentials[1], EncryptionKey);
+				return true;
+			} catch {
+				Debug.LogWarning("Failed to retrieve user credentials.");
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Stores the user's credentials in PlayerPrefs.
+		/// </summary>
+		/// <param name="username">The username to store.</param>
+		/// <param name="token">The token to store.</param>
+		/// <returns>Whether the operations was successfull.</returns>
+		public bool RememberUserCredentials(string username, string token) {
+			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(EncryptionKey) ||
+			   string.IsNullOrEmpty(username) || string.IsNullOrEmpty(token)) return false;
+			var credentials = XTEA.Encrypt(username, EncryptionKey) + "#" + XTEA.Encrypt(token, EncryptionKey);
+			PlayerPrefs.SetString(UserCredentialsPreferences, credentials);
+			PlayerPrefs.Save();
+			return true;
+		}
+
+		/// <summary>
+		/// Clears the stored credentials.
+		/// </summary>
+		public void ClearUserCredentials() {
+			if(string.IsNullOrEmpty(UserCredentialsPreferences)) return;
+			PlayerPrefs.DeleteKey(UserCredentialsPreferences);
+			PlayerPrefs.Save();
+		}
+		#endregion
 	}
 }
