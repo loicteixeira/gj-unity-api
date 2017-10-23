@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][Unreleased]
 
+### Add
+- New `GameJolt.API.DataStore.GetKeys(bool global, string pattern, Action<string[]> callback)` method to fetch all datastore keys matching the provided pattern.
+
+### Fixed
+- Users.Get(int[] ids, ...) throws an exception #79
+
 ## [2.2.0][v2_2_0] (2017-08-13)
 
 ### Add

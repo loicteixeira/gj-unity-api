@@ -4,11 +4,11 @@ using System;
 
 namespace GameJolt.UI
 {
-	[RequireComponent(typeof(Animator))]
 	/// <summary>
 	/// The UI API Manager.
 	/// </summary>
-	public class Manager : GameJolt.API.Core.MonoSingleton<Manager>
+	[RequireComponent(typeof(Animator))]
+	public class Manager : API.Core.MonoSingleton<Manager>
 	{
 		#region Init
 		SignInWindow signinWindow;
@@ -19,7 +19,7 @@ namespace GameJolt.UI
 		/// <summary>
 		/// Init this instance.
 		/// </summary>
-		override protected void Init()
+		protected override void Init()
 		{
 			var animator = GetComponent<Animator>();
 			notificationCentre = animator.GetBehaviour<Behaviours.NotificationCentre>();
@@ -65,7 +65,7 @@ namespace GameJolt.UI
 		/// </summary>
 		public void ShowSignIn()
 		{
-			ShowSignIn(null, null);
+			ShowSignIn(null);
 		}
 
 		/// <summary>
@@ -73,7 +73,7 @@ namespace GameJolt.UI
 		/// </summary>
 		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
 		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>
-		public void ShowSignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null)
+		public void ShowSignIn(Action<bool> signedInCallback, Action<bool> userFetchedCallback = null)
 		{
 			signinWindow.Show(signedInCallback, userFetchedCallback);
 		}
@@ -142,7 +142,7 @@ namespace GameJolt.UI
 		/// <summary>
 		/// Queues a notification.
 		/// </summary>
-		/// <param name="notification">The <see cref="GameJolt.UI.Objects.Notification"/>.</param>
+		/// <param name="notification">The <see cref="Objects.Notification"/>.</param>
 		public void QueueNotification(Objects.Notification notification)
 		{
 			notificationCentre.QueueNotification(notification);

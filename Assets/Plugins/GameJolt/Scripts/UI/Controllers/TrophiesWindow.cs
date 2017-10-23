@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 namespace GameJolt.UI.Controllers
@@ -11,13 +10,13 @@ namespace GameJolt.UI.Controllers
 
 		Action<bool> callback;
 
-		override public void Show(Action<bool> callback)
+		public override void Show(Action<bool> callback)
 		{
 			animator.SetTrigger("Trophies");
 			animator.SetTrigger("ShowLoadingIndicator");
 			this.callback = callback;
 
-			GameJolt.API.Trophies.Get((GameJolt.API.Objects.Trophy[] trophies) => {
+			API.Trophies.Get(trophies => {
 				if (trophies != null)
 				{
 					// Create children if there are none.
@@ -50,7 +49,7 @@ namespace GameJolt.UI.Controllers
 			});
 		}
 		
-		override public void Dismiss(bool success)
+		public override void Dismiss(bool success)
 		{
 			animator.SetTrigger("Dismiss");
 			if (callback != null)

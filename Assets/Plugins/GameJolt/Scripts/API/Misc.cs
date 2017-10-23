@@ -15,7 +15,7 @@ namespace GameJolt.API
 		/// <param name="callback">A callback function accepting a single parameter, a UnityEngine.Sprite.</param>
 		public static void DownloadImage(string url, Action<Sprite> callback)
 		{
-			Manager.Instance.StartCoroutine(Manager.Instance.GetRequest(url, Core.ResponseFormat.Texture, (Core.Response response) => {
+			Manager.Instance.StartCoroutine(Manager.Instance.GetRequest(url, Core.ResponseFormat.Texture, response => {
 				Sprite sprite;
 				if (response.success)
 				{
@@ -43,7 +43,7 @@ namespace GameJolt.API
 		/// <param name="callback">A callback function accepting a single parameter, a System.DateTime.</param>
 		public static void GetTime(Action<DateTime> callback)
 		{
-			Core.Request.Get(Constants.API_TIME_GET, null, (Core.Response response) => {
+			Core.Request.Get(Constants.API_TIME_GET, null, response => {
 				if (callback != null)
 				{
 					double timestamp = response.json["timestamp"].AsDouble;

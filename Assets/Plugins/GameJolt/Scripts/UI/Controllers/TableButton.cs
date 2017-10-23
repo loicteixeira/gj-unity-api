@@ -17,10 +17,10 @@ namespace GameJolt.UI.Controllers
 
 		public void Awake()
 		{
-			this.button = GetComponent<Button>();
+			button = GetComponent<Button>();
 		}
 
-		public void Init(GameJolt.API.Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
+		public void Init(API.Objects.Table table, int index, LeaderboardsWindow controller, bool active = false)
 		{
 			title.text = table.Name;
 			tabIndex = index;

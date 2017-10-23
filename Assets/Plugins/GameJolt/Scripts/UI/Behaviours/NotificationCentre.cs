@@ -7,27 +7,27 @@ namespace GameJolt.UI.Behaviours
 	{
 		public string notificationPanelPath;
 
-		GameJolt.UI.Controllers.NotificationItem notificationItem;
-		Queue<GameJolt.UI.Objects.Notification> notificationsQueue;
+		Controllers.NotificationItem notificationItem;
+		Queue<Objects.Notification> notificationsQueue;
 
-		override public void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+		public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 		{
 			if (notificationItem == null)
 			{
 				var panelTransform = animator.transform.Find(notificationPanelPath);
 				if (panelTransform != null)
 				{
-					notificationItem = panelTransform.GetComponent<GameJolt.UI.Controllers.NotificationItem>();
+					notificationItem = panelTransform.GetComponent<Controllers.NotificationItem>();
 				}
 			}
 
 			if (notificationsQueue == null)
 			{
-				notificationsQueue = new Queue<GameJolt.UI.Objects.Notification>();
+				notificationsQueue = new Queue<Objects.Notification>();
 			}
 		}
 
-		override public void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
+		public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
 		{
 			if (notificationsQueue.Count > 0)
 			{

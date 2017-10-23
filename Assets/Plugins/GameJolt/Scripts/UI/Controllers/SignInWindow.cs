@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using System;
 
 namespace GameJolt.UI.Controllers
@@ -13,7 +12,7 @@ namespace GameJolt.UI.Controllers
 		Action<bool> signedInCallback;
 		Action<bool> userFetchedCallback;
 
-		override public void Show(Action<bool> callback)
+		public override void Show(Action<bool> callback)
 		{
 			Show(callback, null);
 		}
@@ -26,7 +25,7 @@ namespace GameJolt.UI.Controllers
 			this.userFetchedCallback = userFetchedCallback;
 		}
 
-		override public void Dismiss(bool success)
+		public override void Dismiss(bool success)
 		{
 			animator.SetTrigger("Dismiss");
 			if (signedInCallback != null)
@@ -50,8 +49,8 @@ namespace GameJolt.UI.Controllers
 				animator.SetTrigger("Lock");
 				animator.SetTrigger("ShowLoadingIndicator");
 
-				var user = new GameJolt.API.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
-				user.SignIn((bool signInSuccess) => {
+				var user = new API.Objects.User(usernameField.text.Trim(), tokenField.text.Trim());
+				user.SignIn(signInSuccess => {
 					if (signInSuccess)
 					{
 						Dismiss(true);
@@ -65,7 +64,7 @@ namespace GameJolt.UI.Controllers
 
 					animator.SetTrigger("HideLoadingIndicator");
 					animator.SetTrigger("Unlock");
-				}, (bool userFetchedSuccess) => {
+				}, userFetchedSuccess => {
 					if (userFetchedCallback != null) {
 						// This will potentially be called after a user dismissed the window..
 						userFetchedCallback(userFetchedSuccess);

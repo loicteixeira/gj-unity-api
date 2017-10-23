@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 using GameJolt.External.SimpleJSON;
 
 namespace GameJolt.API.Core
@@ -23,58 +21,58 @@ namespace GameJolt.API.Core
 		/// <summary>
 		/// Whether the response is successful.
 		/// </summary>
-		public readonly bool success = false;
+		public readonly bool success;
 
 		/// <summary>
 		/// The response bytes.
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Raw`./> 
+		/// Only populated when the <see cref="ResponseFormat"/> is `Raw`. 
 		/// </para>
 		/// </remarks>
-		public readonly byte[] bytes = null;
+		public readonly byte[] bytes;
 
 		/// <summary>
 		/// The response dump.
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Dump`./> 
+		/// Only populated when the <see cref="ResponseFormat"/>  is `Dump`.
 		/// </para>
 		/// </remarks>
-		public readonly string dump = null;
+		public readonly string dump;
 
 		/// <summary>
 		/// The response JSON.
 		/// </summary>
 		/// <para>
-		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Json`./> 
+		/// Only populated when the <see cref="ResponseFormat"/>  is `Json`.
 		/// </para>
 		/// </remarks>
-		public readonly JSONNode json = null;
+		public readonly JSONNode json;
 
 		/// <summary>
 		/// The response texture.
 		/// </summary>
 		/// <remarks>
 		/// <para>
-		/// Only populated when the <see cref="GameJolt.API.Core.ResponseFormat" is `Texture`./> 
+		/// Only populated when the <see cref="ResponseFormat"/> is `Texture`. 
 		/// </para>
 		/// </remarks>
-		public readonly Texture2D texture = null;
+		public readonly Texture2D texture;
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.API.Core.Response"/> class.
+		/// Initializes a new instance of the <see cref="Response"/> class.
 		/// </summary>
 		/// <param name="errorMessage">Error message.</param>
 		public Response(string errorMessage) {
-			this.success = false;
+			success = false;
 			Debug.LogWarning(errorMessage);
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.API.Core.Response"/> class.
+		/// Initializes a new instance of the <see cref="Response"/> class.
 		/// </summary>
 		/// <param name="www">The API Fesponse.</param>
 		/// <param name="format">The format of the response.</param>
@@ -82,7 +80,7 @@ namespace GameJolt.API.Core
 		{
 			if (!string.IsNullOrEmpty(www.error))
 			{
-				this.success = false;
+				success = false;
 				Debug.LogWarning(www.error);
 				return;
 			}
@@ -92,50 +90,43 @@ namespace GameJolt.API.Core
 			switch (format)
 			{
 			case ResponseFormat.Dump:
-				this.success = www.text.StartsWith("SUCCESS");
-
+				success = www.text.StartsWith("SUCCESS");
 				var returnIndex = www.text.IndexOf ('\n');
 				if (returnIndex != -1)
 				{
-					this.dump = www.text.Substring(returnIndex + 1);
+					dump = www.text.Substring(returnIndex + 1);
 				}
 
-				if (!this.success)
+				if (!success)
 				{
-					Debug.LogWarning(this.dump);
-					this.dump = null;
+					Debug.LogWarning(dump);
+					dump = null;
 				}
-
 				break;
 				
 			case ResponseFormat.Json:
-				this.json = JSON.Parse(www.text)["response"];
-				this.success = this.json["success"].AsBool;
-
-				if (!this.success)
+				json = JSON.Parse(www.text)["response"];
+				success = json["success"].AsBool;
+				if (!success)
 				{
-					Debug.LogWarning(this.json["message"]);
-					this.json = null;
+					Debug.LogWarning(json["message"]);
+					json = null;
 				}
-
 				break;
 			
 			case ResponseFormat.Raw:
-				this.success = true;
-				this.bytes = www.bytes;
-
+				success = true;
+				bytes = www.bytes;
 				break;
 
 			case ResponseFormat.Texture:
-				this.success = true;
-				this.texture = www.texture;
-
+				success = true;
+				texture = www.texture;
 				break;
 
 			default:
-				this.success = false;
+				success = false;
 				Debug.LogWarning("Unknown format. Cannot process response.");
-
 				break;
 			}
 		}

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameJolt.API.Objects;
 
 namespace GameJolt.API
 {
@@ -11,36 +12,36 @@ namespace GameJolt.API
 	{
 		#region Get
 		/// <summary>
-		/// Get the <see cref="GameJolt.API.Objects.User"/> by name.
+		/// Get the <see cref="User"/> by name.
 		/// </summary>
-		/// <param name="name">The <see cref="GameJolt.API.Objects.User"/> `Name`.</param>
-		/// <param name="callback">A callback function accepting a single parameter, a <see cref="GameJolt.API.Objects.User"/>.</param>
-		public static void Get(string name, Action<Objects.User> callback)
+		/// <param name="name">The <see cref="User"/> `Name`.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a <see cref="User"/>.</param>
+		public static void Get(string name, Action<User> callback)
 		{
-			var user = new Objects.User(name, string.Empty);
+			var user = new User(name, string.Empty);
 			Get(user, callback);
 		}
 
 		/// <summary>
-		/// Get the <see cref="GameJolt.API.Objects.User"/> by ID.
+		/// Get the <see cref="User"/> by ID.
 		/// </summary>
-		/// <param name="name">The <see cref="GameJolt.API.Objects.User"/> `ID`.</param>
-		/// <param name="callback">A callback function accepting a single parameter, a <see cref="GameJolt.API.Objects.User"/>.</param>
-		public static void Get(int id, Action<Objects.User> callback)
+		/// <param name="id">The <see cref="User"/> `ID`.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a <see cref="User"/>.</param>
+		public static void Get(int id, Action<User> callback)
 		{
-			var user = new Objects.User(id);
+			var user = new User(id);
 			Get(user, callback);
 		}
 
 		/// <summary>
-		/// Get the <see cref="GameJolt.API.Objects.User"/> information.
+		/// Get the <see cref="User"/> information.
 		/// </summary>
-		/// <param name="user">A <see cref="GameJolt.API.Objects.User"/> with either `Name` or `ID` set.</param>
-		/// <param name="callback">A callback function accepting a single parameter, a <see cref="GameJolt.API.Objects.User"/>.</param>
-		public static void Get(Objects.User user, Action<Objects.User> callback)
+		/// <param name="user">A <see cref="User"/> with either `Name` or `ID` set.</param>
+		/// <param name="callback">A callback function accepting a single parameter, a <see cref="User"/>.</param>
+		public static void Get(User user, Action<User> callback)
 		{
 			var parameters = new Dictionary<string, string>();
-			if(user.Name != null && user.Name != string.Empty)
+			if(!string.IsNullOrEmpty(user.Name))
 			{
 				parameters.Add("username", user.Name.ToLower());
 			}
@@ -49,7 +50,7 @@ namespace GameJolt.API
 				parameters.Add("user_id", user.ID.ToString());
 			}
 
-			Core.Request.Get(Constants.API_USERS_FETCH, parameters, (Core.Response response) => {
+			Core.Request.Get(Constants.API_USERS_FETCH, parameters, response => {
 				if(response.success)
 				{
 					user.BulkUpdate(response.json["users"][0].AsObject);
@@ -67,25 +68,24 @@ namespace GameJolt.API
 		}
 
 		/// <summary>
-		/// Get the <see cref="GameJolt.API.Objects.User"/>s by ID.
+		/// Get the <see cref="User"/>s by ID.
 		/// </summary>
-		/// <param name="user">An array of <see cref="GameJolt.API.Objects.User"/>s IDs</param>
-		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="GameJolt.API.Objects.User"/>s.</param>
-		public static void Get(int[] ids, Action<Objects.User[]> callback)
+		/// <param name="ids">An array of <see cref="User"/>s IDs</param>
+		/// <param name="callback">A callback function accepting a single parameter, an array of <see cref="User"/>s.</param>
+		public static void Get(int[] ids, Action<User[]> callback)
 		{
-			var parameters = new Dictionary<string, string>();
-			parameters.Add(Constants.API_USERS_FETCH, string.Join(",", ids.Select(id => id.ToString()).ToArray()));
+			var parameters = new Dictionary<string, string> {{"user_id", string.Join(",", ids.Select(id => id.ToString()).ToArray())}};
 
-			Core.Request.Get("users/", parameters, (Core.Response response) => {
-				Objects.User[] users;
+			Core.Request.Get(Constants.API_USERS_FETCH, parameters, response => {
+				User[] users;
 				if(response.success)
 				{
 					int count = response.json["users"].AsArray.Count;
-					users = new Objects.User[count];
+					users = new User[count];
 
 					for (int i = 0; i < count; ++i)
 					{
-						users[i] = new Objects.User(response.json["users"][i].AsObject);
+						users[i] = new User(response.json["users"][i].AsObject);
 					}
 				}
 				else

@@ -6,7 +6,7 @@ namespace GameJolt.API.Objects
 	/// <summary>
 	/// Score object.
 	/// </summary>
-	public class Score : Base
+	public sealed class Score : Base
 	{
 		#region Fields & Properties
 		/// <summary>
@@ -55,38 +55,32 @@ namespace GameJolt.API.Objects
 		/// Gets the name of the player (username or guest name as appropriate).
 		/// </summary>
 		/// <value>The name of the player.</value>
-		public string PlayerName
-		{
-			get
-			{
-				return UserName != null && UserName != string.Empty ? UserName : GuestName;
-			}
-		}
+		public string PlayerName { get { return !string.IsNullOrEmpty(UserName) ? UserName : GuestName; } }
 		#endregion Fields & Properties
-		
+
 		#region Constructors
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.API.Objects.Score"/> class.
+		/// Initializes a new instance of the <see cref="Score"/> class.
 		/// </summary>
-		/// <param name="value">The <see cref="GameJolt.API.Objects.Score"/> value.</param>
-		/// <param name="text">The <see cref="GameJolt.API.Objects.Score"/> text.</param>
-		/// <param name="guestName">The <see cref="GameJolt.API.Objects.Score"/> guest name.</param>
-		/// <param name="extra">The <see cref="GameJolt.API.Objects.Score"/> extra.</param>
+		/// <param name="value">The <see cref="Score"/> value.</param>
+		/// <param name="text">The <see cref="Score"/> text.</param>
+		/// <param name="guestName">The <see cref="Score"/> guest name.</param>
+		/// <param name="extra">The <see cref="Score"/> extra.</param>
 		public Score(int value, string text, string guestName = "", string extra = "")
 		{
-			this.Value = value;
-			this.Text = text;
-			this.GuestName = guestName;
-			this.Extra = extra;
+			Value = value;
+			Text = text;
+			GuestName = guestName;
+			Extra = extra;
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.API.Objects.Score"/> class.
+		/// Initializes a new instance of the <see cref="Score"/> class.
 		/// </summary>
 		/// <param name="data">API JSON data.</param>
 		public Score(JSONClass data)
 		{
-			this.PopulateFromJSON(data);
+			PopulateFromJSON(data);
 		}
 		#endregion Constructors
 		
@@ -97,22 +91,22 @@ namespace GameJolt.API.Objects
 		/// <param name="data">JSON data from the API calls.</param>
 		protected override void PopulateFromJSON(JSONClass data)
 		{
-			this.Value = data["sort"].AsInt;
-			this.Text = data["score"].Value;
-			this.Extra = data["extra_data"].Value;
-			this.Time = data["stored"].Value;
+			Value = data["sort"].AsInt;
+			Text = data["score"].Value;
+			Extra = data["extra_data"].Value;
+			Time = data["stored"].Value;
 
-			this.UserID = data["user_id"].AsInt;
-			this.UserName = data["user"].Value;
-			this.GuestName = data["guest"].Value;
+			UserID = data["user_id"].AsInt;
+			UserName = data["user"].Value;
+			GuestName = data["guest"].Value;
 		}
 		#endregion Update Attributes
 
 		#region Interface
 		/// <summary>
-		/// Add the <see cref="GameJolt.API.Objects.Score"/>.
+		/// Add the <see cref="Score"/>.
 		/// </summary>
-		/// <param name="table">The ID of the HighScore <see cref="GameJolt.API.Objects.Table"/>. Defaults to 0 (i.e. Primary Table).</param>
+		/// <param name="table">The ID of the HighScore <see cref="Table"/>. Defaults to 0 (i.e. Primary Table).</param>
 		/// <param name="callback">A callback function accepting a single parameter, a boolean indicating success.</param>
 		/// <remarks>
 		/// <para>
@@ -126,9 +120,9 @@ namespace GameJolt.API.Objects
 		#endregion Interface
 
 		/// <summary>
-		/// Returns a <see cref="System.String"/> that represents the current <see cref="GameJolt.API.Objects.Score"/>.
+		/// Returns a <see cref="string"/> that represents the current <see cref="Score"/>.
 		/// </summary>
-		/// <returns>A <see cref="System.String"/> that represents the current <see cref="GameJolt.API.Objects.Score"/>.</returns>
+		/// <returns>A <see cref="string"/> that represents the current <see cref="Score"/>.</returns>
 		public override string ToString()
 		{
 			return string.Format("GameJolt.API.Objects.Score: {0} - {1}", PlayerName, Value);

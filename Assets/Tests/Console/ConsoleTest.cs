@@ -12,6 +12,7 @@ public class ConsoleTest : MonoBehaviour
 	// Users
 	public InputField userNameField;
 	public InputField userTokenField;
+	public InputField userIdsField;
 
 	// Scores
 	public InputField scoreValueField;
@@ -31,6 +32,7 @@ public class ConsoleTest : MonoBehaviour
 	public InputField keyField;
 	public InputField valueField;
 	public InputField modeField;
+	public InputField patternField;
 	public Toggle globalToggle;
 	#endregion Inspector Fields
 
@@ -60,6 +62,21 @@ public class ConsoleTest : MonoBehaviour
 		}
 
 		AddConsoleLine(string.Format("Sign Out {0}.", isSignedIn ? "Successful" : "Failed"));
+	}
+
+	public void GetUsersById()
+	{
+		Debug.Log("Get Users By Id. Click to see source.");
+
+		var ids = ParseIds(userIdsField.text);
+		GameJolt.API.Users.Get(ids, (GameJolt.API.Objects.User[] users) => {
+			if(users != null) {
+				foreach(var user in users) {
+					AddConsoleLine(string.Format("> {0} - {1}", user.Name, user.ID));
+				}
+				AddConsoleLine(string.Format("Found {0} user(s).", users.Length));
+			}
+		});
 	}
 
 	public void SessionOpen()
@@ -197,13 +214,8 @@ public class ConsoleTest : MonoBehaviour
 		else
 		{
 			Debug.Log("Get Multiple Trophies. Click to see source.");
-
-			var idStrings = trophyIDsField.text.Split(',');
-			var trophyIDs = new int[idStrings.Length];
-			for (int i = 0; i < idStrings.Length; ++i)
-			{
-				trophyIDs[i] = idStrings[i] != string.Empty ? int.Parse(idStrings[i]) : 0;
-			}
+			
+			var trophyIDs = ParseIds(trophyIDsField.text);
 
 			GameJolt.API.Trophies.Get(trophyIDs, (GameJolt.API.Objects.Trophy[] trophies) => {
 				if (trophies != null)
@@ -266,7 +278,7 @@ public class ConsoleTest : MonoBehaviour
 	{
 		Debug.Log("Get DataStore Keys. Click to see source.");
 
-		GameJolt.API.DataStore.GetKeys(globalToggle.isOn, (string[] keys) => {
+		GameJolt.API.DataStore.GetKeys(globalToggle.isOn, patternField.text, (string[] keys) => {
 			if (keys != null)
 			{
 				foreach (var key in keys)
@@ -343,6 +355,8 @@ public class ConsoleTest : MonoBehaviour
 			userNameField.text = settings.user;
 			userTokenField.text = settings.token;
 		}
+		userIdsField.onValidateInput += ValidateIdList;
+		trophyIDsField.onValidateInput += ValidateIdList;
 	}
 
 	void AddConsoleLine(string text)
@@ -351,6 +365,15 @@ public class ConsoleTest : MonoBehaviour
 		tr.GetComponent<Text>().text = text;
 		tr.SetParent(consoleTransform);
 		tr.SetAsFirstSibling();
+	}
+
+	private char ValidateIdList(string text, int index, char addedChar) {
+		if(addedChar >= '0' && addedChar <= '9' || addedChar == ',') return addedChar;
+		return '\0';
+	}
+
+	private int[] ParseIds(string text) {
+		return text.Split(',').Where(x => !string.IsNullOrEmpty(x)).Select(x => int.Parse(x)).ToArray();
 	}
 	#endregion Internal
 }

@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 namespace GameJolt.UI.Controllers
 {
-	abstract public class BaseWindow : MonoBehaviour
+	public abstract class BaseWindow : MonoBehaviour
 	{
 		protected Animator animator;
 
@@ -13,19 +12,18 @@ namespace GameJolt.UI.Controllers
 			this.animator = animator;
 		}
 
-		abstract public void Show(Action<bool> callback);
+		public abstract void Show(Action<bool> callback);
 
-		abstract public void Dismiss(bool success);
+		public abstract void Dismiss(bool success);
 
 		protected void Populate(RectTransform container, GameObject prefab, int count)
 		{
 			if (container.childCount < count)
 			{
 				int nbToCreate = count - container.childCount;
-				Transform tr;
 				for (int i = 0; i < nbToCreate; ++i)
 				{
-					tr = Instantiate(prefab).transform;
+					var tr = Instantiate(prefab).transform;
 					tr.SetParent(container);
 					tr.SetAsLastSibling();
 				}

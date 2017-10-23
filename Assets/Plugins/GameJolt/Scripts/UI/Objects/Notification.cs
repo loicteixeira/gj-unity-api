@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace GameJolt.UI.Objects
 {
@@ -24,26 +23,26 @@ namespace GameJolt.UI.Objects
 		
 		#region Constructors
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.UI.Objects.Notification"/> class.
+		/// Initializes a new instance of the <see cref="Notification"/> class.
 		/// </summary>
 		/// <param name="text">The notification text.</param>
 		public Notification(string text)
 		{
-			this.Text = text;
+			Text = text;
 
-			var tex = Resources.Load(GameJolt.API.Constants.DEFAULT_NOTIFICATION_ASSET_PATH) as Texture2D;
-			this.Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
+			var tex = Resources.Load<Texture2D>(API.Constants.DEFAULT_NOTIFICATION_ASSET_PATH);
+			Image = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(.5f, .5f), tex.width);
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="GameJolt.UI.Objects.Notification"/> class.
+		/// Initializes a new instance of the <see cref="Notification"/> class.
 		/// </summary>
 		/// <param name="text">The notification text.</param>
 		/// <param name="image">The notification image.</param>
 		public Notification(string text, Sprite image)
 		{
-			this.Text = text;
-			this.Image = image;
+			Text = text;
+			Image = image;
 		}
 		#endregion Constructors
 	}
