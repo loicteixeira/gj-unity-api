@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEditor;
+using GameJolt.API;
 
 namespace GameJolt.Editor
 {
@@ -9,12 +10,12 @@ namespace GameJolt.Editor
 		[MenuItem("Edit/Project Settings/Game Jolt API")]
 		public static void Settings()
 		{
-			var asset = AssetDatabase.LoadAssetAtPath(GameJolt.API.Constants.SETTINGS_ASSET_FULL_PATH, typeof(GameJolt.API.Settings)) as GameJolt.API.Settings;
+			var asset = AssetDatabase.LoadAssetAtPath(Constants.SETTINGS_ASSET_FULL_PATH, typeof(Settings)) as Settings;
 			if (asset == null)
 			{
-				asset = ScriptableObject.CreateInstance<GameJolt.API.Settings>();
-				AssetDatabase.CreateAsset (asset, GameJolt.API.Constants.SETTINGS_ASSET_FULL_PATH);
-				AssetDatabase.SaveAssets ();
+				asset = ScriptableObject.CreateInstance<Settings>();
+				AssetDatabase.CreateAsset(asset, Constants.SETTINGS_ASSET_FULL_PATH);
+				AssetDatabase.SaveAssets();
 			}
 			
 			EditorUtility.FocusProjectWindow();
@@ -24,14 +25,14 @@ namespace GameJolt.Editor
 		[MenuItem("GameObject/Game Jolt API Manager")]
 		public static void Manager()
 		{
-			var manager = FindObjectOfType<GameJolt.API.Manager>();
+			var manager = FindObjectOfType<Manager>();
 			if (manager != null)
 			{
 				Selection.activeObject = manager;
 			}
 			else
 			{
-				var prefab = AssetDatabase.LoadAssetAtPath(GameJolt.API.Constants.MANAGER_ASSET_FULL_PATH, typeof(GameObject)) as GameObject;
+				var prefab = AssetDatabase.LoadAssetAtPath(Constants.MANAGER_ASSET_FULL_PATH, typeof(GameObject)) as GameObject;
 				if (prefab == null)
 				{
 					Debug.LogError("Unable to locate Game Jolt API prefab.");

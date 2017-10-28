@@ -75,10 +75,9 @@ namespace GameJolt.UI
 		/// </summary>
 		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
 		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>
-		/// <param name="autoLogin">If true the user will be automatically logged in with the stored credentials.</param>
-		public void ShowSignIn(Action<bool> signedInCallback, Action<bool> userFetchedCallback = null, bool autoLogin = false)
+		public void ShowSignIn(Action<bool> signedInCallback, Action<bool> userFetchedCallback = null)
 		{
-			signinWindow.Show(signedInCallback, userFetchedCallback, autoLogin);
+			signinWindow.Show(signedInCallback, userFetchedCallback);
 		}
 		#endregion SignIn
 

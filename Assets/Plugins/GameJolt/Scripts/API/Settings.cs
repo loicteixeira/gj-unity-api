@@ -20,10 +20,8 @@ namespace GameJolt.API
 		public bool autoPing = true;
 		[Tooltip("Cache High Score Tables and Trophies information for faster display.")]
 		public bool useCaching = true;
-		[Tooltip("The PlayerPrefs key for the user credentials if the 'Remember Me' option is ticked.")]
-		public string userCredentialsPreferences = "GJ-API-User-Credentials";
 		[Tooltip("The key used to encrypt the user credentials.")]
-		public string encryptionKey = "EnterSomeNicePassword";
+		public string encryptionKey = "";
 
 		[Header("Debug")]
 		[Tooltip("AutoConnect in the Editor as if the game was hosted on GameJolt.")]

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameJolt.API.Objects;
 using GameJolt.External;
 
 namespace GameJolt.API
@@ -9,9 +10,10 @@ namespace GameJolt.API
 	/// <summary>
 	/// The Core API Manager.
 	/// </summary>
-	public class Manager : Core.MonoSingleton<Manager>
-	{
+	public class Manager : Core.MonoSingleton<Manager> {
 		#region Fields & Properties
+		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
+
 		/// <summary>
 		/// Gets the game ID.
 		/// </summary>
@@ -67,17 +69,15 @@ namespace GameJolt.API
 		/// </remarks>
 		public bool UseCaching { get; private set; }
 
-		private string UserCredentialsPreferences { get; set; }
-
 		private string EncryptionKey { get; set; }
 
 
-		private Objects.User currentUser;
+		private User currentUser;
 		/// <summary>
 		/// Gets or sets the current user.
 		/// </summary>
 		/// <value>The current user.</value>
-		public Objects.User CurrentUser
+		public User CurrentUser
 		{
 			get { return currentUser; }
 			set
@@ -142,14 +142,14 @@ namespace GameJolt.API
 		protected override void Init()
 		{
 			Configure();
-			AutoConnectWebPlayer();
+			AutoConnect();
 			CacheTables();
 		}
 
 		/// <summary>
 		/// Configure this instance.
 		/// </summary>
-		void Configure()
+		private void Configure()
 		{
 			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;
 			if (settings != null)
@@ -159,7 +159,6 @@ namespace GameJolt.API
 				Timeout = settings.timeout;
 				AutoPing = settings.autoPing;
 				UseCaching = settings.useCaching;
-				UserCredentialsPreferences = settings.userCredentialsPreferences;
 				EncryptionKey = settings.encryptionKey;
 				
 				if (GameID == 0)
@@ -237,16 +236,17 @@ namespace GameJolt.API
 		#endregion Requests
 
 		#region Actions
-		void AutoConnectWebPlayer()
+		private void AutoConnect()
 		{
 #if UNITY_WEBPLAYER || UNITY_WEBGL
+			#region Autoconnect Web
 	#if UNITY_EDITOR
 			if (DebugAutoConnect)
 			{
 				if (DebugUser != string.Empty && DebugToken != string.Empty)
 				{
 					var user = new Objects.User(DebugUser, DebugToken);
-					user.SignIn((bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
+					user.SignIn(success => { Debug.Log(string.Format("AutoConnect: " + success)); });
 				}
 				else
 				{
@@ -287,9 +287,21 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				Debug.Log("Cannot AutoConnect, the game is not hosted on GameJolt.");
 			}
 	#endif
+			
+			#endregion
+#else
+			#region Autoconnect Non Web
+			string username, token;
+			if(GetStoredUserCredentials(out username, out token)) {
+				var user = new User(username, token);
+				user.SignIn();
+			}
+			#endregion
+
 #endif
 		}
 
+#if UNITY_WEBPLAYER || UNITY_WEBGL
 		public void OnAutoConnectWebPlayer(string response)
 		{
 			if (response != string.Empty)
@@ -312,8 +324,9 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				// TODO: Prompt "Hello Guest!" and encourage to signup/signin?
 			}
 		}
+#endif
 
-		void StartAutoPing()
+		private void StartAutoPing()
 		{
 			if (!AutoPing)
 			{
@@ -330,7 +343,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			});
 		}
 
-		void Ping()
+		private void Ping()
 		{
 			Sessions.Ping(SessionStatus.Active, success => {
 				// Sessions are automatically closed after 120 seconds
@@ -349,7 +362,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			});
 		}
 
-		void StopAutoPing()
+		private void StopAutoPing()
 		{
 			if (AutoPing)
 			{
@@ -358,7 +371,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			}
 		}
 
-		void CacheTables()
+		private void CacheTables()
 		{
 			if (UseCaching)
 			{
@@ -366,14 +379,14 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			}
 		}
 
-		void CacheTrophies()
+		private void CacheTrophies()
 		{
 			if (UseCaching)
 			{
 				Trophies.Get(trophies => {
 					if (trophies != null)
 					{
-						foreach(Objects.Trophy trophy in trophies)
+						foreach(Trophy trophy in trophies)
 						{
 							trophy.DownloadImage();
 						}
@@ -381,7 +394,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				});
 			}
 		}
-		#endregion Actions
+#endregion Actions
 
 		#region Helper
 		/// <summary>

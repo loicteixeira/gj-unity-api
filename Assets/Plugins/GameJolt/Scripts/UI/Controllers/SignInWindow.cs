@@ -15,10 +15,10 @@ namespace GameJolt.UI.Controllers
 
 		public override void Show(Action<bool> callback)
 		{
-			Show(callback, null, false);
+			Show(callback, null);
 		}
 
-		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback, bool autoLogin) {
+		public void Show(Action<bool> signedInCallback, Action<bool> userFetchedCallback) {
 			errorMessage.enabled = false;
 			animator.SetTrigger("SignIn");
 			this.signedInCallback = signedInCallback;
@@ -27,7 +27,6 @@ namespace GameJolt.UI.Controllers
 			rememberMeToggle.isOn = API.Manager.Instance.GetStoredUserCredentials(out username, out token);
 			usernameField.text = username;
 			tokenField.text = token;
-			if(rememberMeToggle.isOn && autoLogin) Submit();
 		}
 
 		public override void Dismiss(bool success)

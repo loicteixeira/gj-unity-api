@@ -18,6 +18,15 @@ public class LoadTest : MonoBehaviour
 		});
 	}
 
+	public void SignOutButtonClicked() {
+		if(GameJolt.API.Manager.Instance.CurrentUser == null) {
+			GameJolt.UI.Manager.Instance.QueueNotification("You're not signed in");
+		} else {
+			GameJolt.API.Manager.Instance.CurrentUser.SignOut();
+			GameJolt.UI.Manager.Instance.QueueNotification("Signed out :(");
+		}
+	}
+
 	public void IsSignedInButtonClicked() {
 		if (GameJolt.API.Manager.Instance.CurrentUser != null) {
 			GameJolt.UI.Manager.Instance.QueueNotification(
