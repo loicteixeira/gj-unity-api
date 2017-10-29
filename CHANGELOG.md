@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Add
 - New `GameJolt.API.DataStore.GetKeys(bool global, string pattern, Action<string[]> callback)` method to fetch all datastore keys matching the provided pattern.
+- New "Remember me" functionality for SignIn (user credentials stored in PlayerPrefs), see issue #18
+- XTEA encryption for user credentials
+
+### Changed
+- Changed SignIn signature to `void SignIn(Action<bool> signedInCallback = null, Action<bool> userFetchedCallback = null, bool rememberMe = false)`
 
 ### Fixed
 - Users.Get(int[] ids, ...) throws an exception #79
