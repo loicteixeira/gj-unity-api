@@ -2,15 +2,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameJolt.API.Objects;
+using GameJolt.External;
 
 namespace GameJolt.API
 {
 	/// <summary>
 	/// The Core API Manager.
 	/// </summary>
-	public class Manager : Core.MonoSingleton<Manager>
-	{
+	public class Manager : Core.MonoSingleton<Manager> {
 		#region Fields & Properties
+		private const string UserCredentialsPreferences = "GJ-API-User-Credentials";
+
 		/// <summary>
 		/// Gets the game ID.
 		/// </summary>
@@ -66,12 +69,15 @@ namespace GameJolt.API
 		/// </remarks>
 		public bool UseCaching { get; private set; }
 
-		Objects.User currentUser;
+		private string EncryptionKey { get; set; }
+
+
+		private User currentUser;
 		/// <summary>
 		/// Gets or sets the current user.
 		/// </summary>
 		/// <value>The current user.</value>
-		public Objects.User CurrentUser
+		public User CurrentUser
 		{
 			get { return currentUser; }
 			set
@@ -136,14 +142,14 @@ namespace GameJolt.API
 		protected override void Init()
 		{
 			Configure();
-			AutoConnectWebPlayer();
+			AutoConnect();
 			CacheTables();
 		}
 
 		/// <summary>
 		/// Configure this instance.
 		/// </summary>
-		void Configure()
+		private void Configure()
 		{
 			var settings = Resources.Load(Constants.SETTINGS_ASSET_NAME) as Settings;
 			if (settings != null)
@@ -153,6 +159,7 @@ namespace GameJolt.API
 				Timeout = settings.timeout;
 				AutoPing = settings.autoPing;
 				UseCaching = settings.useCaching;
+				EncryptionKey = settings.encryptionKey;
 				
 				if (GameID == 0)
 				{
@@ -229,16 +236,17 @@ namespace GameJolt.API
 		#endregion Requests
 
 		#region Actions
-		void AutoConnectWebPlayer()
+		private void AutoConnect()
 		{
 #if UNITY_WEBPLAYER || UNITY_WEBGL
+			#region Autoconnect Web
 	#if UNITY_EDITOR
 			if (DebugAutoConnect)
 			{
 				if (DebugUser != string.Empty && DebugToken != string.Empty)
 				{
 					var user = new Objects.User(DebugUser, DebugToken);
-					user.SignIn((bool success) => { Debug.Log(string.Format("AutoConnect: " + success)); });
+					user.SignIn(success => { Debug.Log(string.Format("AutoConnect: " + success)); });
 				}
 				else
 				{
@@ -279,9 +287,21 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				Debug.Log("Cannot AutoConnect, the game is not hosted on GameJolt.");
 			}
 	#endif
+			
+			#endregion
+#else
+			#region Autoconnect Non Web
+			string username, token;
+			if(GetStoredUserCredentials(out username, out token)) {
+				var user = new User(username, token);
+				user.SignIn();
+			}
+			#endregion
+
 #endif
 		}
 
+#if UNITY_WEBPLAYER || UNITY_WEBGL
 		public void OnAutoConnectWebPlayer(string response)
 		{
 			if (response != string.Empty)
@@ -304,8 +324,9 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				// TODO: Prompt "Hello Guest!" and encourage to signup/signin?
 			}
 		}
+#endif
 
-		void StartAutoPing()
+		private void StartAutoPing()
 		{
 			if (!AutoPing)
 			{
@@ -322,7 +343,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			});
 		}
 
-		void Ping()
+		private void Ping()
 		{
 			Sessions.Ping(SessionStatus.Active, success => {
 				// Sessions are automatically closed after 120 seconds
@@ -341,7 +362,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			});
 		}
 
-		void StopAutoPing()
+		private void StopAutoPing()
 		{
 			if (AutoPing)
 			{
@@ -350,7 +371,7 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			}
 		}
 
-		void CacheTables()
+		private void CacheTables()
 		{
 			if (UseCaching)
 			{
@@ -358,14 +379,14 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 			}
 		}
 
-		void CacheTrophies()
+		private void CacheTrophies()
 		{
 			if (UseCaching)
 			{
 				Trophies.Get(trophies => {
 					if (trophies != null)
 					{
-						foreach(Objects.Trophy trophy in trophies)
+						foreach(Trophy trophy in trophies)
 						{
 							trophy.DownloadImage();
 						}
@@ -373,6 +394,54 @@ SendMessage('{0}', 'OnAutoConnectWebPlayer', message);
 				});
 			}
 		}
-		#endregion Actions
+#endregion Actions
+
+		#region Helper
+		/// <summary>
+		/// If the user's credentials are stored in PlayerPrefs, this method will retrieve them.
+		/// </summary>
+		/// <param name="username">Contains the username if retrieval was successfull, empty string otherwise.</param>
+		/// <param name="token">Contains the token if retrieval was successfull, empty string otherwise.</param>
+		/// <returns>Whether retrieval was successfull or not.</returns>
+		public bool GetStoredUserCredentials(out string username, out string token) {
+			username = token = "";
+			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(EncryptionKey) ||
+			   !PlayerPrefs.HasKey(UserCredentialsPreferences)) return false;
+			var credentials = PlayerPrefs.GetString(UserCredentialsPreferences).Split('#');
+			if(credentials.Length != 2) return false;
+			try {
+				username = XTEA.Decrypt(credentials[0], EncryptionKey);
+				token = XTEA.Decrypt(credentials[1], EncryptionKey);
+				return true;
+			} catch {
+				Debug.LogWarning("Failed to retrieve user credentials.");
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Stores the user's credentials in PlayerPrefs.
+		/// </summary>
+		/// <param name="username">The username to store.</param>
+		/// <param name="token">The token to store.</param>
+		/// <returns>Whether the operations was successfull.</returns>
+		public bool RememberUserCredentials(string username, string token) {
+			if(string.IsNullOrEmpty(UserCredentialsPreferences) || string.IsNullOrEmpty(EncryptionKey) ||
+			   string.IsNullOrEmpty(username) || string.IsNullOrEmpty(token)) return false;
+			var credentials = XTEA.Encrypt(username, EncryptionKey) + "#" + XTEA.Encrypt(token, EncryptionKey);
+			PlayerPrefs.SetString(UserCredentialsPreferences, credentials);
+			PlayerPrefs.Save();
+			return true;
+		}
+
+		/// <summary>
+		/// Clears the stored credentials.
+		/// </summary>
+		public void ClearUserCredentials() {
+			if(string.IsNullOrEmpty(UserCredentialsPreferences)) return;
+			PlayerPrefs.DeleteKey(UserCredentialsPreferences);
+			PlayerPrefs.Save();
+		}
+		#endregion
 	}
 }

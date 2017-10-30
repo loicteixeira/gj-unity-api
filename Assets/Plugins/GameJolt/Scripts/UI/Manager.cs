@@ -62,6 +62,7 @@ namespace GameJolt.UI
 		#region SignIn
 		/// <summary>
 		/// Shows the sign in window.
+		/// If the user's credentials are stored in PlayerPrefs, it will populate the fields with them.
 		/// </summary>
 		public void ShowSignIn()
 		{
@@ -70,6 +71,7 @@ namespace GameJolt.UI
 
 		/// <summary>
 		/// Shows the sign in windows.
+		/// If the user's credentials are stored in PlayerPrefs, it will populate the fields with them.
 		/// </summary>
 		/// <param name="signedInCallback">A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</param>
 		/// <param name="userFetchedCallback">A callback function accepting a single parameter, a boolean indicating whether the user's information have been fetched successfully.</param>

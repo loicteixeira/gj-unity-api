@@ -20,6 +20,8 @@ namespace GameJolt.API
 		public bool autoPing = true;
 		[Tooltip("Cache High Score Tables and Trophies information for faster display.")]
 		public bool useCaching = true;
+		[Tooltip("The key used to encrypt the user credentials.")]
+		public string encryptionKey = "";
 
 		[Header("Debug")]
 		[Tooltip("AutoConnect in the Editor as if the game was hosted on GameJolt.")]
