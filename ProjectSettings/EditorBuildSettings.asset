@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Tests/Load/One.unity
+    path: Assets/Plugins/GameJolt/Demo/Load/One.unity
   - enabled: 1
-    path: Assets/Tests/Load/Two.unity
+    path: Assets/Plugins/GameJolt/Demo/Load/Two.unity
   - enabled: 1
-    path: Assets/Tests/UI/UI.unity
+    path: Assets/Plugins/GameJolt/Demo/UI/UI.unity
   - enabled: 1
-    path: Assets/Tests/Console/Console.unity
+    path: Assets/Plugins/GameJolt/Demo/Console/Console.unity
