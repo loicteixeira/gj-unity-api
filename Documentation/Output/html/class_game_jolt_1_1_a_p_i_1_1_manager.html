@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.2.0</span>
+   &#160;<span id="projectnumber">v2.3.0</span>
    </div>
   </td>
  </tr>
@@ -73,9 +73,15 @@ IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><b>GetRequest</b>
 <tr class="memitem:a3bef58f462ae8ca9bedd296ae69263b7"><td class="memItemLeft" align="right" valign="top"><a id="a3bef58f462ae8ca9bedd296ae69263b7"></a>
 IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><b>PostRequest</b> (string url, Dictionary&lt; string, string &gt; payload, <a class="el" href="namespace_game_jolt_1_1_a_p_i_1_1_core.html#a8977dae79184fb2aa00aeb946b8db9bb">Core.ResponseFormat</a> format, Action&lt; <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_core_1_1_response.html">Core.Response</a> &gt; callback)</td></tr>
 <tr class="separator:a3bef58f462ae8ca9bedd296ae69263b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefba2804bfe3897af14766132e1e7607"><td class="memItemLeft" align="right" valign="top"><a id="aefba2804bfe3897af14766132e1e7607"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>OnAutoConnectWebPlayer</b> (string response)</td></tr>
-<tr class="separator:aefba2804bfe3897af14766132e1e7607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a450117a7ac95b38a6fe446294cc37d38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a450117a7ac95b38a6fe446294cc37d38">GetStoredUserCredentials</a> (out string username, out string token)</td></tr>
+<tr class="memdesc:a450117a7ac95b38a6fe446294cc37d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the user's credentials are stored in PlayerPrefs, this method will retrieve them.  <a href="#a450117a7ac95b38a6fe446294cc37d38">More...</a><br /></td></tr>
+<tr class="separator:a450117a7ac95b38a6fe446294cc37d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaffb72d64271f0d873286c779e73f1ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#aaffb72d64271f0d873286c779e73f1ae">RememberUserCredentials</a> (string username, string token)</td></tr>
+<tr class="memdesc:aaffb72d64271f0d873286c779e73f1ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the user's credentials in PlayerPrefs.  <a href="#aaffb72d64271f0d873286c779e73f1ae">More...</a><br /></td></tr>
+<tr class="separator:aaffb72d64271f0d873286c779e73f1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68dbe4529fbd25bb49e3b34ac66351e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a68dbe4529fbd25bb49e3b34ac66351e5">ClearUserCredentials</a> ()</td></tr>
+<tr class="memdesc:a68dbe4529fbd25bb49e3b34ac66351e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the stored credentials.  <a href="#a68dbe4529fbd25bb49e3b34ac66351e5">More...</a><br /></td></tr>
+<tr class="separator:a68dbe4529fbd25bb49e3b34ac66351e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -100,9 +106,9 @@ Properties</h2></td></tr>
 <tr class="memitem:a437627879fee3fa773adb011d01f9e30"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a437627879fee3fa773adb011d01f9e30">UseCaching</a><code> [get]</code></td></tr>
 <tr class="memdesc:a437627879fee3fa773adb011d01f9e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a value indicating whether High Score Tables and <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_trophies.html" title="Trophies API methods ">Trophies</a> information should be cached for faster display.  <a href="#a437627879fee3fa773adb011d01f9e30">More...</a><br /></td></tr>
 <tr class="separator:a437627879fee3fa773adb011d01f9e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a961aff3907dbd4729a41e6319bcf448b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html">Objects.User</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#a961aff3907dbd4729a41e6319bcf448b">CurrentUser</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a961aff3907dbd4729a41e6319bcf448b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the current user.  <a href="#a961aff3907dbd4729a41e6319bcf448b">More...</a><br /></td></tr>
-<tr class="separator:a961aff3907dbd4729a41e6319bcf448b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6bf167b83890e66c4a2043528383815"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html">User</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html#af6bf167b83890e66c4a2043528383815">CurrentUser</a><code> [get, set]</code></td></tr>
+<tr class="memdesc:af6bf167b83890e66c4a2043528383815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets or sets the current user.  <a href="#af6bf167b83890e66c4a2043528383815">More...</a><br /></td></tr>
+<tr class="separator:af6bf167b83890e66c4a2043528383815"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton"><td colspan="2" onclick="javascript:toggleInherit('properties_class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton.html">GameJolt.API.Core.MonoSingleton&lt; Manager &gt;</a></td></tr>
 <tr class="memitem:affc87ede27bf59483b5e9ea633c55edd inherit properties_class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton"><td class="memItemLeft" align="right" valign="top"><a id="affc87ede27bf59483b5e9ea633c55edd"></a>
 static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code> [get]</code></td></tr>
@@ -118,6 +124,79 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="namespace_game_jolt_1_1_a_p_i_1_1_core.html">Core</a> <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a> <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_manager.html" title="The Core API Manager. ">Manager</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a68dbe4529fbd25bb49e3b34ac66351e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68dbe4529fbd25bb49e3b34ac66351e5">&#9670;&nbsp;</a></span>ClearUserCredentials()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameJolt.API.Manager.ClearUserCredentials </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clears the stored credentials. </p>
+
+</div>
+</div>
+<a id="a450117a7ac95b38a6fe446294cc37d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a450117a7ac95b38a6fe446294cc37d38">&#9670;&nbsp;</a></span>GetStoredUserCredentials()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameJolt.API.Manager.GetStoredUserCredentials </td>
+          <td>(</td>
+          <td class="paramtype">out string&#160;</td>
+          <td class="paramname"><em>username</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out string&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>If the user's credentials are stored in PlayerPrefs, this method will retrieve them. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>Contains the username if retrieval was successfull, empty string otherwise.</td></tr>
+    <tr><td class="paramname">token</td><td>Contains the token if retrieval was successfull, empty string otherwise.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether retrieval was successfull or not.</dd></dl>
+
+</div>
+</div>
 <a id="a5a0073da62b197e9fd90dd64ab5e4345"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a0073da62b197e9fd90dd64ab5e4345">&#9670;&nbsp;</a></span>Init()</h2>
 
@@ -144,6 +223,52 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 <p>Init this instance. </p>
 
 <p>Reimplemented from <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_core_1_1_mono_singleton.html">GameJolt.API.Core.MonoSingleton&lt; Manager &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aaffb72d64271f0d873286c779e73f1ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaffb72d64271f0d873286c779e73f1ae">&#9670;&nbsp;</a></span>RememberUserCredentials()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameJolt.API.Manager.RememberUserCredentials </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>username</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stores the user's credentials in PlayerPrefs. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>The username to store.</td></tr>
+    <tr><td class="paramname">token</td><td>The token to store.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the operations was successfull.</dd></dl>
 
 </div>
 </div>
@@ -174,8 +299,8 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
 
 </div>
 </div>
-<a id="a961aff3907dbd4729a41e6319bcf448b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a961aff3907dbd4729a41e6319bcf448b">&#9670;&nbsp;</a></span>CurrentUser</h2>
+<a id="af6bf167b83890e66c4a2043528383815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6bf167b83890e66c4a2043528383815">&#9670;&nbsp;</a></span>CurrentUser</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +309,7 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html">Objects.User</a> GameJolt.API.Manager.CurrentUser</td>
+          <td class="memname"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_objects_1_1_user.html">User</a> GameJolt.API.Manager.CurrentUser</td>
         </tr>
       </table>
   </td>

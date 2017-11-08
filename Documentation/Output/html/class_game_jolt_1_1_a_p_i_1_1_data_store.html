@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.2.0</span>
+   &#160;<span id="projectnumber">v2.3.0</span>
    </div>
   </td>
  </tr>
@@ -71,6 +71,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a162f1774bc692dd5220ffdff31a19b5a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a162f1774bc692dd5220ffdff31a19b5a">GetKeys</a> (bool global, Action&lt; string[]&gt; callback)</td></tr>
 <tr class="memdesc:a162f1774bc692dd5220ffdff31a19b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the list of available keys in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>.  <a href="#a162f1774bc692dd5220ffdff31a19b5a">More...</a><br /></td></tr>
 <tr class="separator:a162f1774bc692dd5220ffdff31a19b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d87ffc1e38d825c52e0ab41b41b3df"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html#a03d87ffc1e38d825c52e0ab41b41b3df">GetKeys</a> (bool global, string pattern, Action&lt; string[]&gt; callback)</td></tr>
+<tr class="memdesc:a03d87ffc1e38d825c52e0ab41b41b3df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the list of available keys in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>.  <a href="#a03d87ffc1e38d825c52e0ab41b41b3df">More...</a><br /></td></tr>
+<tr class="separator:a03d87ffc1e38d825c52e0ab41b41b3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a> <a class="el" href="namespace_game_jolt_1_1_a_p_i.html">API</a> methods. </p>
@@ -119,8 +122,8 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The key name.</td></tr>
-    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true<code>) or private to the user (<code>false<code>).</code></code></code></code></td></tr>
-    <tr><td class="paramname">callback</td><td><code><code><code><code>A callback function accepting a single parameter, a boolean indicating success.</code></code></code></code></td></tr>
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating success.</td></tr>
   </table>
   </dd>
 </dl>
@@ -171,8 +174,8 @@ Static Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The key name.</td></tr>
-    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true<code>) or private to the user (<code>false<code>).</code></code></code></code></td></tr>
-    <tr><td class="paramname">callback</td><td><code><code><code><code>A callback function accepting a single parameter, the key value.</code></code></code></code></td></tr>
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, the key value.</td></tr>
   </table>
   </dd>
 </dl>
@@ -180,7 +183,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a162f1774bc692dd5220ffdff31a19b5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a162f1774bc692dd5220ffdff31a19b5a">&#9670;&nbsp;</a></span>GetKeys()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a162f1774bc692dd5220ffdff31a19b5a">&#9670;&nbsp;</a></span>GetKeys() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,8 +219,60 @@ Static Public Member Functions</h2></td></tr>
 <p>Gets the list of available keys in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">global</td><td>A boolean indicating whether the keys are global (<code>true<code>) or private to the user (<code>false<code>).</code></code></code></code></td></tr>
-    <tr><td class="paramname">callback</td><td><code><code><code><code>A callback function accepting a single parameter, a list of key names.</code></code></code></code></td></tr>
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the keys are global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a list of key names.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a03d87ffc1e38d825c52e0ab41b41b3df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03d87ffc1e38d825c52e0ab41b41b3df">&#9670;&nbsp;</a></span>GetKeys() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void GameJolt.API.DataStore.GetKeys </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>global</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>pattern</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Action&lt; string[]&gt;&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the list of available keys in the <a class="el" href="class_game_jolt_1_1_a_p_i_1_1_data_store.html" title="The DataStore API methods. ">DataStore</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the keys are global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">pattern</td><td>Only keys matching this pattern will be returned. Placeholder character is *</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a list of key names.</td></tr>
   </table>
   </dd>
 </dl>
@@ -275,8 +330,8 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">key</td><td>The key name.</td></tr>
     <tr><td class="paramname">value</td><td>The value to store.</td></tr>
-    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true<code>) or private to the user (<code>false<code>).</code></code></code></code></td></tr>
-    <tr><td class="paramname">callback</td><td><code><code><code><code>A callback function accepting a single parameter, a boolean indicating success.</code></code></code></code></td></tr>
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a boolean indicating success.</td></tr>
   </table>
   </dd>
 </dl>
@@ -341,8 +396,8 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">key</td><td>The key name.</td></tr>
     <tr><td class="paramname">value</td><td>The new value to operate with.</td></tr>
     <tr><td class="paramname">operation</td><td>The <a class="el" href="namespace_game_jolt_1_1_a_p_i.html#ae2ebbc79f84cb314588a173bb8720449" title="DataStore operations. ">DataStoreOperation</a> to perform.</td></tr>
-    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true<code>) or private to the user (<code>false<code>).</code></code></code></code></td></tr>
-    <tr><td class="paramname">callback</td><td><code><code><code><code>A callback function accepting a single parameter, a the updated key value.</code></code></code></code></td></tr>
+    <tr><td class="paramname">global</td><td>A boolean indicating whether the key is global (<code>true</code>) or private to the user (<code>false</code>).</td></tr>
+    <tr><td class="paramname">callback</td><td>A callback function accepting a single parameter, a the updated key value.</td></tr>
   </table>
   </dd>
 </dl>

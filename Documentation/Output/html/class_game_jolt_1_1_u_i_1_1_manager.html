@@ -20,7 +20,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Game Jolt Unity API
-   &#160;<span id="projectnumber">v2.2.0</span>
+   &#160;<span id="projectnumber">v2.3.0</span>
    </div>
   </td>
  </tr>
@@ -67,11 +67,11 @@ Inheritance diagram for GameJolt.UI.Manager:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afec6ebfda3adf94a48b24b37f6666c89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#afec6ebfda3adf94a48b24b37f6666c89">ShowSignIn</a> ()</td></tr>
-<tr class="memdesc:afec6ebfda3adf94a48b24b37f6666c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in window.  <a href="#afec6ebfda3adf94a48b24b37f6666c89">More...</a><br /></td></tr>
+<tr class="memdesc:afec6ebfda3adf94a48b24b37f6666c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in window. If the user's credentials are stored in PlayerPrefs, it will populate the fields with them.  <a href="#afec6ebfda3adf94a48b24b37f6666c89">More...</a><br /></td></tr>
 <tr class="separator:afec6ebfda3adf94a48b24b37f6666c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf18fdb2fe0c8aaa259e930bf61a6d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#abf18fdb2fe0c8aaa259e930bf61a6d9b">ShowSignIn</a> (Action&lt; bool &gt; signedInCallback=null, Action&lt; bool &gt; userFetchedCallback=null)</td></tr>
-<tr class="memdesc:abf18fdb2fe0c8aaa259e930bf61a6d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in windows.  <a href="#abf18fdb2fe0c8aaa259e930bf61a6d9b">More...</a><br /></td></tr>
-<tr class="separator:abf18fdb2fe0c8aaa259e930bf61a6d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a903083d7b4daa398611d02f211ec7432"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#a903083d7b4daa398611d02f211ec7432">ShowSignIn</a> (Action&lt; bool &gt; signedInCallback, Action&lt; bool &gt; userFetchedCallback=null)</td></tr>
+<tr class="memdesc:a903083d7b4daa398611d02f211ec7432"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the sign in windows. If the user's credentials are stored in PlayerPrefs, it will populate the fields with them.  <a href="#a903083d7b4daa398611d02f211ec7432">More...</a><br /></td></tr>
+<tr class="separator:a903083d7b4daa398611d02f211ec7432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f6f59a872743d34c71eb9f829ee55e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_jolt_1_1_u_i_1_1_manager.html#a4f6f59a872743d34c71eb9f829ee55e1">ShowTrophies</a> ()</td></tr>
 <tr class="memdesc:a4f6f59a872743d34c71eb9f829ee55e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the trophies windows.  <a href="#a4f6f59a872743d34c71eb9f829ee55e1">More...</a><br /></td></tr>
 <tr class="separator:a4f6f59a872743d34c71eb9f829ee55e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,7 +249,7 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
 <p>Queues a notification. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">notification</td><td>The <a class="el" href="class_game_jolt_1_1_u_i_1_1_objects_1_1_notification.html" title="A UI Notification. ">GameJolt.UI.Objects.Notification</a>.</td></tr>
+    <tr><td class="paramname">notification</td><td>The <a class="el" href="class_game_jolt_1_1_u_i_1_1_objects_1_1_notification.html" title="A UI Notification. ">Objects.Notification</a>.</td></tr>
   </table>
   </dd>
 </dl>
@@ -340,12 +340,12 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
 </table>
 </div><div class="memdoc">
 
-<p>Shows the sign in window. </p>
+<p>Shows the sign in window. If the user's credentials are stored in PlayerPrefs, it will populate the fields with them. </p>
 
 </div>
 </div>
-<a id="abf18fdb2fe0c8aaa259e930bf61a6d9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf18fdb2fe0c8aaa259e930bf61a6d9b">&#9670;&nbsp;</a></span>ShowSignIn() <span class="overload">[2/2]</span></h2>
+<a id="a903083d7b4daa398611d02f211ec7432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a903083d7b4daa398611d02f211ec7432">&#9670;&nbsp;</a></span>ShowSignIn() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -357,7 +357,7 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
           <td class="memname">void GameJolt.UI.Manager.ShowSignIn </td>
           <td>(</td>
           <td class="paramtype">Action&lt; bool &gt;&#160;</td>
-          <td class="paramname"><em>signedInCallback</em> = <code>null</code>, </td>
+          <td class="paramname"><em>signedInCallback</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -378,7 +378,7 @@ static T&#160;</td><td class="memItemRight" valign="bottom"><b>Instance</b><code
 </table>
 </div><div class="memdoc">
 
-<p>Shows the sign in windows. </p>
+<p>Shows the sign in windows. If the user's credentials are stored in PlayerPrefs, it will populate the fields with them. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">signedInCallback</td><td>A callback function accepting a single parameter, a boolean indicating whether the user has been signed-in successfully.</td></tr>
