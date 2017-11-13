@@ -1,4 +1,8 @@
-## Game Jolt Unity API
+# ‼️ Project has moved 🚨
+
+*It is now maintained at [InfectedBytes/gj-unity-api](https://github.com/InfectedBytes/gj-unity-api/).*
+
+# Game Jolt Unity API
 Game Jolt [Game API](http://gamejolt.com/api/doc/game/) wrapper for [Unity](http://unity3d.com/).
 
 Check out the [documentation](http://loicteixeira.github.io/gj-unity-api/).
